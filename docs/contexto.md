@@ -1,13 +1,31 @@
 # Introdução
 
-Texto descritivo com a visão geral do projeto abordado. Inclui o contexto, o problema, os objetivos, a justificativa e o público-alvo do projeto.
+O projeto visa oferecer uma solução móvel e de fácil utilização para que os usuários possam registrar e acompanhar seus gastos diários de forma simples e eficiente.
+
+No cenário atual de crescente digitalização, o controle financeiro pessoal é uma necessidade fundamental. A maioria das pessoas busca ferramentas que auxiliem na organização de suas despesas e no planejamento financeiro. No entanto, muitas soluções existentes são complexas, com funcionalidades excessivas que acabam por afastar usuários que buscam apenas simplicidade e praticidade. O FinanceFlow surge como uma alternativa direta e intuitiva para suprir essa lacuna.
 
 ## Problema
-Nesse momento você deve apresentar o problema que a sua aplicação deve  resolver. No entanto, não é a hora de comentar sobre a aplicação.
+A falta de controle financeiro pessoal é um problema comum, especialmente entre estudantes universitários e jovens profissionais. Eles frequentemente não sabem para onde o seu dinheiro está indo, o que dificulta o planejamento e a economia. Esse problema se manifesta de várias formas, desde a ausência de registro de despesas até a dificuldade em interpretar dados financeiros.
 
-Descreva também o contexto em que essa aplicação será usada, se  houver: empresa, tecnologias, etc. Novamente, descreva apenas o que de  fato existir, pois ainda não é a hora de apresentar requisitos  detalhados ou projetos.
+O problema de pesquisa a ser explorado é: **"Como uma aplicação móvel com arquitetura de sistemas distribuídos pode simplificar o processo de registro e visualização de gastos diários, capacitando o usuário a obter maior controle e conscientização sobre suas finanças pessoais?"**
 
-Nesse momento, o grupo pode optar por fazer uso  de ferramentas como Design Thinking, que permite um olhar de ponta a ponta para o problema.
+Utilizando a Matriz CSD podemos organizar o que sabemos, o que presumimos e o que precisamos descobrir sobre este problema.
+
+### Certezas:
+ - Pessoas precisam de ajuda para controlar seus gastos.
+ - Muitos aplicativos financeiros são complexos demais para o usuário comum
+ - Anotações em papel ou planilhas são ineficientes
+
+### Suposições:
+ - Os usuários estão dispostos a registrar suas despesas manualmente, desde que o processo seja rápido e fácil.
+ - Gráficos simples e categorização serão suficientes para que o usuário entenda seus gastos.
+ - A segurança dos dados é uma preocupação, mas o usuário dará preferência à simplicidade.
+
+### Dúvidas:
+ - Qual é o conjunto mínimo de funcionalidades que tornaria o aplicativo útil sem ser complicado?
+ - Como podemos incentivar o uso diário da aplicação?
+ - Quais categorias de gastos são mais relevantes para o nosso público-alvo?
+ - Os usuários preferem gráficos de pizza, de barras ou outras visualizações?
 
 > **Links Úteis**:
 > - [Objetivos, Problema de pesquisa e Justificativa](https://medium.com/@versioparole/objetivos-problema-de-pesquisa-e-justificativa-c98c8233b9c3)
@@ -16,18 +34,27 @@ Nesse momento, o grupo pode optar por fazer uso  de ferramentas como Design Thin
 
 ## Objetivos
 
-Aqui você deve descrever os objetivos do trabalho indicando que o objetivo geral é desenvolver um software para solucionar o problema apresentado acima. 
+O objetivo geral do **FinanceFlow** é **desenvolver uma aplicação móvel com arquitetura de sistemas distribuídos que ofereça aos usuários uma ferramenta simples e eficiente para registrar, categorizar e visualizar seus gastos diários, promovendo maior conscientização e controle sobre suas finanças pessoais.**
 
-Apresente também alguns (pelo menos 2) objetivos específicos dependendo de onde você vai querer concentrar a sua prática investigativa, ou como você vai aprofundar no seu trabalho.
+Já os objetivos específicos serão guiados pelas etapas do desenvolvimento do projeto, detalhando as funcionalidades e as frentes de trabalho necessárias para atingir o objetivo geral:
+
+1. **Desenvolver e Implementar o Módulo de Autenticação e Gestão de Usuários**: Criar um sistema seguro para o cadastro e login de usuários. O módulo deverá gerenciar o ciclo de vida do usuário (criação, autenticação, atualização de perfil e exclusão), garantindo que cada usuário tenha acesso apenas aos seus próprios dados financeiros.
+2. ***Construir o Sistema de Registro e Categorização de Despesas:** Implementar as funcionalidades que permitem aos usuários adicionar novas despesas com detalhes como valor, data e descrição. Este objetivo inclui a criação de um sistema flexível onde o usuário possa criar, editar e excluir suas próprias categorias de gastos, permitindo uma organização financeira personalizada.
+3. **Criar o Módulo de Visualização de Dados e Relatórios:** Desenvolver telas na aplicação móvel que apresentem um resumo visual dos gastos do usuário. Isso inclui a criação de gráficos (ex: gráfico de pizza ou de barras) que mostrem a distribuição dos gastos por categoria em um determinado período (mensal ou semanal), além de um painel de controle que exiba o total de despesas e as categorias mais relevantes.
  
 > **Links Úteis**:
 > - [Objetivo geral e objetivo específico: como fazer e quais verbos utilizar](https://blog.mettzer.com/diferenca-entre-objetivo-geral-e-objetivo-especifico/)
 
 ## Justificativa
 
-Descreva a importância ou a motivação para trabalhar com esta aplicação que você escolheu. Indique as razões pelas quais você escolheu seus objetivos específicos ou as razões para aprofundar em certos aspectos do software.
+O controle financeiro pessoal é uma habilidade essencial para a estabilidade e o crescimento individual, mas pesquisas mostram que a população brasileira enfrenta desafios significativos nessa área. Dados de 2023 da Confederação Nacional do Comércio de Bens, Serviços e Turismo (CNC), por meio da Pesquisa de Endividamento e Inadimplência do Consumidor (PEIC), revelaram que a proporção de famílias brasileiras com dívidas atingiu 78,5%, evidenciando uma dificuldade generalizada em gerenciar as contas. Além disso, uma pesquisa do Serviço de Proteção ao Crédito (SPC Brasil) e da Confederação Nacional de Dirigentes Lojistas (CNDL) aponta que 37% dos inadimplentes residentes nas capitais do país admitem que não fazem gestão dos próprios ganhos e gastos, sobretudo porque fazem o controle de cabeça (17%).
 
-O grupo de trabalho pode fazer uso de questionários, entrevistas e dados estatísticos, que podem ser apresentados, com o objetivo de esclarecer detalhes do problema que será abordado pelo grupo.
+Esses números demonstram uma clara necessidade de ferramentas que simplifiquem o monitoramento dos gastos. O **FinanceFlow** se propõe a ser essa ferramenta, oferecendo uma solução descomplicada que capacite os usuários a tomar decisões financeiras mais conscientes. Ao focar em um público que busca simplicidade, o aplicativo preenche uma lacuna no mercado e contribui diretamente para a educação financeira, auxiliando na redução do endividamento e no aumento da capacidade de poupança.
+
+> **Links com dados das Pesquisas**:
+> - [Confederação Nacional do Comércio de Bens, Serviços e Turismo (CNC)](https://portaldocomercio.org.br/publicacoes_posts/pesquisa-de-endividamento-e-inadimplencia-do-consumidor-peic-perfil-do-endividamento-anual-2023/)
+> - [Serviço de Proteção ao Crédito (SPC Brasil) e Confederação Nacional de Dirigentes Lojistas (CNDL)](https://site.cndl.org.br/37-dos-inadimplentes-nao-fazem-controle-das-contas-e-dos-gastos-revela-pesquisa-cndlspc-brasil/)
+
 
 > **Links Úteis**:
 > - [Como montar a justificativa](https://guiadamonografia.com.br/como-montar-justificativa-do-tcc/)
