@@ -62,7 +62,9 @@ Esses números demonstram uma clara necessidade de ferramentas que simplifiquem 
 ## Público-Alvo
 
 **Personas**
+
 *Persona 1 — Ana Beatriz (Estudante Universitária)*
+
 Idade: 21 anos
 Ocupação: Estudante de Administração
 Conhecimentos prévios: Familiaridade básica com aplicativos móveis e redes sociais. Pouca experiência com apps financeiros.
@@ -71,6 +73,7 @@ Desafios: Dificuldade em controlar os gastos mensais com transporte, alimentaç�
 Objetivos: Ter uma forma rápida e intuitiva de registrar pequenos gastos do dia a dia para conseguir economizar e planejar viagens futuras.
 
 *Persona 2 — Lucas Andrade (Jovem Profissional)*
+
 Idade: 27 anos
 Ocupação: Analista de Marketing Digital
 Conhecimentos prévios: Usa planilhas eventualmente para organizar finanças, mas sem consistência.
@@ -79,6 +82,7 @@ Desafios: Não consegue manter disciplina no controle de despesas fixas (aluguel
 Objetivos: Ganhar clareza sobre os principais gastos mensais, reduzir desperdícios e começar a formar uma reserva financeira.
 
 *Persona 3 — Mariana Souza (Jovem Empreendedora)*
+
 Idade: 25 anos
 Ocupação: Proprietária de uma loja online de roupas
 Conhecimentos prévios: Experiência básica em aplicativos de e-commerce e bancos digitais.
