@@ -27,23 +27,21 @@ Utilizando a Matriz CSD podemos organizar o que sabemos, o que presumimos e o qu
  - Quais categorias de gastos são mais relevantes para o nosso público-alvo?
  - Os usuários preferem gráficos de pizza, de barras ou outras visualizações?
 
-> **Links Úteis**:
-> - [Objetivos, Problema de pesquisa e Justificativa](https://medium.com/@versioparole/objetivos-problema-de-pesquisa-e-justificativa-c98c8233b9c3)
-> - [Matriz Certezas, Suposições e Dúvidas](https://medium.com/educa%C3%A7%C3%A3o-fora-da-caixa/matriz-certezas-suposi%C3%A7%C3%B5es-e-d%C3%BAvidas-fa2263633655)
-> - [Brainstorming](https://www.euax.com.br/2018/09/brainstorming/)
 
 ## Objetivos
 
-O objetivo geral do **FinanceFlow** é **desenvolver uma aplicação móvel com arquitetura de sistemas distribuídos que ofereça aos usuários uma ferramenta simples e eficiente para registrar, categorizar e visualizar seus gastos diários, promovendo maior conscientização e controle sobre suas finanças pessoais.**
+O objetivo geral do **FinanceFlow** é **desenvolver uma aplicação móvel com arquitetura de sistemas distribuídos que ofereça aos usuários uma ferramenta simples e eficiente para registrar, categorizar e visualizar seus gastos diários, promovendo maior conscientização e controle sobre suas finanças pessoais. Além disso, o projeto inclui a criação de um portal web de gestão para o administrador da plataforma, que permitirá o monitoramento e o gerenciamento dos dados do sistema.**
 
 Já os objetivos específicos serão guiados pelas etapas do desenvolvimento do projeto, detalhando as funcionalidades e as frentes de trabalho necessárias para atingir o objetivo geral:
 
-1. **Desenvolver e Implementar o Módulo de Autenticação e Gestão de Usuários**: Criar um sistema seguro para o cadastro e login de usuários. O módulo deverá gerenciar o ciclo de vida do usuário (criação, autenticação, atualização de perfil e exclusão), garantindo que cada usuário tenha acesso apenas aos seus próprios dados financeiros.
-2. ***Construir o Sistema de Registro e Categorização de Despesas:** Implementar as funcionalidades que permitem aos usuários adicionar novas despesas com detalhes como valor, data e descrição. Este objetivo inclui a criação de um sistema flexível onde o usuário possa criar, editar e excluir suas próprias categorias de gastos, permitindo uma organização financeira personalizada.
+1. **Desenvolver e Implementar o Módulo de Autenticação e Gestão de Usuários (Aplicativo Mobile)**: Criar um sistema seguro para o cadastro e login de usuários no aplicativo móvel. O módulo deverá gerenciar o ciclo de vida do usuário (criação, autenticação, atualização de perfil e exclusão), garantindo que cada usuário tenha acesso apenas aos seus próprios dados financeiros.
+   
+2. **Construir o Sistema de Registro e Categorização de Despesas:** Implementar as funcionalidades que permitem aos usuários adicionar novas despesas com detalhes como valor, data e descrição. Este objetivo inclui a criação de um sistema flexível onde o usuário possa criar, editar e excluir suas próprias categorias de gastos, permitindo uma organização financeira personalizada.
+   
 3. **Criar o Módulo de Visualização de Dados e Relatórios:** Desenvolver telas na aplicação móvel que apresentem um resumo visual dos gastos do usuário. Isso inclui a criação de gráficos (ex: gráfico de pizza ou de barras) que mostrem a distribuição dos gastos por categoria em um determinado período (mensal ou semanal), além de um painel de controle que exiba o total de despesas e as categorias mais relevantes.
+   
+4. **Criar o Portal Web de Gestão do Administrador:** Desenvolver um portal web em React (ou outra tecnologia de sua escolha, como React, Angular ou Vue.js) que se conecte à API do back-end para gerenciar os dados da aplicação. Este portal permitirá ao administrador visualizar o número de usuários, monitorar o uso geral da aplicação e, se necessário, realizar operações de manutenção ou exclusão de dados.
  
-> **Links Úteis**:
-> - [Objetivo geral e objetivo específico: como fazer e quais verbos utilizar](https://blog.mettzer.com/diferenca-entre-objetivo-geral-e-objetivo-especifico/)
 
 ## Justificativa
 
@@ -55,9 +53,6 @@ Esses números demonstram uma clara necessidade de ferramentas que simplifiquem 
 > - [Confederação Nacional do Comércio de Bens, Serviços e Turismo (CNC)](https://portaldocomercio.org.br/publicacoes_posts/pesquisa-de-endividamento-e-inadimplencia-do-consumidor-peic-perfil-do-endividamento-anual-2023/)
 > - [Serviço de Proteção ao Crédito (SPC Brasil) e Confederação Nacional de Dirigentes Lojistas (CNDL)](https://site.cndl.org.br/37-dos-inadimplentes-nao-fazem-controle-das-contas-e-dos-gastos-revela-pesquisa-cndlspc-brasil/)
 
-
-> **Links Úteis**:
-> - [Como montar a justificativa](https://guiadamonografia.com.br/como-montar-justificativa-do-tcc/)
 
 ## Público-Alvo
 
@@ -96,12 +91,6 @@ Objetivos: Manter uma separação simples entre despesas pessoais e do negócio,
 3. Como empreendedora iniciante, quero separar despesas pessoais das do meu negócio de forma prática, para ter clareza sobre meus custos e poder reinvestir de forma inteligente.
 4. Como usuário preocupado com segurança, quero garantir que apenas eu tenha acesso às minhas informações financeiras, para confiar no aplicativo e usá-lo diariamente.
 5. Como usuário iniciante em finanças pessoais, quero que o aplicativo me ofereça apenas funções essenciais (registro, categorias e relatórios), para não me sentir sobrecarregado com opções desnecessárias.
-
-> **Links Úteis**:
-> - [Público-alvo](https://blog.hotmart.com/pt-br/publico-alvo/)
-> - [Como definir o público alvo](https://exame.com/pme/5-dicas-essenciais-para-definir-o-publico-alvo-do-seu-negocio/)
-> - [Público-alvo: o que é, tipos, como definir seu público e exemplos](https://klickpages.com.br/blog/publico-alvo-o-que-e/)
-> - [Qual a diferença entre público-alvo e persona?](https://rockcontent.com/blog/diferenca-publico-alvo-e-persona/)
 
 # Especificações do Projeto
 
