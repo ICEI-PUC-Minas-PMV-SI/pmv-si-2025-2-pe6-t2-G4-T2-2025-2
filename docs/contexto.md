@@ -61,10 +61,37 @@ Esses números demonstram uma clara necessidade de ferramentas que simplifiquem 
 
 ## Público-Alvo
 
-Descreva quem serão as pessoas que usarão a sua aplicação indicando os diferentes perfis. O objetivo aqui não é definir quem serão os clientes ou quais serão os papéis dos usuários na aplicação. A ideia é, dentro do possível, conhecer um pouco mais sobre o perfil dos usuários: conhecimentos prévios, relação com a tecnologia, relações
-hierárquicas, etc.
+**Personas**
+*Persona 1 — Ana Beatriz (Estudante Universitária)*
+Idade: 21 anos
+Ocupação: Estudante de Administração
+Conhecimentos prévios: Familiaridade básica com aplicativos móveis e redes sociais. Pouca experiência com apps financeiros.
+Relação com a tecnologia: Usa smartphone como ferramenta principal para estudo e organização.
+Desafios: Dificuldade em controlar os gastos mensais com transporte, alimentação e lazer. Costuma anotar algumas despesas em papel, mas abandona rapidamente por achar trabalhoso.
+Objetivos: Ter uma forma rápida e intuitiva de registrar pequenos gastos do dia a dia para conseguir economizar e planejar viagens futuras.
 
-Adicione informações sobre o público-alvo por meio de uma descrição textual, diagramas de personas e mapa de stakeholders.
+*Persona 2 — Lucas Andrade (Jovem Profissional)*
+Idade: 27 anos
+Ocupação: Analista de Marketing Digital
+Conhecimentos prévios: Usa planilhas eventualmente para organizar finanças, mas sem consistência.
+Relação com a tecnologia: Conectado, utiliza diversos aplicativos no dia a dia (delivery, bancos digitais, apps de produtividade).
+Desafios: Não consegue manter disciplina no controle de despesas fixas (aluguel, contas, lazer). Tem dificuldade em visualizar para onde o dinheiro está indo.
+Objetivos: Ganhar clareza sobre os principais gastos mensais, reduzir desperdícios e começar a formar uma reserva financeira.
+
+*Persona 3 — Mariana Souza (Jovem Empreendedora)*
+Idade: 25 anos
+Ocupação: Proprietária de uma loja online de roupas
+Conhecimentos prévios: Experiência básica em aplicativos de e-commerce e bancos digitais.
+Relação com a tecnologia: Frequente usuária de aplicativos de gestão de vendas e redes sociais.
+Desafios: Mistura gastos pessoais com profissionais, o que gera confusão no final do mês. Não tem tempo para lidar com ferramentas complexas.
+Objetivos: Manter uma separação simples entre despesas pessoais e do negócio, visualizar gráficos rápidos e tomar decisões mais conscientes para investir no crescimento da empresa.
+
+**Histórias de Usuário**
+1. Como estudante universitária, quero registrar minhas pequenas despesas diárias em segundos, para não perder tempo e manter o hábito de acompanhar minhas finanças.
+2. Como jovem profissional, quero visualizar meus gastos categorizados em gráficos simples (pizza ou barras), para entender rapidamente para onde vai meu dinheiro e planejar melhor meus próximos meses.
+3. Como empreendedora iniciante, quero separar despesas pessoais das do meu negócio de forma prática, para ter clareza sobre meus custos e poder reinvestir de forma inteligente.
+4. Como usuário preocupado com segurança, quero garantir que apenas eu tenha acesso às minhas informações financeiras, para confiar no aplicativo e usá-lo diariamente.
+5. Como usuário iniciante em finanças pessoais, quero que o aplicativo me ofereça apenas funções essenciais (registro, categorias e relatórios), para não me sentir sobrecarregado com opções desnecessárias.
 
 > **Links Úteis**:
 > - [Público-alvo](https://blog.hotmart.com/pt-br/publico-alvo/)
