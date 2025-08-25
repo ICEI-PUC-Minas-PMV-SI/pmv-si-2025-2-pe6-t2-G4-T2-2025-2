@@ -92,6 +92,10 @@ Objetivos: Manter uma separação simples entre despesas pessoais e do negócio,
 4. Como usuário preocupado com segurança, quero garantir que apenas eu tenha acesso às minhas informações financeiras, para confiar no aplicativo e usá-lo diariamente.
 5. Como usuário iniciante em finanças pessoais, quero que o aplicativo me ofereça apenas funções essenciais (registro, categorias e relatórios), para não me sentir sobrecarregado com opções desnecessárias.
 
+**Mapa de Stakeholders**
+<img width="1555" height="1437" alt="Stakeholders" src="https://github.com/user-attachments/assets/b8ffc793-a05b-4ab0-913c-3d8734772a1f" />
+
+
 # Especificações do Projeto
 
 ## Requisitos
