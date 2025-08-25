@@ -130,15 +130,31 @@ Com base nas Histórias de Usuário, enumere os requisitos da sua solução. Cla
 Lembre-se que cada requisito deve corresponder à uma e somente uma
 característica alvo da sua solução. Além disso, certifique-se de que
 todos os aspectos capturados nas Histórias de Usuário foram cobertos.
-
+///////////////////////////
 ## Restrições
 
 O projeto está restrito pelos itens apresentados na tabela a seguir.
 
 |ID| Restrição                                             |
-|--|-------------------------------------------------------|
-|01| O projeto deverá ser entregue até o final do semestre |
-|02| Não pode ser desenvolvido um módulo de backend        |
+Código
+Restrição
+Descrição
+RNF1
+Portabilidade
+O sistema deve ser responsivo,garantindo  funcionamento adequado tanto navegadores web quanto dispositivos móveis.
+RNF2
+Desenpenho
+O Sistema deve processar e responder às requisições do usuário em no máximo 3s
+RNF3
+Interface do Usuário
+A Interface do sistema será desenvolvido utilizando HTML, CSS e JavaScript e Node.js
+RNF4
+Segurança
+O sistema deve implementar mecanismos s de proteção contra acesso não autorizado,garantindo a integridade ea confidencialidade dos dados.
+RNF5
+Usabilidade
+O sistema deve intuitivo,  de  fácil navegação e compreensão por parte do usário final.
+////////////////////////////
 
 Enumere as restrições à sua solução. Lembre-se de que as restrições geralmente limitam a solução candidata.
 
