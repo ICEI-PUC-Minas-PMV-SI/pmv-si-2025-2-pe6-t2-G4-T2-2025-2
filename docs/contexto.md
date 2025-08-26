@@ -166,9 +166,9 @@ Descreva aqui todos os serviços que serão disponibilizados pelo seu projeto, d
 
 # Arquitetura da Solução
 
-Definição de como o software é estruturado em termos dos componentes que fazem parte da solução e do ambiente de hospedagem da aplicação.
+A arquitetura do FinanceFlow é projetada para ser distribuída, com separação clara entre as camadas de apresentação, lógica de negócio e dados. Ela adota uma abordagem de serviço único (monolito) no backend para simplificar o desenvolvimento e a manutenção, ao mesmo tempo que demonstra a comunicação entre diferentes componentes.
 
-![arq](https://github.com/user-attachments/assets/b9402e05-8445-47c3-9d47-f11696e38a3d)
+![arq](/docs/img/Arquitetura_Distribuida.jpg)
 
 
 ## Tecnologias Utilizadas
