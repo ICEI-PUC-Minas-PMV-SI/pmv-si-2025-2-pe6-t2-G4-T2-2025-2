@@ -140,12 +140,19 @@ RNF1   Portabilidade           O sistema deve ser responsivo,garantindo  funcion
 
 RNF2    Desenpenho             O Sistema deve processar e responder às requisições do usuário em no máximo 3s
 
-RNF3    Interface do Usuário   A Interface do sistema será desenvolvido utilizando HTML, CSS e JavaScript e Node.js
+RNF3    Interface do Usuário   A Interface do sistema será desenvolvido utilizando React Native e Tailwind CSS e Node.js
+                                                        
 
 RNF4    Segurança              O sistema deve implementar mecanismos s de proteção contra acesso não autorizado,garantindo                                             a integridade ea confidencialidade dos dados.
 
 RNF5    Usabilidade            O sistema deve intuitivo,  de  fácil navegação e compreensão por parte do usário final.
 
+RNF6	  Persistencia de Dados         O sistema deve utilizar um banco de dados relacional (como  PostgreSQL) ,
+                                       garantindo integridade segurança e escalabilidade no armazenamento dos dados. 
+                                                A   modelagem, manipulação e migração do banco deverão      
+                                                  ser realizdas usando o Prisma ORM, para assegurar  
+                                                    consistencia produtividade e proteçao  contra  
+                                                         vulnerabilidades  como SQL Injection.
 
 Enumere as restrições à sua solução. Lembre-se de que as restrições geralmente limitam a solução candidata.
 
