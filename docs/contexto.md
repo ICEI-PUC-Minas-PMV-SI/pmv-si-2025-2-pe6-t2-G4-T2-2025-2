@@ -104,32 +104,35 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 
 ### Requisitos Funcionais
 
-|ID    | Descrição do Requisito  | Prioridade |
-|------|-----------------------------------------|----|
-|RF-001| Permitir que o usuário cadastre tarefas | ALTA | 
-|RF-002| Emitir um relatório de tarefas no mês   | MÉDIA |
+|ID     | Descrição do Requisito      |Prioridade               |  
+|-------|-----------------------------|------------|  
+|RF-001 | Permitir que o usuário realize cadastro e login de forma segura | ALTA |  
+|RF-002 | Permitir que o usuário registre manualmente suas despesas, inserindo valor, data e descrição | ALTA |  
+|RF-003 | Permitir a categorização de despesas, incluindo criação, edição e exclusão de categorias personalizadas | ALTA |  
+|RF-004 | Oferecer opção para separar despesas pessoais e profissionais | MÉDIA |  
+|RF-005 | Gerar relatórios de gastos por período (semanal e mensal) | ALTA |  
+|RF-006 | Exibir visualizações gráficas dos gastos (pizza ou barras) | MÉDIA |  
+|RF-007 | Permitir que o usuário visualize o total de despesas e categorias mais relevantes | ALTA |  
+|RF-008 | Disponibilizar ao administrador um portal web para monitoramento de usuários e manutenção de dados | MÉDIA |  
+|RF-009 | Permitir atualização e exclusão de registros de despesas e categorias já cadastrados | ALTA |  
+|RF-010 | Garantir que cada usuário tenha acesso apenas aos seus próprios dados financeiros | ALTA |  
+
 
 ### Requisitos não Funcionais
 
-|ID     | Descrição do Requisito  |Prioridade |
-|-------|-------------------------|----|
-|RNF-001| O sistema deve ser responsivo para rodar em um dispositivos móvel | MÉDIA | 
-|RNF-002| Deve processar requisições do usuário em no máximo 3s |  BAIXA | 
+|ID      | Descrição do Requisito  | Prioridade |  
+|--------|-------------------------|------------|  
+|RNF-001 | O sistema deve ser responsivo e funcionar em dispositivos móveis (Android e iOS) | ALTA |  
+|RNF-002 | O tempo de resposta para registrar ou visualizar uma despesa não deve exceder 3 segundos | MÉDIA |  
+|RNF-003 | Os dados do usuário devem ser armazenados de forma segura, com autenticação e criptografia | ALTA |  
+|RNF-004 | O aplicativo deve apresentar uma interface simples e intuitiva, com foco em usabilidade | ALTA |  
+|RNF-005 | O sistema deve ser escalável, suportando crescimento no número de usuários sem perda de desempenho | MÉDIA |  
+|RNF-006 | O portal web administrativo deve estar disponível 99% do tempo | BAIXA |  
+|RNF-007 | O aplicativo deve ser compatível com diferentes versões de sistemas operacionais móveis (mínimo Android 10 e iOS 13) | MÉDIA |  
+|RNF-008 | O sistema deve garantir que cada usuário só tenha acesso aos seus próprios dados | ALTA |  
+|RNF-009 | O design deve seguir boas práticas de acessibilidade | MÉDIA |  
+|RNF-010 | O sistema deve permitir sincronização em nuvem para manter os dados atualizados entre dispositivos | MÉDIA | 
 
-Com base nas Histórias de Usuário, enumere os requisitos da sua solução. Classifique esses requisitos em dois grupos:
-
-- [Requisitos Funcionais
- (RF)](https://pt.wikipedia.org/wiki/Requisito_funcional):
- correspondem a uma funcionalidade que deve estar presente na
-  plataforma (ex: cadastro de usuário).
-- [Requisitos Não Funcionais
-  (RNF)](https://pt.wikipedia.org/wiki/Requisito_n%C3%A3o_funcional):
-  correspondem a uma característica técnica, seja de usabilidade,
-  desempenho, confiabilidade, segurança ou outro (ex: suporte a
-  dispositivos iOS e Android).
-Lembre-se que cada requisito deve corresponder à uma e somente uma
-característica alvo da sua solução. Além disso, certifique-se de que
-todos os aspectos capturados nas Histórias de Usuário foram cobertos.
 
 ## Restrições
 
