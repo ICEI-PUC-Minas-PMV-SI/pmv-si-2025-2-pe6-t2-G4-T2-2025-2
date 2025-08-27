@@ -138,30 +138,15 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 
 O projeto está restrito pelos itens apresentados na tabela a seguir.
 
-|ID|    Restrição                                              Descrição
-RNF1   Portabilidade           O sistema deve ser responsivo,garantindo  funcionamento adequado tanto navegadores web                                                                quanto dispositivos móveis.
+|ID      | Restrição  | Descrição |  
+|--------|-------------------------|------------|  
+|RNF-001 | Portabilidade | O sistema deve ser responsivo,garantindo  funcionamento adequado tanto navegadores |  
+| RNF-002 | Desempenho | O Sistema deve processar e responder às requisições do usuário em no máximo 3s ||
+| RNF-003 | Interface do Usuário | A Interface do sistema será desenvolvido utilizando React Native e Tailwind CSS e Node.js |
+| RNF-004 | Segurança | O sistema deve implementar mecanismos de proteção contra acesso não autorizado, garantindo a integridade e a confidencialidade dos dados. |
+| RNF-005 | Usabilidade | O sistema deve intuitivo, de fácil navegação e compreensão por parte do usuário final. |
+| RNF-006 | Persistência de Dados | O sistema deve utilizar um banco de dados relacional (como  PostgreSQL), garantindo integridade segurança e escalabilidade no armazenamento dos dados. A   modelagem, manipulação e migração do banco deverão ser realizadas usando o Prisma ORM, para assegurar consistência produtividade e proteção contra vulnerabilidades como SQL Injection. |
 
-RNF2    Desenpenho             O Sistema deve processar e responder às requisições do usuário em no máximo 3s
-
-RNF3    Interface do Usuário   A Interface do sistema será desenvolvido utilizando React Native e Tailwind CSS e Node.js
-                                                        
-
-RNF4    Segurança              O sistema deve implementar mecanismos s de proteção contra acesso não autorizado,garantindo                                             a integridade ea confidencialidade dos dados.
-
-RNF5    Usabilidade            O sistema deve intuitivo,  de  fácil navegação e compreensão por parte do usário final.
-
-RNF6	  Persistencia de Dados         O sistema deve utilizar um banco de dados relacional (como  PostgreSQL) ,
-                                       garantindo integridade segurança e escalabilidade no armazenamento dos dados. 
-                                                A   modelagem, manipulação e migração do banco deverão      
-                                                  ser realizdas usando o Prisma ORM, para assegurar  
-                                                    consistencia produtividade e proteçao  contra  
-                                                         vulnerabilidades  como SQL Injection.
-
-Enumere as restrições à sua solução. Lembre-se de que as restrições geralmente limitam a solução candidata.
-
-> **Links Úteis**:
-> - [O que são Requisitos Funcionais e Requisitos Não Funcionais?](https://codificar.com.br/requisitos-funcionais-nao-funcionais/)
-> - [O que são requisitos funcionais e requisitos não funcionais?](https://analisederequisitos.com.br/requisitos-funcionais-e-requisitos-nao-funcionais-o-que-sao/)
 
 # Catálogo de Serviços
 
@@ -176,13 +161,53 @@ A arquitetura do FinanceFlow é projetada para ser distribuída, com separação
 
 ## Tecnologias Utilizadas
 
-Descreva aqui qual(is) tecnologias você vai usar para resolver o seu problema, ou seja, implementar a sua solução. Liste todas as tecnologias envolvidas, linguagens a serem utilizadas, serviços web, frameworks, bibliotecas, IDEs de desenvolvimento, e ferramentas.
+Para a implementação do FinanceFlow, a escolha das tecnologias foi guiada pelo objetivo de construir um sistema distribuído moderno, seguro e eficiente. A seguir, detalhamos a stack tecnológica completa, abrangendo as linguagens, frameworks, bibliotecas e ferramentas que serão utilizadas no desenvolvimento.
 
-Apresente também uma figura explicando como as tecnologias estão relacionadas ou como uma interação do usuário com o sistema vai ser conduzida, por onde ela passa até retornar uma resposta ao usuário.
+1. **Camada de Apresentação (Front-end)**
+
+   A camada de interface com o usuário será desenvolvida com foco na portabilidade e na experiência mobile.
+   - **React Native**: Framework para desenvolvimento de aplicações móveis multiplataforma (iOS e Android) a partir de uma única base de código JavaScript.
+   - **Nativewind**: Biblioteca que utiliza a sintaxe do Tailwind CSS para estilizar componentes React Native, permitindo o desenvolvimento rápido de interfaces consistentes.
+   - **Expo**: Plataforma que facilita o desenvolvimento de aplicações React Native, oferecendo um conjunto de ferramentas e serviços para a construção, testes e deploy da aplicação.
+   - **TypeScript**: Linguagem de programação que adiciona tipagem estática ao JavaScript, o que melhora a segurança, a escalabilidade e a manutenção do código, especialmente em projetos grandes.
+2. **Camada de Lógica de Negócio (Back-end)**
+    
+    O backend do sistema, responsável por toda a lógica de negócio e pela comunicação com o banco de dados, será construído em um ambiente Node.js.
+    - **TypeScript**: Linguagem principal para o desenvolvimento do backend, garantindo os mesmos benefícios de tipagem estática do front-end.
+    - **Node.js**: Ambiente de execução JavaScript assíncrono e de alto desempenho, ideal para construir APIs eficientes e escaláveis.
+    - **Express**: Framework web minimalista e flexível para Node.js, utilizado para criar os endpoints da API RESTful.
+    - **express-async-errors**: Biblioteca que simplifica o tratamento de erros assíncronos no Express.
+    - **Zod**: Biblioteca para validação de esquemas de dados. Ela garante que os dados recebidos nas requisições da API estejam no formato correto e seguro.
+    - **Bcrypt**: Biblioteca para a criptografia de senhas, garantindo que as credenciais dos usuários sejam armazenadas de forma segura no banco de dados.
+    - **Jsonwebtoken (JWT)**: Biblioteca para a criação e verificação de tokens web JSON, utilizados para a autenticação e autorização de usuários na API.
+    - **PostgreSQL**: Banco de dados relacional robusto e de código aberto, escolhido para armazenar as informações dos usuários, despesas e categorias.
+    - **Prisma**: ORM (Object-Relational Mapping) que atua como uma camada de abstração entre o código TypeScript e o banco de dados. Ele simplifica as operações de consulta, inserção e atualização de dados, além de garantir a segurança de tipos.
+    - **Jest e ts-jest**: Framework de testes unitários e de integração para aplicações JavaScript e TypeScript.
+    - **Supertest**: Biblioteca para testar APIs HTTP, permitindo a simulação de requisições de forma programática.
+    - **Cross-env**: Ferramenta para definir variáveis de ambiente de forma consistente em diferentes sistemas operacionais.
+    - **Docker e Docker Compose**: Ferramentas de conteinerização que serão utilizadas para isolar e gerenciar o ambiente de desenvolvimento, facilitando o setup do projeto e garantindo que o backend e o banco de dados funcionem de forma consistente em qualquer ambiente.
 
 ## Hospedagem
 
-Explique como a hospedagem e o lançamento da plataforma foi feita.
+Para fins de demonstração acadêmica e devido à natureza do projeto, a hospedagem do FinanceFlow foi concebida para ser realizada em um ambiente de nuvem que oferece flexibilidade e escalabilidade.
+
+Para a hospedagem do FinanceFlow, optou-se pela plataforma Render, que oferece um ambiente de nuvem ideal para a demonstração de projetos acadêmicos, combinando facilidade de uso com suporte a tecnologias modernas de conteinerização.
+
+A estratégia de hospedagem adotada para o FinanceFlow é baseada em serviços gerenciados pelo Render, o que simplifica o processo de implantação e garante a consistência entre os ambientes de desenvolvimento e de produção.
+
+1. **Back-end (Node.js)**: O serviço de back-end será hospedado como um serviço web no Render. A plataforma se encarregará de executar a imagem do Docker ou o código Node.js diretamente, gerenciando a infraestrutura subjacente de forma automática.
+
+2. **Banco de Dados (PostgreSQL)**: O banco de dados será um serviço de PostgreSQL gerenciado pelo Render. Isso elimina a necessidade de gerenciar o servidor de banco de dados, backups e segurança, garantindo a alta disponibilidade e a integridade dos dados.
+
+O processo de lançamento da aplicação segue os seguintes passos, otimizados para um ambiente de desenvolvimento contínuo:
+
+1. **Containerização**: Primeiro, o back-end Node.js e o banco de dados PostgreSQL são configurados com Docker e Docker Compose no ambiente de desenvolvimento local. Isso cria um ambiente de trabalho consistente, onde todos os desenvolvedores (ou, neste caso, o desenvolvedor solo) têm a garantia de que a aplicação funcionará da mesma forma em suas máquinas.
+
+2. **Preparação do Ambiente de Produção**: Na plataforma de hospedagem, o serviço de banco de dados gerenciado é provisionado. Em seguida, a URL de conexão do banco de dados e outras variáveis de ambiente sensíveis são configuradas no serviço de PaaS que hospedará a API.
+
+3. **Deploy do Back-end**: O código-fonte do back-end é enviado para a plataforma de hospedagem (por exemplo, via Git). A plataforma de PaaS detecta as configurações do Docker e do Node.js, constrói a imagem do contêiner e o implanta, tornando a API acessível publicamente através de uma URL.
+
+4. **Lançamento do Aplicativo Mobile**: O aplicativo mobile, construído com React Native e Expo, será disponibilizado para testes por meio do Expo Go. O uso do Expo Go é suficiente para demonstrar a funcionalidade completa da aplicação, uma vez que ele consome a API que já estará online.
 
 # Planejamento
 
@@ -192,25 +217,44 @@ Explique como a hospedagem e o lançamento da plataforma foi feita.
 
 ### Semana 1
 
-Atualizado em: 21/04/2024
+Atualizado em: 17/08/2025
 
 | Responsável   | Tarefa/Requisito | Iniciado em    | Prazo      | Status | Terminado em    |
 | :----         |    :----         |      :----:    | :----:     | :----: | :----:          |
-| AlunaX        | Introdução | 01/02/2024     | 07/02/2024 | ✔️    | 05/02/2024      |
-| AlunaZ        | Objetivos    | 03/02/2024     | 10/02/2024 | 📝    |                 |
-| AlunoY        | Histórias de usuário  | 01/01/2024     | 07/01/2005 | ⌛     |                 |
-| AlunoK        | Personas 1  |    01/01/2024        | 12/02/2005 | ❌    |       |
+| Thiago Ferreira | Introdução | 11/08/2025 | 17/08/2025 | ✔️ | 16/08/2025      |
+| André Ramos | Escolha Tema | 11/08/2025 | 13/08/2025 | ✔️ | 11/08/2025
+| Gustavo Gino | Escolha Tema | 11/08/2025 | 13/08/2025 | ✔️ | 13/08/2025 |
+| Lucas Borges | Escolha Tema | 11/08/2025 | 13/08/2025 | ✔️ | 13/08/2025 |
+| Natã Gabriel | Escolha Tema | 11/08/2025 | 13/08/2025 | ✔️ | 12/08/2025 |
+| Rhafael Hector | Escolha Tema | 11/08/2025 | 13/08/2025 | ✔️ | 11/08/2025 |
 
-#### Semana 2
 
-Atualizado em: 21/04/2024
+### Semana 2
+
+Atualizado em: 24/08/2025
 
 | Responsável   | Tarefa/Requisito | Iniciado em    | Prazo      | Status | Terminado em    |
 | :----         |    :----         |      :----:    | :----:     | :----: | :----:          |
-| AlunaX        | Página inicial   | 01/02/2024     | 07/03/2024 | ✔️    | 05/02/2024      |
-| AlunaZ        | CSS unificado    | 03/02/2024     | 10/03/2024 | 📝    |                 |
-| AlunoY        | Página de login  | 01/02/2024     | 07/03/2024 | ⌛     |                 |
-| AlunoK        | Script de login  |  01/01/2024    | 12/03/2024 | ❌    |       |
+| Thiago Ferreira | Problema | 18/08/2025 | 24/08/2025 | ✔️ | 20/08/2025      |
+| André Ramos | Problema | 18/08/2025 | 24/08/2025 | ✔️ | 22/08/2025
+| Gustavo Gino | Justificativa | 18/08/2025 | 24/08/2025 | ✔️ | 24/08/2025 |
+| Lucas Borges | Justificativa | 18/08/2025 | 24/08/2025 | ✔️ | 23/08/2025 |
+| Natã Gabriel | Objetivos | 18/08/2025 | 24/08/2025 | ✔️ | 23/08/2025 |
+| Rhafael Hector | Objetivos | 18/08/2025 | 24/08/2025 | ✔️ | 20/08/2025 |
+
+
+### Semana 3
+
+Atualizado em: 27/08/2025
+
+| Responsável   | Tarefa/Requisito | Iniciado em    | Prazo      | Status | Terminado em    |
+| :----         |    :----         |      :----:    | :----:     | :----: | :----:          |
+| Thiago Ferreira | Arquitetura e Catálogo de Serviços | 25/08/2025 | 31/08/2025 | 📝 |       |
+| André Ramos | Restrições | 25/08/2025 | 31/08/2025 | ✔️ | 26/08/2025
+| Gustavo Gino | Requisitos | 25/08/2025 | 31/08/2025 | ✔️ | 27/08/2025 |
+| Lucas Borges | Hospedagem | 25/08/2025 | 31/08/2025 | ✔️ | 26/08/2025 |
+| Natã Gabriel | Planejamento | 25/08/2025 | 31/08/2025 | ✔️ | 27/08/2025 |
+| Rhafael Hector | Publico-Alvo e Personas | 25/08/2025 | 31/08/2025 | ✔️ | 20/08/2025 |
 
 Legenda:
 - ✔️: terminado
