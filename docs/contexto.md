@@ -122,16 +122,16 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 
 |ID      | Descrição do Requisito  | Prioridade |  
 |--------|-------------------------|------------|  
-|RNF-001 | O sistema deve ser responsivo e funcionar em dispositivos móveis (Android e iOS) | ALTA |  
-|RNF-002 | O tempo de resposta para registrar ou visualizar uma despesa não deve exceder 3 segundos | MÉDIA |  
-|RNF-003 | Os dados do usuário devem ser armazenados de forma segura, com autenticação e criptografia | ALTA |  
-|RNF-004 | O aplicativo deve apresentar uma interface simples e intuitiva, com foco em usabilidade | ALTA |  
-|RNF-005 | O sistema deve ser escalável, suportando crescimento no número de usuários sem perda de desempenho | MÉDIA |  
-|RNF-006 | O portal web administrativo deve estar disponível 99% do tempo | BAIXA |  
-|RNF-007 | O aplicativo deve ser compatível com diferentes versões de sistemas operacionais móveis (mínimo Android 10 e iOS 13) | MÉDIA |  
-|RNF-008 | O sistema deve garantir que cada usuário só tenha acesso aos seus próprios dados | ALTA |  
-|RNF-009 | O design deve seguir boas práticas de acessibilidade | MÉDIA |  
-|RNF-010 | O sistema deve permitir sincronização em nuvem para manter os dados atualizados entre dispositivos | MÉDIA | 
+| RNF-001 | O sistema deve ser responsivo e funcionar em dispositivos móveis (Android e iOS) | ALTA |  
+| RNF-002 | O tempo de resposta para registrar ou visualizar uma despesa não deve exceder 3 segundos | MÉDIA |  
+| RNF-003 | Os dados do usuário devem ser armazenados de forma segura, com autenticação e criptografia | ALTA |  
+| RNF-004 | O aplicativo deve apresentar uma interface simples e intuitiva, com foco em usabilidade | ALTA |  
+| RNF-005 | O sistema deve ser escalável, suportando crescimento no número de usuários sem perda de desempenho | MÉDIA |  
+| RNF-006 | O portal web administrativo deve estar disponível 99% do tempo | BAIXA |  
+| RNF-007 | O aplicativo deve ser compatível com diferentes versões de sistemas operacionais móveis (mínimo Android 10 e iOS 13) | MÉDIA |  
+| RNF-008 | O sistema deve garantir que cada usuário só tenha acesso aos seus próprios dados | ALTA |  
+| RNF-009 | O design deve seguir boas práticas de acessibilidade | MÉDIA |  
+| RNF-010 | O sistema deve permitir sincronização em nuvem para manter os dados atualizados entre dispositivos | MÉDIA | 
 
 
 ## Restrições
@@ -140,24 +140,58 @@ O projeto está restrito pelos itens apresentados na tabela a seguir.
 
 |ID      | Restrição  | Descrição |  
 |--------|-------------------------|------------|  
-|RNF-001 | Portabilidade | O sistema deve ser responsivo,garantindo  funcionamento adequado tanto navegadores |  
-| RNF-002 | Desempenho | O Sistema deve processar e responder às requisições do usuário em no máximo 3s ||
+| RNF-001 | Portabilidade | O sistema deve ser responsivo, garantindo funcionamento adequado tanto navegadores |  
+| RNF-002 | Desempenho | O Sistema deve processar e responder às requisições do usuário em no máximo 3s |
 | RNF-003 | Interface do Usuário | A Interface do sistema será desenvolvido utilizando React Native e Tailwind CSS e Node.js |
 | RNF-004 | Segurança | O sistema deve implementar mecanismos de proteção contra acesso não autorizado, garantindo a integridade e a confidencialidade dos dados. |
 | RNF-005 | Usabilidade | O sistema deve intuitivo, de fácil navegação e compreensão por parte do usuário final. |
-| RNF-006 | Persistência de Dados | O sistema deve utilizar um banco de dados relacional (como  PostgreSQL), garantindo integridade segurança e escalabilidade no armazenamento dos dados. A   modelagem, manipulação e migração do banco deverão ser realizadas usando o Prisma ORM, para assegurar consistência produtividade e proteção contra vulnerabilidades como SQL Injection. |
+| RNF-006 | Persistência de Dados | O sistema deve utilizar um banco de dados relacional (como  PostgreSQL), garantindo integridade segurança e escalabilidade no armazenamento dos dados. A modelagem, manipulação e migração do banco deverão ser realizadas usando o Prisma ORM, para assegurar consistência produtividade e proteção contra vulnerabilidades como SQL Injection. |
 
 
 # Catálogo de Serviços
 
-Descreva aqui todos os serviços que serão disponibilizados pelo seu projeto, detalhando suas características e funcionalidades.
+1. Serviço: Gerenciamento de Conta do Usuário
+Este serviço permite que o usuário gerencie sua identidade e acesso à plataforma, garantindo segurança e personalização.
+    • Descrição do Serviço: Permite que novos usuários criem uma conta segura no FinanceFlow e que usuários existentes façam login para acessar seus dados financeiros. Inclui funcionalidades para recuperação de senha e atualização de informações de perfil, como nome de usuário.
+    • Componentes do Serviço:
+        ◦ Funcionalidades: Cadastro de usuário, autenticação de login, redefinição de senha.
+        ◦ Camada de Lógica: API de Autenticação (Node.js/JWT).
+        ◦ Camada de Dados: Dados de usuário armazenados no PostgreSQL.
+        ◦ Interface: Telas de registro e login no aplicativo mobile (React Native).
+
+2. Serviço: Acompanhamento de Gastos Pessoais
+Este é o serviço central da plataforma, oferecendo ao usuário as ferramentas para registrar e organizar suas finanças diárias.
+    • Descrição do Serviço: Permite que o usuário insira, visualize, edite e exclua suas despesas diárias, atribuindo-as a categorias personalizáveis. O serviço é projetado para ser rápido e intuitivo, facilitando a manutenção de um registro financeiro consistente.
+    • Componentes do Serviço:
+        ◦ Funcionalidades: Adicionar despesa, editar despesa, excluir despesa, criar/editar/excluir categorias.
+        ◦ Camada de Lógica: API de Gastos (Node.js).
+        ◦ Camada de Dados: Dados de despesas e categorias armazenados no PostgreSQL.
+        ◦ Interface: Telas de inserção de gastos e listagem de despesas no aplicativo mobile (React Native).
+
+3. Serviço: Análise e Visualização Financeira
+Este serviço transforma os dados brutos de gastos em informações valiosas, ajudando o usuário a entender seu comportamento financeiro.
+    • Descrição do Serviço: Oferece relatórios visuais e resumos analíticos dos gastos do usuário. Permite a visualização de gráficos por categoria e por período de tempo, facilitando a identificação de tendências e áreas para economia.
+    • Componentes do Serviço:
+        ◦ Funcionalidades: Geração de gráficos de gastos por categoria (gráfico de pizza), resumo de gastos mensais/semanais.
+        ◦ Camada de Lógica: API de Relatórios (Node.js).
+        ◦ Camada de Dados: Consultas de dados agregados no PostgreSQL.
+        ◦ Interface: Telas de painel de controle e relatórios no aplicativo mobile (React Native).
+
+4. Serviço: Gestão da Plataforma (Serviço de Suporte ao Administrador)
+Este serviço é dedicado ao administrador da plataforma, fornecendo as ferramentas necessárias para monitorar a saúde do sistema e gerenciar os dados dos usuários.
+    • Descrição do Serviço: Permite que o administrador visualize métricas gerais do sistema, como o número total de usuários, e gerencie contas de usuário, se necessário. O serviço visa garantir a integridade dos dados e o bom funcionamento da plataforma.
+    • Componentes do Serviço:
+        ◦ Funcionalidades: Listagem de usuários, visualização de dados do sistema, possibilidade de exclusão de dados (caso necessário para manutenção).
+        ◦ Camada de Lógica: API de Administração (Node.js).
+        ◦ Camada de Dados: Acesso aos dados de todos os usuários no PostgreSQL.
+        ◦ Interface: Portal de gestão em React.
+Este catálogo de serviços é uma ferramenta essencial que demonstra a capacidade da arquitetura distribuída de suportar diferentes serviços e clientes (usuário final e administrador) por meio de uma base de serviços comum.
 
 # Arquitetura da Solução
 
 A arquitetura do FinanceFlow é projetada para ser distribuída, com separação clara entre as camadas de apresentação, lógica de negócio e dados. Ela adota uma abordagem de serviço único (monolito) no backend para simplificar o desenvolvimento e a manutenção, ao mesmo tempo que demonstra a comunicação entre diferentes componentes.
 
 ![arq](/docs/img/Arquitetura_Distribuida.jpg)
-
 
 ## Tecnologias Utilizadas
 
