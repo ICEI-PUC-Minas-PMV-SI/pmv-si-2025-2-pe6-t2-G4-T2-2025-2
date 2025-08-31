@@ -191,7 +191,7 @@ Este catálogo de serviços é uma ferramenta essencial que demonstra a capacida
 
 A arquitetura do FinanceFlow é projetada para ser distribuída, com separação clara entre as camadas de apresentação, lógica de negócio e dados. Ela adota uma abordagem de serviço único (monolito) no backend para simplificar o desenvolvimento e a manutenção, ao mesmo tempo que demonstra a comunicação entre diferentes componentes.
 
-![arq](/docs/img/Arquitetura_Distribuida.jpg)
+![arq](/docs/img/Arquitetura%20Distribuida%20-%20Frame%201.jpg)
 
 ## Tecnologias Utilizadas
 
@@ -283,11 +283,11 @@ Atualizado em: 27/08/2025
 
 | Responsável   | Tarefa/Requisito | Iniciado em    | Prazo      | Status | Terminado em    |
 | :----         |    :----         |      :----:    | :----:     | :----: | :----:          |
-| Thiago Ferreira | Arquitetura e Catálogo de Serviços | 25/08/2025 | 31/08/2025 | 📝 |       |
+| Thiago Ferreira | Arquitetura e Hospedagem | 25/08/2025 | 31/08/2025 | ✔️ | 31/08/2025 |
 | André Ramos | Restrições | 25/08/2025 | 31/08/2025 | ✔️ | 26/08/2025
 | Gustavo Gino | Requisitos | 25/08/2025 | 31/08/2025 | ✔️ | 27/08/2025 |
-| Lucas Borges | Hospedagem | 25/08/2025 | 31/08/2025 | ✔️ | 26/08/2025 |
-| Natã Gabriel | Planejamento | 25/08/2025 | 31/08/2025 | ✔️ | 27/08/2025 |
+| Lucas Borges | Catálogo de Serviços | 25/08/2025 | 31/08/2025 | ✔️ | 29/08/2025 |
+| Natã Gabriel | Catálogo de Serviços | 25/08/2025 | 31/08/2025 | ✔️ | 29/08/2025 |
 | Rhafael Hector | Publico-Alvo e Personas | 25/08/2025 | 31/08/2025 | ✔️ | 20/08/2025 |
 
 Legenda:
