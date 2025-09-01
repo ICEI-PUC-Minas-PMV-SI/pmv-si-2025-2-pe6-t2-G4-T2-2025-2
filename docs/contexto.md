@@ -136,16 +136,27 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 
 ## Restrições
 
-O projeto está restrito pelos itens apresentados na tabela a seguir.
+As restrições aqui descritas definem os limite dentro dos quais o projeto FinanceFlow deves ser construido e implementado.
+ 
+Restrições Gerais 
 
-|ID      | Restrição  | Descrição |  
-|--------|-------------------------|------------|  
-| RNF-001 | Portabilidade | O sistema deve ser responsivo, garantindo funcionamento adequado tanto navegadores |  
-| RNF-002 | Desempenho | O Sistema deve processar e responder às requisições do usuário em no máximo 3s |
-| RNF-003 | Interface do Usuário | A Interface do sistema será desenvolvido utilizando React Native e Tailwind CSS e Node.js |
-| RNF-004 | Segurança | O sistema deve implementar mecanismos de proteção contra acesso não autorizado, garantindo a integridade e a confidencialidade dos dados. |
-| RNF-005 | Usabilidade | O sistema deve intuitivo, de fácil navegação e compreensão por parte do usuário final. |
-| RNF-006 | Persistência de Dados | O sistema deve utilizar um banco de dados relacional (como  PostgreSQL), garantindo integridade segurança e escalabilidade no armazenamento dos dados. A modelagem, manipulação e migração do banco deverão ser realizadas usando o Prisma ORM, para assegurar consistência produtividade e proteção contra vulnerabilidades como SQL Injection. |
+01. Aplicativo móvel deve ser desenvolvido utilizando React Native com Expo, não sendo permitida a mudança  de framework durante o ciclo  de desenvolvimento do projeto.
+
+02. O backend deve ser implementado  obrigatoriamente em Node.js com Typescript ,utilizando  Express como framework principal e Prisma como  ORM para comunicação com o banco de dados .
+
+o3. o banco de dados relacional utilizado sera o PostgreSQL, sendo vetada a adoção de bancos NoSql ou alternativos.
+
+04. o deploy da aplicação  deve ser feito obrigatoriamente  na plataformas Render, tanto para o backend quanto para o banco de dados , visando padronização  e facilidade  de manutenção .
+
+05.A interface mobile precisa funcionar  corretamente nas versões  Android 10+  e iOs 13+ , sendo essas as versões mínimas  suportadas.
+
+06. O aplicativo  deve oferecer   suporte offline apenas  para visualização  dos dados ja armazenados  localmente , não sendo obrigatória  a funcionalidade completa fora da rede.
+
+07. o escopo funcional do projeto deve ser limitado as funcionalidades  descritas nos requisitos priorizados. Funcionalidades extras só poderão ser incluídas mediante  aprovação  do orientador  ou coordenador do projeto.
+
+08. o grupo não poderá  contar com recursos financeiros externos(como APIs pagas, hospedagens premium, licenças comerciais). devendo utilizar exclusivamente ferramentais gratuitas ou open source.
+
+09. Todo o código do projeto  deve estar  hospedado em repositórios  publico no GitHub , com commits rastreáveis por membro  e atualizações  semanais obrigatórias.
 
 
 # Catálogo de Serviços
