@@ -30,7 +30,7 @@ Utilizando a Matriz CSD podemos organizar o que sabemos, o que presumimos e o qu
 
 ## Objetivos
 
-O objetivo geral do **FinanceFlow** é **desenvolver uma aplicação móvel com arquitetura de sistemas distribuídos que ofereça aos usuários uma ferramenta simples e eficiente para registrar, categorizar e visualizar seus gastos diários, promovendo maior conscientização e controle sobre suas finanças pessoais. Além disso, o projeto inclui a criação de um portal web de gestão para o administrador da plataforma, que permitirá o monitoramento e o gerenciamento dos dados do sistema.**
+O objetivo geral do **Flow** é **desenvolver uma aplicação móvel com arquitetura de sistemas distribuídos que ofereça aos usuários uma ferramenta simples e eficiente para registrar, categorizar e visualizar seus gastos diários, promovendo maior conscientização e controle sobre suas finanças pessoais. Além disso, o projeto inclui a criação de um portal web de gestão para o administrador da plataforma, que permitirá o monitoramento e o gerenciamento dos dados do sistema.**
 
 Já os objetivos específicos serão guiados pelas etapas do desenvolvimento do projeto, detalhando as funcionalidades e as frentes de trabalho necessárias para atingir o objetivo geral:
 
@@ -47,7 +47,7 @@ Já os objetivos específicos serão guiados pelas etapas do desenvolvimento do 
 
 O controle financeiro pessoal é uma habilidade essencial para a estabilidade e o crescimento individual, mas pesquisas mostram que a população brasileira enfrenta desafios significativos nessa área. Dados de 2023 da Confederação Nacional do Comércio de Bens, Serviços e Turismo (CNC), por meio da Pesquisa de Endividamento e Inadimplência do Consumidor (PEIC), revelaram que a proporção de famílias brasileiras com dívidas atingiu 78,5%, evidenciando uma dificuldade generalizada em gerenciar as contas. Além disso, uma pesquisa do Serviço de Proteção ao Crédito (SPC Brasil) e da Confederação Nacional de Dirigentes Lojistas (CNDL) aponta que 37% dos inadimplentes residentes nas capitais do país admitem que não fazem gestão dos próprios ganhos e gastos, sobretudo porque fazem o controle de cabeça (17%).
 
-Esses números demonstram uma clara necessidade de ferramentas que simplifiquem o monitoramento dos gastos. O **FinanceFlow** se propõe a ser essa ferramenta, oferecendo uma solução descomplicada que capacite os usuários a tomar decisões financeiras mais conscientes. Ao focar em um público que busca simplicidade, o aplicativo preenche uma lacuna no mercado e contribui diretamente para a educação financeira, auxiliando na redução do endividamento e no aumento da capacidade de poupança.
+Esses números demonstram uma clara necessidade de ferramentas que simplifiquem o monitoramento dos gastos. O **Flow** se propõe a ser essa ferramenta, oferecendo uma solução descomplicada que capacite os usuários a tomar decisões financeiras mais conscientes. Ao focar em um público que busca simplicidade, o aplicativo preenche uma lacuna no mercado e contribui diretamente para a educação financeira, auxiliando na redução do endividamento e no aumento da capacidade de poupança.
 
 > **Links com dados das Pesquisas**:
 > - [Confederação Nacional do Comércio de Bens, Serviços e Turismo (CNC)](https://portaldocomercio.org.br/publicacoes_posts/pesquisa-de-endividamento-e-inadimplencia-do-consumidor-peic-perfil-do-endividamento-anual-2023/)
@@ -122,7 +122,7 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 
 |ID      | Descrição do Requisito  | Prioridade |  
 |--------|-------------------------|------------|  
-| RNF-001 | O sistema deve ser responsivo e funcionar em dispositivos móveis (Android e iOS) | ALTA |  
+| RNF-001 | O sistema deve ser responsivo e funcionar em dispositivos móveis (Android e iOS) | ALTA |
 | RNF-002 | O tempo de resposta para 95% das requisições mais comuns (ex: adicionar uma despesa, listar transações do mês) deve ser inferior a 500 milissegundos (0,5 segundos) sob a carga de 1.000 usuários | MÉDIA |  
 | RNF-003 | Os dados do usuário devem ser armazenados de forma segura, com autenticação e criptografia | ALTA |  
 | RNF-004 | O aplicativo deve apresentar uma interface simples e intuitiva, com foco em usabilidade | ALTA |  
@@ -137,7 +137,7 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 
 ## Restrições
 
-O projeto está restrito pelos itens apresentados na tabela a seguir.
+As restrições aqui descritas definem os limite dentro dos quais o projeto Flow deves ser construido e implementado.
 
 |ID      | Restrição  | Descrição |  
 |--------|-------------------------|------------|  
@@ -147,7 +147,6 @@ O projeto está restrito pelos itens apresentados na tabela a seguir.
 | RNF-004 | Segurança | O sistema deve implementar mecanismos de proteção contra acesso não autorizado, garantindo a integridade e a confidencialidade dos dados. |
 | RNF-005 | Usabilidade | O sistema deve ser intuitivo, de fácil navegação e compreensão por parte do usuário final. |
 | RNF-006 | Persistência de Dados | O sistema deve utilizar um banco de dados relacional (como  PostgreSQL), garantindo integridade segurança e escalabilidade no armazenamento dos dados. A modelagem, manipulação e migração do banco deverão ser realizadas usando o Prisma ORM, para assegurar consistência produtividade e proteção contra vulnerabilidades como SQL Injection. |
-
 
 # Catálogo de Serviços
 
