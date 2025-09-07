@@ -1,6 +1,6 @@
 # Introdução
 
-O projeto visa oferecer uma solução móvel e de fácil utilização para que os usuários possam registrar e acompanhar seus gastos diários de forma simples e eficiente.
+O projeto consiste em um aplicativo móvel para os usuários e um painel web intuitivo para o administrador. A solução permite que os usuários registrem e acompanhem seus gastos diários de forma simples e eficiente.
 
 No cenário atual de crescente digitalização, o controle financeiro pessoal é uma necessidade fundamental. A maioria das pessoas busca ferramentas que auxiliem na organização de suas despesas e no planejamento financeiro. No entanto, muitas soluções existentes são complexas, com funcionalidades excessivas que acabam por afastar usuários que buscam apenas simplicidade e praticidade. O FinanceFlow surge como uma alternativa direta e intuitiva para suprir essa lacuna.
 
@@ -30,7 +30,7 @@ Utilizando a Matriz CSD podemos organizar o que sabemos, o que presumimos e o qu
 
 ## Objetivos
 
-O objetivo geral do **FinanceFlow** é **desenvolver uma aplicação móvel com arquitetura de sistemas distribuídos que ofereça aos usuários uma ferramenta simples e eficiente para registrar, categorizar e visualizar seus gastos diários, promovendo maior conscientização e controle sobre suas finanças pessoais. Além disso, o projeto inclui a criação de um portal web de gestão para o administrador da plataforma, que permitirá o monitoramento e o gerenciamento dos dados do sistema.**
+O objetivo geral do **Flow** é **desenvolver uma aplicação móvel com arquitetura de sistemas distribuídos que ofereça aos usuários uma ferramenta simples e eficiente para registrar, categorizar e visualizar seus gastos diários, promovendo maior conscientização e controle sobre suas finanças pessoais. Além disso, o projeto inclui a criação de um portal web de gestão para o administrador da plataforma, que permitirá o monitoramento e o gerenciamento dos dados do sistema.**
 
 Já os objetivos específicos serão guiados pelas etapas do desenvolvimento do projeto, detalhando as funcionalidades e as frentes de trabalho necessárias para atingir o objetivo geral:
 
@@ -47,7 +47,7 @@ Já os objetivos específicos serão guiados pelas etapas do desenvolvimento do 
 
 O controle financeiro pessoal é uma habilidade essencial para a estabilidade e o crescimento individual, mas pesquisas mostram que a população brasileira enfrenta desafios significativos nessa área. Dados de 2023 da Confederação Nacional do Comércio de Bens, Serviços e Turismo (CNC), por meio da Pesquisa de Endividamento e Inadimplência do Consumidor (PEIC), revelaram que a proporção de famílias brasileiras com dívidas atingiu 78,5%, evidenciando uma dificuldade generalizada em gerenciar as contas. Além disso, uma pesquisa do Serviço de Proteção ao Crédito (SPC Brasil) e da Confederação Nacional de Dirigentes Lojistas (CNDL) aponta que 37% dos inadimplentes residentes nas capitais do país admitem que não fazem gestão dos próprios ganhos e gastos, sobretudo porque fazem o controle de cabeça (17%).
 
-Esses números demonstram uma clara necessidade de ferramentas que simplifiquem o monitoramento dos gastos. O **FinanceFlow** se propõe a ser essa ferramenta, oferecendo uma solução descomplicada que capacite os usuários a tomar decisões financeiras mais conscientes. Ao focar em um público que busca simplicidade, o aplicativo preenche uma lacuna no mercado e contribui diretamente para a educação financeira, auxiliando na redução do endividamento e no aumento da capacidade de poupança.
+Esses números demonstram uma clara necessidade de ferramentas que simplifiquem o monitoramento dos gastos. O **Flow** se propõe a ser essa ferramenta, oferecendo uma solução descomplicada que capacite os usuários a tomar decisões financeiras mais conscientes. Ao focar em um público que busca simplicidade, o aplicativo preenche uma lacuna no mercado e contribui diretamente para a educação financeira, auxiliando na redução do endividamento e no aumento da capacidade de poupança.
 
 > **Links com dados das Pesquisas**:
 > - [Confederação Nacional do Comércio de Bens, Serviços e Turismo (CNC)](https://portaldocomercio.org.br/publicacoes_posts/pesquisa-de-endividamento-e-inadimplencia-do-consumidor-peic-perfil-do-endividamento-anual-2023/)
@@ -122,42 +122,31 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 
 |ID      | Descrição do Requisito  | Prioridade |  
 |--------|-------------------------|------------|  
-| RNF-001 | O sistema deve ser responsivo e funcionar em dispositivos móveis (Android e iOS) | ALTA |  
-| RNF-002 | O tempo de resposta para registrar ou visualizar uma despesa não deve exceder 3 segundos | MÉDIA |  
+| RNF-001 | O sistema deve ser responsivo e funcionar em dispositivos móveis (Android e iOS) | ALTA |
+| RNF-002 | O tempo de resposta para 95% das requisições mais comuns (ex: adicionar uma despesa, listar transações do mês) deve ser inferior a 500 milissegundos (0,5 segundos) sob a carga de 1.000 usuários | MÉDIA |  
 | RNF-003 | Os dados do usuário devem ser armazenados de forma segura, com autenticação e criptografia | ALTA |  
 | RNF-004 | O aplicativo deve apresentar uma interface simples e intuitiva, com foco em usabilidade | ALTA |  
-| RNF-005 | O sistema deve ser escalável, suportando crescimento no número de usuários sem perda de desempenho | MÉDIA |  
-| RNF-006 | O portal web administrativo deve estar disponível 99% do tempo | BAIXA |  
-| RNF-007 | O aplicativo deve ser compatível com diferentes versões de sistemas operacionais móveis (mínimo Android 10 e iOS 13) | MÉDIA |  
-| RNF-008 | O sistema deve garantir que cada usuário só tenha acesso aos seus próprios dados | ALTA |  
-| RNF-009 | O design deve seguir boas práticas de acessibilidade | MÉDIA |  
-| RNF-010 | O sistema deve permitir sincronização em nuvem para manter os dados atualizados entre dispositivos | MÉDIA | 
+| RNF-005 | O sistema deve ser capaz de suportar até 1.000 usuários ativos e simultâneos registrando ou consultando dados. (escalabilidade) | MÉDIA |
+| RNF-006 | A API deve ser capaz de processar uma taxa de transferência de 50 a 100 requisições por segundo sem degradação significativa no tempo de resposta | BAIXA |
+| RNF-007 | O portal web administrativo deve estar disponível 99% do tempo | BAIXA |  
+| RNF-008 | O aplicativo deve ser compatível com diferentes versões de sistemas operacionais móveis (mínimo Android 10 e iOS 13) | MÉDIA |  
+| RNF-009 | O sistema deve garantir que cada usuário só tenha acesso aos seus próprios dados | ALTA |  
+| RNF-010 | O design deve seguir boas práticas de acessibilidade | MÉDIA |  
+| RNF-011 | O sistema deve permitir sincronização em nuvem para manter os dados atualizados entre dispositivos | MÉDIA | 
 
 
 ## Restrições
 
-As restrições aqui descritas definem os limite dentro dos quais o projeto FinanceFlow deves ser construido e implementado.
- 
-Restrições Gerais 
+As restrições aqui descritas definem os limite dentro dos quais o projeto Flow deves ser construido e implementado.
 
-01. Aplicativo móvel deve ser desenvolvido utilizando React Native com Expo, não sendo permitida a mudança  de framework durante o ciclo  de desenvolvimento do projeto.
-
-02. O backend deve ser implementado  obrigatoriamente em Node.js com Typescript ,utilizando  Express como framework principal e Prisma como  ORM para comunicação com o banco de dados .
-
-o3. o banco de dados relacional utilizado sera o PostgreSQL, sendo vetada a adoção de bancos NoSql ou alternativos.
-
-04. o deploy da aplicação  deve ser feito obrigatoriamente  na plataformas Render, tanto para o backend quanto para o banco de dados , visando padronização  e facilidade  de manutenção .
-
-05.A interface mobile precisa funcionar  corretamente nas versões  Android 10+  e iOs 13+ , sendo essas as versões mínimas  suportadas.
-
-06. O aplicativo  deve oferecer   suporte offline apenas  para visualização  dos dados ja armazenados  localmente , não sendo obrigatória  a funcionalidade completa fora da rede.
-
-07. o escopo funcional do projeto deve ser limitado as funcionalidades  descritas nos requisitos priorizados. Funcionalidades extras só poderão ser incluídas mediante  aprovação  do orientador  ou coordenador do projeto.
-
-08. o grupo não poderá  contar com recursos financeiros externos(como APIs pagas, hospedagens premium, licenças comerciais). devendo utilizar exclusivamente ferramentais gratuitas ou open source.
-
-09. Todo o código do projeto  deve estar  hospedado em repositórios  publico no GitHub , com commits rastreáveis por membro  e atualizações  semanais obrigatórias.
-
+|ID      | Restrição  | Descrição |  
+|--------|-------------------------|------------|  
+| RNF-001 | Portabilidade | O sistema deve ser responsivo, garantindo funcionamento adequado tanto navegadores |  
+| RNF-002 | Desempenho | O Sistema deve processar e responder às requisições do usuário em no máximo 3s |
+| RNF-003 | Interface do Usuário | A Interface do sistema será desenvolvido utilizando React Native e Tailwind CSS e Node.js |
+| RNF-004 | Segurança | O sistema deve implementar mecanismos de proteção contra acesso não autorizado, garantindo a integridade e a confidencialidade dos dados. |
+| RNF-005 | Usabilidade | O sistema deve ser intuitivo, de fácil navegação e compreensão por parte do usuário final. |
+| RNF-006 | Persistência de Dados | O sistema deve utilizar um banco de dados relacional (como  PostgreSQL), garantindo integridade segurança e escalabilidade no armazenamento dos dados. A modelagem, manipulação e migração do banco deverão ser realizadas usando o Prisma ORM, para assegurar consistência produtividade e proteção contra vulnerabilidades como SQL Injection. |
 
 # Catálogo de Serviços
 
