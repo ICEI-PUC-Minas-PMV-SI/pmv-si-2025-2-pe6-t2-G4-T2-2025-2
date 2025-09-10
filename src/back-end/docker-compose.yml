@@ -1,5 +1,5 @@
 services:
-  postgres:
+  apiflow_db:
     image: "bitnami/postgresql:latest"
     ports:
       - "5432:5432"
