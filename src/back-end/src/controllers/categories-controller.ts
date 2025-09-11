@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { prisma } from "@/database/prisma";
+import { prisma, Prisma } from "@/database/prisma";
 import { AppError } from "@/utils/AppError";
 import { z } from "zod";
 
@@ -58,35 +58,38 @@ class CategoriesController {
 
         const skip = (page - 1) * perPage
 
-        const categories = await prisma.category.findMany({
-            skip,
-            take: perPage,
-            where: {
-                userId,
-                name: {
-                    contains: name.trim(),
-                    mode: "insensitive",
-                }
-            },
-            orderBy: {
-                name: "asc"
+        const searchFilter = {
+            userId,
+            name: {
+                contains: name.trim(),
+                mode: Prisma.QueryMode.insensitive
             }
-        })
+        }
 
-        const totalRecords = await prisma.category.count({
-            where: {
-                userId,
-                name: {
-                    contains: name.trim(),
-                    mode: "insensitive",
+        const [ categories, totalRecords ] = await prisma.$transaction([
+            prisma.category.findMany({
+                skip,
+                take: perPage,
+                where: searchFilter,
+                orderBy: {
+                    name: "asc"
+                },
+                include: {
+                    user: {
+                        select: {
+                            name: true,
+                            email: true
+                        }
+                    }
                 }
-            },
-            orderBy: {
-                name: "asc"
-            }
-        })
+            }),
+            prisma.category.count({
+                where: searchFilter
+            })
+        ])
 
         const totalPages = Math.ceil(totalRecords / perPage)
+
 
         response.status(200).json({
             categories,
@@ -99,28 +102,83 @@ class CategoriesController {
         })
     }
 
-    async update (request: Request, response: Response) {
+    async update(request: Request, response: Response) {
+        const userId = request.user?.id
+
+        if(!userId) {
+            throw new AppError("Usuário não autenticado", 401)
+        }
+
         const paramsSchema = z.object({
             id: z.string().uuid()
         })
 
         const bodySchema = z.object({
-            name: z.string().trim().min(3, { message: "Nome é obrigatório"}),
-            type: typeEnum,
+            name: z.string().trim().min(3, { message: "Nome é obrigatório"}).optional(),
+            type: typeEnum.optional(),
+        }).refine( data => data.name !== undefined || data.type !== undefined, {
+            message: "Ao menos um dos campos (nome ou tipo) deve ser fornecido.",
+            path: ["name", "type"]
+        })
+
+        const { id } = paramsSchema.parse(request.params)
+        const { name, type } = bodySchema.parse(request.body)
+
+        const category = await prisma.category.findUnique({
+            where: {
+                id,
+                userId
+            }
+        })
+
+        if(!category) {
+            throw new AppError("Categoria não encontrada ou não pertence a você", 404)
+        }
+
+        const updatedCategory = await prisma.category.update({
+            data: {
+                name,
+                type
+            },
+            where: {
+                id
+            }
+        })
+
+        response.json(updatedCategory)
+    }
+
+    async delete(request: Request, response: Response) {
+        const userId = request.user?.id
+
+        if(!userId) {
+            throw new AppError("Usuário não autenticado", 401)
+        }
+
+        const paramsSchema = z.object({
+            id: z.string().uuid()
         })
 
         const { id } = paramsSchema.parse(request.params)
 
-        const categories = await prisma.category.findFirst({
+        const category = await prisma.category.findUnique({
             where: {
-                id
-            },
-            include: {
-                user: true
+                id,
+                userId
             }
         })
 
-        response.status(200).json(categories)
+        if(!category) {
+            throw new AppError("Categoria não encontrada ou não pertence a você", 404)
+        }
+
+        await prisma.category.delete({
+            where: {
+                id
+            }
+        })
+
+        response.status(204).send()
     }
 }
 

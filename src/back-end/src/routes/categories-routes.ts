@@ -8,6 +8,7 @@ const categoriesController = new CategoriesController()
 categoriesRoutes.use(verifyUserAuthorization(["admin", "member"]))
 categoriesRoutes.post("/", categoriesController.create)
 categoriesRoutes.get("/", categoriesController.list)
-categoriesRoutes.get("/:id", categoriesController.update)
+categoriesRoutes.patch("/:id", categoriesController.update)
+categoriesRoutes.delete("/:id", categoriesController.delete)
 
 export { categoriesRoutes }
