@@ -36,21 +36,77 @@ class UsersController {
         response.status(201).json()
     }
 
-    async list(request: Request, response: Response) {
-        const users = await prisma.user.findMany({
+    async show(request: Request, response: Response) {
+        const userId = request.user?.id
+
+        if(!userId) {
+            throw new AppError("Usuário não autenticado", 401)
+        }
+
+        const user = await prisma.user.findUnique({
+            where: {
+                id: userId
+            },
+            select: {
+                id: true,
+                name: true,
+                email: true,
+                role: true,
+                createdAt: true
+            }
+        })
+
+        return response.json(user)
+    }
+
+    async update(request: Request, response: Response) {
+        const userId = request.user?.id
+
+        if(!userId) {
+            throw new AppError("Usuário não autenticado", 401)
+        }
+
+        const bodySchema = z.object({
+            name: z.string().trim().min(3, { message: "Nome deve ter pelo menos 3 caracteres." }).optional(),
+            password: z.string().min(6, { message: "Senha deve ter pelo menos 6 caracteres." }).optional(),
+        }).refine(data => data.name !== undefined || data.password !== undefined, {
+            message: "Pelo menos um dos campos (nome ou senha) deve ser fornecido para a atualização.",
+            path: ["body"]
+        })
+
+        const { name, password } = bodySchema.parse(request.body)
+
+        const user = await prisma.user.findUnique({
+            where: { id: userId }
+        })
+
+        if(!user) {
+            throw new AppError("Usuário não encontrado", 404)
+        }
+
+        let passwordHash: string = user.password
+
+        if(password) {
+            passwordHash = await hash(password, 8)
+        }
+
+        const updatedUser = await prisma.user.update({
+            where: { id: userId },
+            data: {
+                name: name || user.name,
+                password: passwordHash
+            },
             select: {
                 id: true,
                 name: true,
                 email: true,
                 role: true,
                 createdAt: true,
-            },
-            orderBy: {
-                createdAt: "desc"
+                updatedAt: true
             }
         })
 
-        response.json(users)
+        return response.json(updatedUser)
     }
 
 }

@@ -5,6 +5,8 @@ import { usersRoutes } from "./user-routes";
 import { sessionsRoutes } from "./sessions-routes";
 import { categoriesRoutes } from "./categories-routes";
 import { transactionsRoutes } from "./transactions-routes";
+import { reportsRoutes } from "./reports-routes";
+import { adminRoutes } from "./admin-routes";
 
 const routes = Router()
 
@@ -16,5 +18,7 @@ routes.use("/sessions", sessionsRoutes)
 routes.use(ensureAuthenticated)
 routes.use("/categories", categoriesRoutes)
 routes.use("/transactions", transactionsRoutes)
+routes.use("/reports", reportsRoutes)
+routes.use("/admin", adminRoutes)
 
 export { routes }
