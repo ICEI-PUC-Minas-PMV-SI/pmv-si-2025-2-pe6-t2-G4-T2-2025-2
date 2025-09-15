@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "src/server.ts",
   "scripts": {
-    "dev": "tsx watch --env-file .env src/server.ts"
+    "dev": "tsx watch --env-file .env src/server.ts",
+    "test:dev": "NODE_OPTIONS=--experimental-vm-modules npx jest --watchAll --runInBand"
   },
   "author": "Turma 2 Grupo 4 - PUCMINAS",
   "license": "ISC",
@@ -21,8 +22,13 @@
     "@types/bcrypt": "^5.0.2",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
+    "@types/jest": "^29.5.13",
     "@types/jsonwebtoken": "^9.0.10",
+    "@types/supertest": "^6.0.3",
+    "jest": "^29.7.0",
     "prisma": "^6.15.0",
+    "supertest": "^7.1.4",
+    "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
     "tsx": "^4.20.5",
     "typescript": "^5.9.2"
