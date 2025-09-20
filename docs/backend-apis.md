@@ -10,7 +10,31 @@ Aqui estão algumas etapas importantes que devem ser consideradas no planejament
 
 O primeiro passo é definir os objetivos da sua API. O que você espera alcançar com ela? Você quer que ela seja usada por clientes externos ou apenas por aplicações internas? Quais são os recursos que a API deve fornecer?
 
-[]
+[ A API do Flow tem como objetivo principal servir como camada intermediária entre  o aplicativo mobile  e a bases de a dados , expondo endepoints seguros e bem estrturados para seguintes itens: 
+
+Gerenciar  usarios : cadastro , autenticação, recuperação de senha e controle de sessão.
+
+Registrar e consultar  despesas : incluindo  criação , edição e exclusão de lançametos  financeiros por usuário.
+
+Organizar categorias  de gastos : permitindo ao usuário personalizar e consultar suas categorias . 
+
+Oferecer  autenticação seguara: via JWTY, com controle de acesso baseados em escopos e validações de dados.
+
+Prover dados agregados: como totais mensais,garaficos  e relatorios de uso.
+
+Esses Objetivos estão alinhados com uma arquitetura simples, mas robusta, permitindo facilidade de uso, manutençao do código, expansão futura e, principalmente, segurança
+no tratamento das informaçoes pessoais e finaceiras do usuarios.
+
+Segurança aplicada por camada 
+Na camada de apresentação , a segurança  de comunicação entre API e armazenamento  de tokens de autenticçao sendo todo trafego por HTTPS para proteçao contra interceptaçoes.
+Como melhoria  adicional , recomenda se o a implementação do SSL assegurando conexoes apenas com servidores confiáveis.
+No Backend , o uso do JWT para autenticaçao  é feito de froma segura  com tokens  curtos e protegidos por chave secreta e senhas criptografada  com bcryot con salt.
+A camada de dados, composta por PostgreSQL e Prisma ORM, conta com proteção contra SQL Injection por meio do uso de consultas parametrizadas. 
+Na infraestrutura, o backend é containerizado com Docker, e o deploy é realizado na Render, é importante garantir que o container exponha apenas as portas necessárias, bibliotecas e dependências estejam sempre atualizadas por meio de ferramentas como npm audit, dependabot ou snyk.
+
+Em relação á conformidade com oOWASP Top 10 , o sistema apresenta  proteçao contra injeçoes  e falhas cripitogáficas  autenticçaoconfiavel.  Mas precisa rever  a ausencia  de SSL Pinning no App Mobile.
+ 
+Mesmo sendo projeto academico tem base sólida de segurança, validaçao e criptografia e iinfraestrtura escalavel. API Flow ira cumprir   seus objetivos  ao oferecer uma interface segura, funcional e extensivel pra gerenciamento de finanças pessoias .]
 
 
 ## Modelagem da Aplicação
