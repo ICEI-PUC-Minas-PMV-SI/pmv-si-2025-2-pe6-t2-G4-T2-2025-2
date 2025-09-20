@@ -80,7 +80,45 @@ Existem muitas tecnologias diferentes que podem ser usadas para desenvolver APIs
 
 ## Considerações de Segurança
 
-[Discuta as considerações de segurança relevantes para a aplicação distribuída, como autenticação, autorização, proteção contra ataques, etc.]
+[O projeto Flow está bem estruturado do ponto de vista tecnológico, e as medidas de segurança abaixo complementam a arquitetura, garantindo:
+Proteção de dados sensíveis, Autenticação e autorização seguras, Comunicação criptografada, Isolamento entre serviços, Infraestrutura consistente e segura com Docker e Render.
+
+1.Camada de Apresentaçao (Front-end - ReactNative)
+
+Armazenamentos  Seguros de Tokens:
+Tokens JWT não devem ser armazenados em AsyncStorege ou SEcureStore em texto puro sem criptografia.
+Tokens com  escopo limitado e curto tempo de expiração mitigam a vulnelaribilidade .
+Comunicação Segura com HTTPS :
+todo trafego deve usar https com tls 1.2+ para proteger dados em transito.
+Proteção contra Man in the Midle.
+Implementar SSl Pinnig  no App Mobile para que se comunique apenas com servidores confiáveis.
+Nunca imbutir chaves de Api ou senhas  diretamente no código.
+Usar variáveis de ambiente  e configuração por build.
+
+2.Camada de Lógica de Negocio(Backend - Node.js + Expres)
+Autenticaçoa e Autorização:
+Usa JWT com expiração curta, armazena JWT_Secrete em .env, e refersh tokens com escopo limitado.
+Validação  de Entrada (Zod): Protege  contra injeções  e falhas  ao validar /sanitizar todos dados  recebidos.
+Crptografia  de Senhas :Nunca armazena senhas  em texto claro , implementa politica de senha forte.
+Tratamentos de Erros e Logs:Nao expõe  erros internos e não loga com erros sem com dados sensíveis.
+
+3. Banco de Dados (PostgreSQL com Prisma)
+Privilégios Mínimos: Usuário da aplicação com acesso mínimo necessário (sem root),
+Evitar SQL Injection: Prisma ORM já protege ao parametrizar queries.
+Backups e Criptografia: Render deve realizar backups automáticos e criptografados, dados sensíveis podem ser criptografados na aplicação.
+
+4. Infraestrutura (Render ,Docker)
+Variáveis de ambiente : JWT _Secrete , DataBaseURL apenas no .env seguro.
+Imagen Docker Segura: Usa Imagens minimalistas ,roda App com usuário sem root.
+Atualizações de segurança: Mantem tudo atualizado, usar npm audit,Dependabot ou Snyk para vulnerabilidades.
+Firewall/Rede: Banco deve aceitar consxoes só do backend, a API deve validar domínios e autenticação.
+
+5.Pratica de Segurança
+Testes de Segurança Autommatizados: uso do Jest+ Supertest para testar falhas de segurança como: Autenticçao invalida, injeção de dados e acesso não autorizado.
+Monitoramento de alertas : ferramentas para detctar falhas, picos e acessos incomuns.
+CorsRestritivo : Configure cors para permitir  apenas oiregens especificas .
+Gerenciamento de Sessões : Revogar tokens apos troca de senha.
+]
 
 ## Implantação
 
