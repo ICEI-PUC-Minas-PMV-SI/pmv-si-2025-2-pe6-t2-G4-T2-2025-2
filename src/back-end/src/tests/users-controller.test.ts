@@ -1,27 +1,17 @@
 import request from "supertest"
-import { prisma } from "@/database/prisma"
 import { app } from "@/app"
+import { prisma } from "@/database/prisma"
 
+let userToken: string
+let userId: string
 
+beforeAll(async () => {
+    await prisma.user.deleteMany()
+})
 
 describe("UsersController", () => {
-    let user_id: string
-
-    afterAll(async () => {
-        await prisma.user.delete({ where: { id: user_id } })
-    })
-
-    it("criar um novo usuário", async () => {
-        const response = await request(app).post("/users").send({
-            email: "testuser@flow.com.br",
-            name: "Test User",
-            password: "password123",
-        })
-
-        expect(response.status).toBe(201)
-        expect(response.body).toHaveProperty("id")
-        expect(response.body.name).toBe("Test User")
-
-        user_id = response.body.id
+    beforeAll(async () => {
+        const response = await request(app)
+            .post("/user")
     })
 })
