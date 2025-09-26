@@ -10,7 +10,9 @@ Aqui estão algumas etapas importantes que devem ser consideradas no planejament
 
 O primeiro passo é definir os objetivos da sua API. O que você espera alcançar com ela? Você quer que ela seja usada por clientes externos ou apenas por aplicações internas? Quais são os recursos que a API deve fornecer?
 
-[ A API do Flow tem como objetivo principal servir como camada intermediária entre  o aplicativo mobile  e a bases de a dados , expondo endepoints seguros e bem estrturados para seguintes itens: 
+[Objetivos da API 
+
+A API do Flow tem cono objetivo principal servir como camada intermediária entre  o aplicativo mobile  e a bases de a dados , expondo endepoints seguros e bem estrturados para seguintes itens:
 
 Gerenciar  usarios : cadastro , autenticação, recuperação de senha e controle de sessão.
 
@@ -178,29 +180,42 @@ Atualizado em: 13/09/2025
 
 ### Semana 3
 
-Atualizado em: 17/09/2025
+Atualizado em: 20/09/2025
 
 | Responsável   | Tarefa/Requisito | Iniciado em    | Prazo      | Status | Terminado em    |
 | :----         |    :----         |      :----:    | :----:     | :----: | :----:          |
 | Thiago Ferreira | API(Controllers) | 14/09/2025 | 20/09/2025 | ✔️ | 14/09/2025 |
-| André Ramos | Segurança | 14/09/2025 | 20/09/2025 | 📝 | ----
+| André Ramos | Segurança | 14/09/2025 | 20/09/2025 | ✔️ | 20/09/2025
 | Gustavo Gino | Testes | 14/09/2025 | 20/09/2025 | 📝 | ---- |
-| Lucas Borges | Endpoints | 14/09/2025 | 20/09/2025 | ✔️ | 29/08/2025 |
-| Natã Gabriel | Documentos da Modelagem | 14/09/2025 | 20/09/2025 | 📝 | 29/08/2025 |
+| Lucas Borges | Endpoints | 14/09/2025 | 20/09/2025 | ✔️ | 20/09/2025 |
+| Natã Gabriel | Documentos da Modelagem | 14/09/2025 | 20/09/2025 | 📝 | ---- |
 | Rhafael Hector | Testes | 14/09/2025 | 20/09/2025 | 📝 | ---- |
 
 ### Semana 4
 
-Atualizado em: 17/09/2025
+Atualizado em: 26/09/2025
 
 | Responsável   | Tarefa/Requisito | Iniciado em    | Prazo      | Status | Terminado em    |
 | :----         |    :----         |      :----:    | :----:     | :----: | :----:          |
-| Thiago Ferreira | Implantação | 21/09/2025 | 27/09/2025 | 📝 | ---- |
-| André Ramos | Objetivos da API | 21/09/2025 | 27/09/2025 | 📝 | ----
+| Thiago Ferreira | (DOC)Implantação | 21/09/2025 | 27/09/2025 | 📝 | ---- |
+| André Ramos | Objetivos da API | 21/09/2025 | 27/09/2025 | ✔️ | 23/09/2025
 | Gustavo Gino | Testes | 21/09/2025 | 27/09/2025 | 📝 | ---- |
 | Lucas Borges | API Endpoints | 21/09/2025 | 27/09/2025 | 📝 | ---- |
 | Natã Gabriel | Documentos da Modelagem | 21/09/2025 | 27/09/2025 | 📝 | ---- |
 | Rhafael Hector | Testes | 21/09/2025 | 27/09/2025 | 📝 | ---- |
+
+### Semana 5
+
+Atualizado em: 26/09/2025
+
+| Responsável   | Tarefa/Requisito | Iniciado em    | Prazo      | Status | Terminado em    |
+| :----         |    :----         |      :----:    | :----:     | :----: | :----:          |
+| Thiago Ferreira | (DOC)Implantação | 28/09/2025 | 04/10/2025 | 📝 | ---- |
+| André Ramos | Objetivos da API | 28/09/2025 | 04/10/2025 | ✔️ | 23/09/2025
+| Gustavo Gino | Testes | 28/09/2025 | 04/10/2025 | 📝 | ---- |
+| Lucas Borges | API Endpoints | 28/09/2025 | 04/10/2025 | 📝 | ---- |
+| Natã Gabriel | Documentos da Modelagem | 28/09/2025 | 04/10/2025 | 📝 | ---- |
+| Rhafael Hector | Testes | 28/09/2025 | 04/10/2025 | 📝 | ---- |
 
 Legenda:
 - ✔️: terminado

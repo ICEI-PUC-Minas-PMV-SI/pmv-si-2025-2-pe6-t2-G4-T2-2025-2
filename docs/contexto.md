@@ -2,7 +2,7 @@
 
 O projeto consiste em um aplicativo móvel para os usuários e um painel web intuitivo para o administrador. A solução permite que os usuários registrem e acompanhem seus gastos diários de forma simples e eficiente.
 
-No cenário atual de crescente digitalização, o controle financeiro pessoal é uma necessidade fundamental. A maioria das pessoas busca ferramentas que auxiliem na organização de suas despesas e no planejamento financeiro. No entanto, muitas soluções existentes são complexas, com funcionalidades excessivas que acabam por afastar usuários que buscam apenas simplicidade e praticidade. O FinanceFlow surge como uma alternativa direta e intuitiva para suprir essa lacuna.
+No cenário atual de crescente digitalização, o controle financeiro pessoal é uma necessidade fundamental. A maioria das pessoas busca ferramentas que auxiliem na organização de suas despesas e no planejamento financeiro. No entanto, muitas soluções existentes são complexas, com funcionalidades excessivas que acabam por afastar usuários que buscam apenas simplicidade e praticidade. O Flow surge como uma alternativa direta e intuitiva para suprir essa lacuna.
 
 ## Problema
 A falta de controle financeiro pessoal é um problema comum, especialmente entre estudantes universitários e jovens profissionais. Eles frequentemente não sabem para onde o seu dinheiro está indo, o que dificulta o planejamento e a economia. Esse problema se manifesta de várias formas, desde a ausência de registro de despesas até a dificuldade em interpretar dados financeiros.
@@ -189,13 +189,13 @@ Este catálogo de serviços é uma ferramenta essencial que demonstra a capacida
 
 # Arquitetura da Solução
 
-A arquitetura do FinanceFlow é projetada para ser distribuída, com separação clara entre as camadas de apresentação, lógica de negócio e dados. Ela adota uma abordagem de serviço único (monolito) no backend para simplificar o desenvolvimento e a manutenção, ao mesmo tempo que demonstra a comunicação entre diferentes componentes.
+A arquitetura do Flow é projetada para ser distribuída, com separação clara entre as camadas de apresentação, lógica de negócio e dados. Ela adota uma abordagem de serviço único (monolito) no backend para simplificar o desenvolvimento e a manutenção, ao mesmo tempo que demonstra a comunicação entre diferentes componentes.
 
 ![arq](/docs/img/Arquitetura%20Distribuida%20-%20Frame%201.jpg)
 
 ## Tecnologias Utilizadas
 
-Para a implementação do FinanceFlow, a escolha das tecnologias foi guiada pelo objetivo de construir um sistema distribuído moderno, seguro e eficiente. A seguir, detalhamos a stack tecnológica completa, abrangendo as linguagens, frameworks, bibliotecas e ferramentas que serão utilizadas no desenvolvimento.
+Para a implementação do Flow, a escolha das tecnologias foi guiada pelo objetivo de construir um sistema distribuído moderno, seguro e eficiente. A seguir, detalhamos a stack tecnológica completa, abrangendo as linguagens, frameworks, bibliotecas e ferramentas que serão utilizadas no desenvolvimento.
 
 1. **Camada de Apresentação (Front-end)**
 
@@ -225,7 +225,7 @@ Para a implementação do FinanceFlow, a escolha das tecnologias foi guiada pelo
 
 Para fins de demonstração acadêmica e devido à natureza do projeto, a hospedagem do FinanceFlow foi concebida para ser realizada em um ambiente de nuvem que oferece flexibilidade e escalabilidade.
 
-Para a hospedagem do FinanceFlow, optou-se pela plataforma Render, que oferece um ambiente de nuvem ideal para a demonstração de projetos acadêmicos, combinando facilidade de uso com suporte a tecnologias modernas de conteinerização.
+Para a hospedagem do Flow, optou-se pela plataforma Render, que oferece um ambiente de nuvem ideal para a demonstração de projetos acadêmicos, combinando facilidade de uso com suporte a tecnologias modernas de conteinerização.
 
 A estratégia de hospedagem adotada para o FinanceFlow é baseada em serviços gerenciados pelo Render, o que simplifica o processo de implantação e garante a consistência entre os ambientes de desenvolvimento e de produção.
 

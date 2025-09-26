@@ -1,4 +1,4 @@
-# Projeto de Acompanhamento de Gastos Pessoais (FinanceFlow)
+# Projeto de Acompanhamento de Gastos Pessoais (Flow)
 
 `CURSO: Sistemas de Informação`
 
