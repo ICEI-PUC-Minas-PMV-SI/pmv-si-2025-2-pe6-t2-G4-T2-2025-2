@@ -38,7 +38,7 @@ class CategoriesController {
                 userId: userId
             }
         })
-        response.status(201).json(category)
+        response.status(201).json()
     }
 
     async list(request: Request, response: Response) {

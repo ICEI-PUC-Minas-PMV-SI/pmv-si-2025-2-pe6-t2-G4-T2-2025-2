@@ -4,11 +4,10 @@ import { prisma } from '@/database/prisma';
 
 let userToken: string;
 let userId: string;
-let categoryId: string;
+let categoryId: string
 
 // Limpa o banco de dados antes de todos os testes
 beforeAll(async () => {
-  await prisma.transactions.deleteMany();
   await prisma.category.deleteMany();
   await prisma.user.deleteMany();
 });
@@ -34,26 +33,47 @@ describe("CategoriesController", () => {
                 email: "test@example.com",
                 password: "password123"
             });
+        
+        if(sessionResponse.body.user) {
+            userId = sessionResponse.body.user.id
+        } else {
+            throw new Error("Não foi possivel obter o ID do usuário")
+        }
 
         userToken = sessionResponse.body.token;
     });
 
+    afterAll(async () => {
+        await prisma.user.delete({ where: { id: userId } })
+    })
+
     // Teste 1
     test("Criar uma nova categoria", async () => {
+        const categoryName = "Alimentacao"
+        const categoryType = "expense"
+
         const response = await request(app)
             .post("/categories")
             .set("Authorization", `Bearer ${userToken}`)
             .send({
-                name: "Alimentacao",
-                type: "expense"
+                name: categoryName,
+                type: categoryType
             });
 
         expect(response.status).toBe(201);
-        expect(response.body).toHaveProperty("id");
-        expect(response.body.name).toBe("Alimentacao");
-        expect(response.body.type).toBe("expense");
 
-        categoryId = response.body.id;
+        const createdCategory = await prisma.category.findFirst({
+            where: {
+                name: categoryName,
+                type: categoryType
+            }
+        })
+
+        if(!createdCategory) {
+            throw new Error("ID da categoria não encontrado")
+        }
+
+        categoryId = createdCategory.id
     });
 
     // Teste 2
