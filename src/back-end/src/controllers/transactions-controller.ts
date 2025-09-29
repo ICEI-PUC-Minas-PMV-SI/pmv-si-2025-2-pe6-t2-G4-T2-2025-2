@@ -97,6 +97,13 @@ class TransactionsController {
                 where: searchFilter,
                 orderBy: {
                     date: "desc"
+                },
+                include: {
+                    category: {
+                        select: {
+                            name: true,
+                        }
+                    }
                 }
             }),
             prisma.transactions.count({
