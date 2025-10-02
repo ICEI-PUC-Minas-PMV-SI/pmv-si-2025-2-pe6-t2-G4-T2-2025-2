@@ -64,45 +64,51 @@ Existem muitas tecnologias diferentes que podem ser usadas para desenvolver APIs
 
 ## Considerações de Segurança
 
-[O projeto Flow está bem estruturado do ponto de vista tecnológico, e as medidas de segurança abaixo complementam a arquitetura, garantindo:
-Proteção de dados sensíveis, Autenticação e autorização seguras, Comunicação criptografada, Isolamento entre serviços, Infraestrutura consistente e segura com Docker e Render.
+O projeto Flow está bem estruturado do ponto de vista tecnológico, e as medidas de segurança a seguir complementam a arquitetura, garantindo a Proteção de dados sensíveis, Autenticação e autorização seguras, Comunicação criptografada, Isolamento entre serviços, e uma Infraestrutura consistente com Docker e Render.
+Camada de Apresentação (Front-end - React Native)
 
-1.Camada de Apresentaçao (Front-end - ReactNative)
+| Prática de Segurança   | Descrição |
+| :----         |    :----         |      :----:    |
+| Armazenamento de Tokens | Tokens JWT não devem ser armazenados em AsyncStorage ou SecureStore em texto puro sem criptografia. Recomenda-se o uso de soluções que proveem criptografia nativa no dispositivo. |
+| Escopo e Expiração de Tokens | Implementar refresh tokens com escopo limitado e tempos de expiração curtos para o token principal (userToken) para mitigar a vulnerabilidade em caso de vazamento. |
+| Comunicação Segura (HTTPS)| Todo o tráfego deve usar HTTPS com TLS 1.2+ para proteger os dados em trânsito contra interceptações (Man-in-the-Middle). |
+| Proteção de Chaves | Nunca embutir chaves de API ou senhas diretamente no código-fonte do aplicativo. Usar variáveis de ambiente e configuração por processo de build. |
+| SSL Pinning (Melhoria) | Implementar SSL Pinning no App Mobile para garantir que ele se comunique apenas com os certificados e servidores confiáveis conhecidos, oferecendo uma camada extra de proteção contra ataques MiTM. |
 
-Armazenamentos  Seguros de Tokens:
-Tokens JWT não devem ser armazenados em AsyncStorege ou SEcureStore em texto puro sem criptografia.
-Tokens com  escopo limitado e curto tempo de expiração mitigam a vulnelaribilidade .
-Comunicação Segura com HTTPS :
-todo trafego deve usar https com tls 1.2+ para proteger dados em transito.
-Proteção contra Man in the Midle.
-Implementar SSl Pinnig  no App Mobile para que se comunique apenas com servidores confiáveis.
-Nunca imbutir chaves de Api ou senhas  diretamente no código.
-Usar variáveis de ambiente  e configuração por build.
+Camada de Lógica de Negócio (Backend - Node.js + Express)
 
-2.Camada de Lógica de Negocio(Backend - Node.js + Expres)
-Autenticaçoa e Autorização:
-Usa JWT com expiração curta, armazena JWT_Secrete em .env, e refersh tokens com escopo limitado.
-Validação  de Entrada (Zod): Protege  contra injeções  e falhas  ao validar /sanitizar todos dados  recebidos.
-Crptografia  de Senhas :Nunca armazena senhas  em texto claro , implementa politica de senha forte.
-Tratamentos de Erros e Logs:Nao expõe  erros internos e não loga com erros sem com dados sensíveis.
+| Prática de Segurança   | Descrição |
+| :----         |    :----         |      :----:    |
+| Autenticação e Autorização (JWT) | Usar JWT com expiração curta e refresh tokens com escopo limitado. O JWT_SECRET deve ser armazenado em variáveis de ambiente seguras. |
+| Validação de Entrada (Zod) | O Zod protege contra injeções de dados e falhas de lógica ao validar/sanitizar rigorosamente todos os dados recebidos antes de qualquer processamento (Princípio Trust No One). |
+| Criptografia de Senhas | Nunca armazenar senhas em texto claro. Implementar política de senha forte e usar o Bcrypt com salt para armazenar as senhas de forma segura. |
+| Tratamento de Erros e Logs | Não expor stack traces ou mensagens de erro internos para o cliente. Não logar dados sensíveis (senhas, tokens) em logs de produção. |
+| Verificação de Propriedade | A lógica da API garante que o usuário só possa acessar ou modificar seus próprios registros (ex: where: { id, userId }), protegendo contra acesso não autorizado a dados de terceiros. |
 
-3. Banco de Dados (PostgreSQL com Prisma)
-Privilégios Mínimos: Usuário da aplicação com acesso mínimo necessário (sem root),
-Evitar SQL Injection: Prisma ORM já protege ao parametrizar queries.
-Backups e Criptografia: Render deve realizar backups automáticos e criptografados, dados sensíveis podem ser criptografados na aplicação.
+Banco de Dados (PostgreSQL com Prisma)
 
-4. Infraestrutura (Render ,Docker)
-Variáveis de ambiente : JWT _Secrete , DataBaseURL apenas no .env seguro.
-Imagen Docker Segura: Usa Imagens minimalistas ,roda App com usuário sem root.
-Atualizações de segurança: Mantem tudo atualizado, usar npm audit,Dependabot ou Snyk para vulnerabilidades.
-Firewall/Rede: Banco deve aceitar consxoes só do backend, a API deve validar domínios e autenticação.
+| Prática de Segurança   | Descrição |
+| :----         |    :----         |      :----:    |
+| Evitar SQL Injection | O Prisma ORM já protege a aplicação ao utilizar consultas parametrizadas por padrão, eliminando a vulnerabilidade a injeções de SQL. |
+| Privilégios Mínimos | O usuário de banco de dados da aplicação deve ter apenas o acesso mínimo necessário (ex: sem permissões de root ou de criação de tabelas). |
+| Backups e Criptografia | A Render deve realizar backups automáticos e criptografados. Dados sensíveis que não são senhas (ex: nome completo, e-mail) devem ser considerados para criptografia em repouso no disco do servidor. |
 
-5.Pratica de Segurança
-Testes de Segurança Autommatizados: uso do Jest+ Supertest para testar falhas de segurança como: Autenticçao invalida, injeção de dados e acesso não autorizado.
-Monitoramento de alertas : ferramentas para detctar falhas, picos e acessos incomuns.
-CorsRestritivo : Configure cors para permitir  apenas oiregens especificas .
-Gerenciamento de Sessões : Revogar tokens apos troca de senha.
-]
+Infraestrutura (Render, Docker)
+
+| Prática de Segurança   | Descrição |
+| :----         |    :----         |      :----:    |
+| Variáveis de Ambiente | Armazenar credenciais críticas como JWT_SECRET e DataBaseURL apenas em ambientes seguros (.env local, Secrets do Render). |
+| Imagens Docker Seguras | Utilizar imagens base minimalistas (ex: Alpine) para o container do back-end e rodar a aplicação com um usuário sem permissões de root. |
+| Atualizações de Segurança | Manter todas as bibliotecas e dependências (npm packages) atualizadas. Utilizar ferramentas como npm audit, Dependabot ou Snyk para monitorar vulnerabilidades. |
+| Firewall e Rede | O banco de dados (PostgreSQL) deve aceitar conexões somente da API do back-end (restrição de IP/rede virtual), e não diretamente da internet. |
+Práticas de Segurança e Testes
+
+    • Testes de Segurança Automatizados: Uso do Jest e Supertest para simular falhas de segurança, como:
+        ◦ Autorização Inválida: Tentar acessar rotas de admin com token de member.
+        ◦ Injeção de Dados: Tentar enviar dados malformados ao Zod.
+        ◦ Quebra de Propriedade: Tentar deletar uma transação de outro usuário (404 Not Found).
+    • Gerenciamento de Sessões: Implementar a revogação de tokens e a invalidação de sessões antigas após a troca de senha.
+    • CORS Restritivo: Configurar o CORS (cross-origin resource sharing) para permitir requisições apenas de origens específicas (domínio do portal web e aplicativo mobile).
 
 ## Implantação
 
