@@ -10,33 +10,17 @@ Aqui estão algumas etapas importantes que devem ser consideradas no planejament
 
 O primeiro passo é definir os objetivos da sua API. O que você espera alcançar com ela? Você quer que ela seja usada por clientes externos ou apenas por aplicações internas? Quais são os recursos que a API deve fornecer?
 
-[Objetivos da API 
+Objetivos da API
+A API do Flow foi concebida para ser a espinha dorsal de um sistema distribuído, focado em segurança e funcionalidade.
+A API do Flow tem como objetivo principal servir como camada intermediária entre o aplicativo mobile e portal administrativo web (cliente front-end) e o banco de dados (PostgreSQL), expondo endpoints seguros e bem estruturados para as seguintes funcionalidades:
 
-A API do Flow tem cono objetivo principal servir como camada intermediária entre  o aplicativo mobile  e a bases de a dados , expondo endepoints seguros e bem estrturados para seguintes itens:
+1. Gerenciamento de Usuários: Permitir o cadastro, autenticação, controle de sessão (via JWT) e gerenciamento de perfis de usuário (/users e /sessions)
 
-Gerenciar  usarios : cadastro , autenticação, recuperação de senha e controle de sessão.
-
-Registrar e consultar  despesas : incluindo  criação , edição e exclusão de lançametos  financeiros por usuário.
-
-Organizar categorias  de gastos : permitindo ao usuário personalizar e consultar suas categorias . 
-
-Oferecer  autenticação seguara: via JWTY, com controle de acesso baseados em escopos e validações de dados.
-
-Prover dados agregados: como totais mensais,garaficos  e relatorios de uso.
-
-Esses Objetivos estão alinhados com uma arquitetura simples, mas robusta, permitindo facilidade de uso, manutençao do código, expansão futura e, principalmente, segurança
-no tratamento das informaçoes pessoais e finaceiras do usuarios.
-
-Segurança aplicada por camada 
-Na camada de apresentação , a segurança  de comunicação entre API e armazenamento  de tokens de autenticçao sendo todo trafego por HTTPS para proteçao contra interceptaçoes.
-Como melhoria  adicional , recomenda se o a implementação do SSL assegurando conexoes apenas com servidores confiáveis.
-No Backend , o uso do JWT para autenticaçao  é feito de froma segura  com tokens  curtos e protegidos por chave secreta e senhas criptografada  com bcryot con salt.
-A camada de dados, composta por PostgreSQL e Prisma ORM, conta com proteção contra SQL Injection por meio do uso de consultas parametrizadas. 
-Na infraestrutura, o backend é containerizado com Docker, e o deploy é realizado na Render, é importante garantir que o container exponha apenas as portas necessárias, bibliotecas e dependências estejam sempre atualizadas por meio de ferramentas como npm audit, dependabot ou snyk.
-
-Em relação á conformidade com oOWASP Top 10 , o sistema apresenta  proteçao contra injeçoes  e falhas cripitogáficas  autenticçaoconfiavel.  Mas precisa rever  a ausencia  de SSL Pinning no App Mobile.
- 
-Mesmo sendo projeto academico tem base sólida de segurança, validaçao e criptografia e iinfraestrtura escalavel. API Flow ira cumprir   seus objetivos  ao oferecer uma interface segura, funcional e extensivel pra gerenciamento de finanças pessoias .]
+2. Registro e Consulta de Transações: Implementar as operações essenciais (CRUD - Criar, Registrar, Atualizar e Deletar) para lançamentos financeiros (despesas e receitas), garantindo a propriedade dos dados por usuário.
+3. Organização de Categorias: Permitir que o usuário personalize e consulte suas categorias de gastos e receitas, mantendo-as atreladas ao seu perfil.
+4. Oferecer Autenticação Segura: Utilizar o padrão JWT para todas as rotas privadas, com controle de acesso baseado em perfis (admin e member)
+5. Prover Dados Agregados e Analíticos: Fornecer endpoints de relatórios (/reports) para cálculos de totais mensais, balanços e agrupamentos por categoria, que são consumidos pelo painel do usuário.
+6. Prover Dados Analíticos para Administrador: Fornecer endpoints de relatórios (/admin) para listar usuários e informar métricas como total de transações, total de usuários, total de despesas e receitas.
 
 
 ## Modelagem da Aplicação
