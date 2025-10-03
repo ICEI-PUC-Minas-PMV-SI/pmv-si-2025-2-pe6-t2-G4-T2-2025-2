@@ -44,6 +44,7 @@ describe("UsersController", () => {
     //Depois de executar o teste remove o usuário criado
     afterAll(async () => {
         await prisma.user.delete({ where: { id: userId } })
+        await prisma.$disconnect();
     })
 
     // Teste 1
