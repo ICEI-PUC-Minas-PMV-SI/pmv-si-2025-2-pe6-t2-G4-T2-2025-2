@@ -291,7 +291,7 @@ Atualizado em: 26/09/2025
 | André Ramos | Objetivos da API | 28/09/2025 | 04/10/2025 | ✔️ | 23/09/2025
 | Gustavo Gino | Testes | 28/09/2025 | 04/10/2025 | 📝 | ---- |
 | Lucas Borges | API Endpoints | 28/09/2025 | 04/10/2025 | 📝 | ---- |
-| Natã Gabriel | Documentos da Modelagem | 28/09/2025 | 04/10/2025 | 📝 | ---- |
+| Natã Gabriel | Documentos da Modelagem | 28/09/2025 | 04/10/2025 | ✔️ | ---- |
 | Rhafael Hector | Testes | 28/09/2025 | 04/10/2025 | 📝 | ---- |
 
 Legenda:
