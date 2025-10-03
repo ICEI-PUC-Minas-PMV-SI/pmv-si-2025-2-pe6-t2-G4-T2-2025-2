@@ -218,15 +218,10 @@ A estratégia de teste do Flow é vital para garantir que a arquitetura distribu
 #### Estratégia e Tipos de Teste
 
 | Tipos de Teste   | Objetivo | Ferramentas | Cobertura de Requesito |
-
 | :----         |    :----         |      :----    |     :----    |
-
 | Testes de Integração | Verificar a comunicação completa entre a API (Node.js) e o Banco de Dados (PostgreSQL), garantindo que o CRUD, filtros e agregações funcionem corretamente com dados persistidos. | Jest e Supertest | Cobertura total dos Requisitos Funcionais (RFs) e de Desempenho (RNFs). |
-
 | Testes Unitários | Verificar funções isoladas (ex: criptografia de senhas, validação de Zod). | Jest | Cobertura de Unidades de Código. |
-
 | Testes de Autorização | Garantir que o middleware verifyUserAuthorization funcione, impedindo que usuários member acessem rotas de admin e que qualquer usuário acesse dados de terceiros. | Jest e Supertest | Cobertura total da Segurança (RNF03). |
-
 | Testes Manuais/Funcionais | Verificar a interface de endpoints em tempo real. | Insomnia | Confirmação da Usabilidade e Tratamento de Erros de Front-end. |
 
  
@@ -236,26 +231,16 @@ A estratégia de teste do Flow é vital para garantir que a arquitetura distribu
 Foram criadas 5 suítes de teste (27 testes no total) para cobrir todas as funcionalidades da aplicação e os principais cenários de erro e segurança.
  
 | Suites de Teste  | Foco Principal | Casos de Teste Implementados |
-
 | :----         |    :----         |      :----    |
-
 | admin-controller.test.ts | Autorização (Admin) | 4 casos, incluindo: ADMIN deve listar todos os usuários e MEMBER não deve conseguir obter métricas do sistema. |
-
 | categories-controller.test.ts | CRUD e Propriedade | 6 casos, incluindo: Tentar criar uma categoria que já existe (conflito por usuário) e Retornar status 404 quando tentar deletar um registro já excluído. |
-
 | reports-controller.test.ts | Agregação e Filtros | 5 casos, incluindo: Deve calcular o resumo (receita/despesa) corretamente e Deve retornar 400 se o mês for inválido (validação de query).|
-
 | transactions-controller.test.ts | Segurança e Chave Estrangeira | 6 casos, incluindo: Deve falhar ao tentar atualizar transação de outro usuário e Retorna 404 se a categoria não existir para o usuário. |
-
 | users-controller.test.ts | Autenticação e Perfil | 6 casos, incluindo: Tenta criar um usuário com um email já existente (409 Conflict) e Atualizar o perfil do usuário que está logado (PUT /users/me). |
 
  ----------------------------
 
-1. Crie casos de teste para cobrir todos os requisitos funcionais e não funcionais da aplicação.
-2. Implemente testes unitários para testar unidades individuais de código, como funções e classes.
-3. Realize testes de integração para verificar a interação correta entre os componentes da aplicação.
-4. Execute testes de carga para avaliar o desempenho da aplicação sob carga significativa.
-5. Utilize ferramentas de teste adequadas, como frameworks de teste e ferramentas de automação de teste, para agilizar o processo de teste.
+
 
 # Referências
 
