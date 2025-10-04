@@ -209,8 +209,6 @@ O deploy do Flow deve seguir um fluxo de Integração Contínua/Entrega Contínu
 
 ## Testes
 
-[Descreva a estratégia de teste, incluindo os tipos de teste a serem realizados (unitários, integração, carga, etc.) e as ferramentas a serem utilizadas.]
-
 A estratégia de teste do Flow é vital para garantir que a arquitetura distribuída funcione de forma coesa e segura. O foco principal foi na segurança (Autorização/Propriedade) e na integridade da lógica de negócio (Agregação/Filtros).
 
  
@@ -239,6 +237,38 @@ Foram criadas 5 suítes de teste (27 testes no total) para cobrir todas as funci
 | users-controller.test.ts | Autenticação e Perfil | 6 casos, incluindo: Tenta criar um usuário com um email já existente (409 Conflict) e Atualizar o perfil do usuário que está logado (PUT /users/me). |
 
  ----------------------------
+
+ #### Relatório de Execução de Testes
+
+O resultado da execução de todos os testes de integração do projeto Flow confirma a estabilidade da API:
+
+Test Suites: 5 passed, 5 total
+Tests: 27 passed, 27 total
+Snapshots: 0 total
+Time: 2.711 s, estimated 3 s
+
+#### Conclusão do Teste:
+
+Todos os 27 casos de teste passaram com sucesso. Este resultado valida as principais áreas da arquitetura:
+
+- Segurança (Propriedade e Acesso): Os testes confirmam que a lógica de where: { id: userId } e o middleware de autorização estão impedindo acessos não autorizados.
+
+- Integridade dos Dados: O tratamento de conflitos (409 ao criar e-mail duplicado) e as operações de agregação (reports) estão funcionando conforme a lógica de negócio.
+
+- Performance (Testes Rápidos): O baixo tempo de execução (2.711 s) para 27 testes de integração confirma que o ambiente Jest/Supertest/Prisma está configurado para um ciclo de feedback rápido.
+
+#### Testes Manuais Complementares (Insomnia)
+Complementarmente aos testes automatizados, foi utilizado o Insomnia para realizar testes manuais (funcionais) em tempo real, verificando a semântica HTTP e as mensagens de erro retornadas pela API.
+
+- Verificação de 400 Bad Request: Testes enviados com senhas curtas, e-mails inválidos, e corpo vazio confirmaram que o Zod está retornando o 400 com mensagens claras, o que protege a API e auxilia o front-end na usabilidade.
+![arq](/docs/img/Imagem1.png)
+
+
+(Cópia das telas - )
+- Validação de Tokens: Confirmação de que o envio de tokens expirados ou inválidos resulta em 401 Unauthorized antes que a requisição chegue ao controller.
+
+![arq](/docs/img/Imagem2.png)
+
 
 
 
