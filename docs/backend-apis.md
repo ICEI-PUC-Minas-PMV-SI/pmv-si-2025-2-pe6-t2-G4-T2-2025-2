@@ -209,12 +209,10 @@ O deploy do Flow deve seguir um fluxo de Integração Contínua/Entrega Contínu
 
 ## Testes
 
+Testes
 A estratégia de teste do Flow é vital para garantir que a arquitetura distribuída funcione de forma coesa e segura. O foco principal foi na segurança (Autorização/Propriedade) e na integridade da lógica de negócio (Agregação/Filtros).
 
- 
-
 #### Estratégia e Tipos de Teste
-
 | Tipos de Teste   | Objetivo | Ferramentas | Cobertura de Requesito |
 | :----         |    :----         |      :----    |     :----    |
 | Testes de Integração | Verificar a comunicação completa entre a API (Node.js) e o Banco de Dados (PostgreSQL), garantindo que o CRUD, filtros e agregações funcionem corretamente com dados persistidos. | Jest e Supertest | Cobertura total dos Requisitos Funcionais (RFs) e de Desempenho (RNFs). |
@@ -222,23 +220,64 @@ A estratégia de teste do Flow é vital para garantir que a arquitetura distribu
 | Testes de Autorização | Garantir que o middleware verifyUserAuthorization funcione, impedindo que usuários member acessem rotas de admin e que qualquer usuário acesse dados de terceiros. | Jest e Supertest | Cobertura total da Segurança (RNF03). |
 | Testes Manuais/Funcionais | Verificar a interface de endpoints em tempo real. | Insomnia | Confirmação da Usabilidade e Tratamento de Erros de Front-end. |
 
- 
-
 #### Suítes de Teste Implementadas e Casos de Uso
-
 Foram criadas 5 suítes de teste (27 testes no total) para cobrir todas as funcionalidades da aplicação e os principais cenários de erro e segurança.
- 
-| Suites de Teste  | Foco Principal | Casos de Teste Implementados |
-| :----         |    :----         |      :----    |
-| admin-controller.test.ts | Autorização (Admin) | 4 casos, incluindo: ADMIN deve listar todos os usuários e MEMBER não deve conseguir obter métricas do sistema. |
-| categories-controller.test.ts | CRUD e Propriedade | 6 casos, incluindo: Tentar criar uma categoria que já existe (conflito por usuário) e Retornar status 404 quando tentar deletar um registro já excluído. |
-| reports-controller.test.ts | Agregação e Filtros | 5 casos, incluindo: Deve calcular o resumo (receita/despesa) corretamente e Deve retornar 400 se o mês for inválido (validação de query).|
-| transactions-controller.test.ts | Segurança e Chave Estrangeira | 6 casos, incluindo: Deve falhar ao tentar atualizar transação de outro usuário e Retorna 404 se a categoria não existir para o usuário. |
-| users-controller.test.ts | Autenticação e Perfil | 6 casos, incluindo: Tenta criar um usuário com um email já existente (409 Conflict) e Atualizar o perfil do usuário que está logado (PUT /users/me). |
 
- ----------------------------
+**Suite: users-controller.test.ts (6 Casos)**
 
- #### Relatório de Execução de Testes
+| Teste  | O Que Foi Testado | Expectativa de Sucesso | Segurança (RNF03) |
+| :----         |    :----         |      :----    | :----    |
+| 1. Criar usuário (Conflito) | Tentativa de criar usuário com e-mail já existente. | 409 Conflict | Integridade de Dados. |
+| 2. Obter perfil (Sucesso) | GET /users/me com usuário autenticado. | 200 OK | Acesso ao Próprio Dado. |
+| 3. Obter perfil (Sem Token) | Tentativa de obter o perfil sem token JWT. | 401 Unauthorized | ensureAuthenticated |
+| 4. Atualizar perfil (Sucesso) | PUT /users/me para alterar o name e/ou password. | 200 OK + Retorno do name atualizado. | Propriedade de Dados. |
+| 5. Atualizar perfil (Inválido) | Tentativa de atualização com dados que falham na validação Zod. | 400 Bad Request | Validação de Entrada. |
+| 6. Atualizar perfil (Sem Token) | Tentativa de atualização sem token JWT. | 401 Unauthorized | Segurança. |
+
+**Suite: categories-controller.test.ts (6 Casos)**
+
+| Teste  | O Que Foi Testado | Expectativa de Sucesso | Segurança (RNF03) |
+| :----         |    :----         |      :----    | :----    |
+| 1. Criar Categoria | Criação bem-sucedida de uma nova categoria. | 201 Created | RF04 |
+| 2. Criar (Conflito) | Tentativa de criar categoria com nome duplicado para o mesmo usuário. | 409 Conflict | Integridade de Dados por Usuário. |
+| 3. Listar Categorias | Listagem de todas as categorias do usuário autenticado. | 200 OK + Array com length correto. | RF04 |
+| 4. Atualizar Categoria | PATCH /categories/:id com dados válidos. | 200 OK + Retorno da categoria atualizada. | RF04, Propriedade. |
+| 5. Deletar Categoria | Exclusão bem-sucedida de uma categoria. | 204 No Content | RF04 |
+| 6. Deletar (404) | Tentativa de deletar uma categoria já excluída (teste de idempotência). | 404 Not Found | Integridade de Dados. |
+
+**Suite: transactions-controller.test.ts (6 Casos)**
+
+| Teste  | O Que Foi Testado | Expectativa de Sucesso | Segurança (RNF03) |
+| :----         |    :----         |      :----    | :----    |
+| 1. Criar Transação | Criação de transação com dependências válidas. | 201 Created | RF02 |
+| 2. Criar (404 Categoria) | Tentativa de criar transação com categoryId que não pertence ao usuário. | 404 Not Found | Propriedade (Falha de Chave Estrangeira). |
+| 3. Listar Transações | GET /transactions para listar, verificando se o category.name foi incluído (include). | 200 OK + category.name presente no corpo. | RF02, Performance. |
+| 4. Listar (Filtro Data) | Listagem filtrada por month e year, verificando que transações fora do mês são excluídas. | 200 OK + Lista com tamanho correto. | RF05 (Filtro). |
+| 5. Atualizar (Invasão) | Tentativa de atualizar transação que pertence a outro usuário. | 404 Not Found | RNF03 (Segurança/Propriedade). |
+| 6. Deletar Transação | Exclusão bem-sucedida da própria transação. | 204 No Content | RF03. |
+
+**Suite: reports-controller.test.ts (5 Casos)**
+
+| Teste  | O Que Foi Testado | Expectativa de Sucesso | Segurança (RNF03) |
+| :----         |    :----         |      :----    | :----    |
+| 1. Sumário (Cálculo) | Cálculo do total de Receitas e Despesas para o mês alvo. | 200 OK + Valores calculados corretamente. | RF05. |
+| 2. Sumário (Mês Vazio) | Cálculo do resumo para um mês sem transações. | 200 OK + Retorno de 0 para ambos os totais. | Lógica de Negócio (Tratamento de Nulo). |
+| 3. Agrupamento (Categoria) | Agrupamento de transações por categoria, verificando a soma por grupo. | 200 OK + Array com totais agrupados. | RF06 |
+| 4. Segurança (Sem Token) | Tentativa de acessar relatórios sem autenticação. | 401 Unauthorized | RNF03 (Segurança). |
+| 5. Validação de Query | Tentativa de acesso com month ou year inválido. | 400 Bad Request | RNF03 (Validação de Entrada). |
+
+**Suite: admin-controller.test.ts (4 Casos)**
+
+| Teste  | O Que Foi Testado | Expectativa de Sucesso | Segurança (RNF03) |
+| :----         |    :----         |      :----    | :----    |
+| 1. Listar Usuários (Admin) | GET /admin/users com token de ADMIN. | 200 OK + Retorno de todos os usuários (length >= 2). | RF07 (Acesso Global). |
+| 2. Listar Usuários (Member) | Tentativa de listar todos os usuários com token de MEMBER. | 401 Unauthorized | RNF03 (Bloqueio de Acesso). |
+| 3. Obter Métricas (Admin) | GET /admin/metrics com token de ADMIN, verificando os totais globais. | 200 OK + Retorno de totalUsers e totalTransactions. | Lógica de Agregação Global. |
+| 4. Obter Métricas (Member) | Tentativa de obter métricas com token de MEMBER. | 401 Unauthorized | RNF03 (Bloqueio de Acesso). |
+
+
+
+#### Relatório de Execução de Testes
 
 O resultado da execução de todos os testes de integração do projeto Flow confirma a estabilidade da API:
 
@@ -268,8 +307,6 @@ Complementarmente aos testes automatizados, foi utilizado o Insomnia para realiz
 - Validação de Tokens: Confirmação de que o envio de tokens expirados ou inválidos resulta em 401 Unauthorized antes que a requisição chegue ao controller.
 
 ![arq](/docs/img/Imagem2.png)
-
-
 
 
 # Referências
