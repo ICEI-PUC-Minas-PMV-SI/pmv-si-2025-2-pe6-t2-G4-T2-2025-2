@@ -1,6 +1,6 @@
 services:
   apiflow_db:
-    image: "bitnami/postgresql:latest"
+    image: "postgres:latest"
     ports:
       - "5432:5432"
     environment:
