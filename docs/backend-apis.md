@@ -84,11 +84,11 @@ Descrição: Cadastrar novo usuário.
 
 Parâmetros (Body JSON):
 
-name (string): Nome do usuário. Ex: "Ana Souza"
+name (string): Nome do usuário.
 
-email (string): E-mail válido. Ex: "ana.souza@example.com"
+email (string): E-mail válido. 
 
-password (string): Senha com no mínimo 6 caracteres. Ex: "MinhaSenha123"
+password (string): Senha com no mínimo 6 caracteres. 
 
 Resposta:
 
@@ -206,15 +206,15 @@ Descrição: Criar novo lançamento financeiro (despesa ou receita).
 
 Parâmetros (Body JSON):
 
-title (string): Título da entrada. Ex: "Assinatura Netflix"
+title (string): Título da entrada. 
 
-amount (number): Valor da entrada. Ex: 29.90
+amount (number): Valor da entrada. 
 
-type (string): Tipo da entrada. Valores: "INCOME" ou "EXPENSE"
+type (string): Tipo da entrada. Valores: "INCOME-entrada" ou "EXPENSE-saída"
 
-categoryId (string): ID da categoria. Ex: "cat_03"
+categoryId (string): ID da categoria. 
 
-date (string): Data da entrada. Formato: YYYY-MM-DD. Ex: "2025-09-25"
+date (string): Data da entrada. Formato: YYYY-MM-DD.
 
 Cabeçalho: Authorization: Bearer <token JWT>
 
