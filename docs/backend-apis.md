@@ -76,30 +76,175 @@ A escolha tecnológica para o FinanceFlow foi guiada pela eficiência, robustez 
 
 [Liste os principais endpoints da API, incluindo as operações disponíveis, os parâmetros esperados e as respostas retornadas.]
 
-### Endpoint 1
-- Método: GET
-- URL: /endpoint1
-- Parâmetros:
-  - param1: [descrição]
-- Resposta:
-  - Sucesso (200 OK)
-    ```
-    {
-      "message": "Success",
-      "data": {
-        ...
+Endpoint 1
+
+Método: POST
+URL: /users
+Descrição: Cadastrar novo usuário.
+
+Parâmetros (Body JSON):
+
+name (string): Nome do usuário. Ex: "Ana Souza"
+
+email (string): E-mail válido. Ex: "ana.souza@example.com"
+
+password (string): Senha com no mínimo 6 caracteres. Ex: "MinhaSenha123"
+
+Resposta:
+
+Sucesso (201 Created):
+
+{
+  "message": "Success",
+  "data": {
+    "id": "user_0009",
+    "name": "Ana Souza",
+    "email": "ana.souza@example.com",
+    "role": "member",
+    "createdAt": "2025-10-04T15:00:00Z"
+  }
+}
+
+
+Erro (409 Conflict - Email já existente):
+
+{
+  "message": "Error",
+  "error": {
+    "code": "EMAIL_ALREADY_EXISTS",
+    "details": "Já existe um usuário com o e-mail 'ana.souza@example.com'."
+  }
+}
+
+Endpoint 2
+
+Método: POST
+URL: /sessions
+Descrição: Autenticar usuário e gerar token JWT.
+
+Parâmetros (Body JSON):
+
+email (string): E-mail do usuário.
+
+password (string): Senha do usuário.
+
+Resposta:
+
+Sucesso (200 OK):
+
+{
+  "message": "Success",
+  "data": {
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+  }
+}
+
+
+Erro (401 Unauthorized - Credenciais inválidas):
+
+{
+  "message": "Error",
+  "error": {
+    "code": "INVALID_CREDENTIALS",
+    "details": "E-mail ou senha inválidos."
+  }
+}
+
+Endpoint 3
+
+Método: GET
+URL: /financial-entries
+Descrição: Listar lançamentos financeiros do usuário autenticado.
+
+Parâmetros (Query):
+
+month (integer, opcional): Mês da entrada (1–12). Ex: 9
+
+year (integer, opcional): Ano da entrada. Ex: 2025
+
+Cabeçalho: Authorization: Bearer <token JWT>
+
+Resposta:
+
+Sucesso (200 OK):
+
+{
+  "message": "Success",
+  "data": {
+    "month": 9,
+    "year": 2025,
+    "financialEntries": [
+      {
+        "id": "fin_10001",
+        "title": "Conta de Luz",
+        "amount": 120.75,
+        "type": "EXPENSE",
+        "categoryId": "cat_10",
+        "date": "2025-09-15",
+        "createdAt": "2025-09-15T10:00:00Z"
       }
-    }
-    ```
-  - Erro (4XX, 5XX)
-    ```
-    {
-      "message": "Error",
-      "error": {
-        ...
-      }
-    }
-    ```
+    ]
+  }
+}
+
+
+Erro (401 Unauthorized - Token ausente ou inválido):
+
+{
+  "message": "Error",
+  "error": {
+    "code": "UNAUTHORIZED",
+    "details": "Token JWT inválido ou não fornecido."
+  }
+}
+
+Endpoint 4
+
+Método: POST
+URL: /financial-entries
+Descrição: Criar novo lançamento financeiro (despesa ou receita).
+
+Parâmetros (Body JSON):
+
+title (string): Título da entrada. Ex: "Assinatura Netflix"
+
+amount (number): Valor da entrada. Ex: 29.90
+
+type (string): Tipo da entrada. Valores: "INCOME" ou "EXPENSE"
+
+categoryId (string): ID da categoria. Ex: "cat_03"
+
+date (string): Data da entrada. Formato: YYYY-MM-DD. Ex: "2025-09-25"
+
+Cabeçalho: Authorization: Bearer <token JWT>
+
+Resposta:
+
+Sucesso (201 Created):
+
+{
+  "message": "Success",
+  "data": {
+    "id": "fin_10001",
+    "title": "Assinatura Netflix",
+    "amount": 29.90,
+    "type": "EXPENSE",
+    "categoryId": "cat_03",
+    "date": "2025-09-25",
+    "createdAt": "2025-09-25T10:00:00Z"
+  }
+}
+
+
+Erro (400 Bad Request - Parâmetro inválido):
+
+{
+  "message": "Error",
+  "error": {
+    "code": "INVALID_PARAM",
+    "details": "O parâmetro 'amount' deve ser um número válido."
+  }
+}
 
 ## Considerações de Segurança
 
