@@ -1,0 +1,1073 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API FinanceFlow - Arquitetura Distribuída",
+        "description": "API RESTful para gerenciamento de finanças pessoais.",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "/",
+            "description": "URL Base da API (Desenvolvimento/Produção)"
+        }
+    ],
+    "security": [
+        {
+            "bearerAuth": []
+        }
+    ],
+    "tags": [
+        {
+            "name": "1. Autenticação e Usuário",
+            "description": "Rotas públicas de login e rotas privadas de perfil (/me)."
+        },
+        {
+            "name": "2. Categorias",
+            "description": "Gerenciamento (CRUD) de categorias de despesas/receitas por usuário."
+        },
+        {
+            "name": "3. Transações",
+            "description": "Gerenciamento (CRUD) de lançamentos financeiros (Receitas e Despesas)."
+        },
+        {
+            "name": "4. Relatórios Analíticos",
+            "description": "Rotas de agregação e cálculo para dashboards."
+        },
+        {
+            "name": "5. Administração",
+            "description": "Rotas exclusivas para o perfil 'admin'."
+        }
+    ],
+    "paths": {
+        "/users": {
+            "post": {
+                "tags": [
+                    "1. Autenticação e Usuário"
+                ],
+                "summary": "Criar Novo Usuário (Cadastro)",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "novo@usuario.com"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "João Silva"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "senhaforte123"
+                                    },
+                                    "role": {
+                                        "type": "string",
+                                        "enum": [
+                                            "member",
+                                            "admin"
+                                        ],
+                                        "default": "member"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Usuário criado com sucesso. (Corpo Vazio)"
+                    },
+                    "409": {
+                        "description": "E-mail já cadastrado."
+                    }
+                }
+            }
+        },
+        "/sessions": {
+            "post": {
+                "tags": [
+                    "1. Autenticação e Usuário"
+                ],
+                "summary": "Login do Usuário (Criação de Sessão)",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "dono@test.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "password123"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Login bem-sucedido.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "token": {
+                                            "type": "string",
+                                            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                                        },
+                                        "user": {
+                                            "$ref": "#/components/schemas/User"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Credenciais inválidas."
+                    }
+                }
+            }
+        },
+        "/users/me": {
+            "get": {
+                "tags": [
+                    "1. Autenticação e Usuário"
+                ],
+                "summary": "Obter Perfil do Usuário Autenticado",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retorna os dados do próprio perfil.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "1. Autenticação e Usuário"
+                ],
+                "summary": "Atualizar Nome e/ou Senha",
+                "description": "Requer JWT. O e-mail não pode ser alterado.",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Novo Nome"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "novasenha123"
+                                    }
+                                },
+                                "minProperties": 1
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Perfil atualizado com sucesso.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/categories": {
+            "post": {
+                "tags": [
+                    "2. Categorias"
+                ],
+                "summary": "Criar Nova Categoria",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Alimentação"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "enum": [
+                                            "expense",
+                                            "income"
+                                        ],
+                                        "example": "expense"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Categoria criada com sucesso. (Retorno Vazio)"
+                    },
+                    "409": {
+                        "description": "Categoria já existe para este usuário."
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "2. Categorias"
+                ],
+                "summary": "Listar Categorias do Usuário",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filtra categorias por nome (busca insensível a maiúsculas/minúsculas)."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retorna lista paginada de categorias.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "categories": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Category"
+                                            }
+                                        },
+                                        "pagination": {
+                                            "$ref": "#/components/schemas/Pagination"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/categories/{id}": {
+            "patch": {
+                "tags": [
+                    "2. Categorias"
+                ],
+                "summary": "Atualizar Categoria",
+                "description": "Atualização parcial. Requer o ID da categoria no caminho.",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Alimentação Editada"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "enum": [
+                                            "expense",
+                                            "income"
+                                        ]
+                                    }
+                                },
+                                "minProperties": 1
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Categoria atualizada com sucesso.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Category"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Categoria não encontrada ou não pertence ao usuário."
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "2. Categorias"
+                ],
+                "summary": "Excluir Categoria",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Categoria excluída com sucesso (No Content)."
+                    },
+                    "404": {
+                        "description": "Categoria não encontrada ou não pertence ao usuário."
+                    }
+                }
+            }
+        },
+        "/transactions": {
+            "post": {
+                "tags": [
+                    "3. Transações"
+                ],
+                "summary": "Criar Nova Transação",
+                "description": "Cria um lançamento de Despesa ou Receita.",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TransactionCreation"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Transação criada com sucesso. (Retorno Vazio)"
+                    },
+                    "404": {
+                        "description": "Categoria não encontrada ou não pertence ao usuário."
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "3. Transações"
+                ],
+                "summary": "Listar Transações com Filtros",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "month",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 12
+                        },
+                        "description": "Mês de referência para o filtro."
+                    },
+                    {
+                        "name": "year",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "Ano de referência para o filtro."
+                    },
+                    {
+                        "name": "description",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Filtra por descrição (busca parcial)."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retorna lista paginada de transações.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "transactions": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/TransactionResponse"
+                                            }
+                                        },
+                                        "pagination": {
+                                            "$ref": "#/components/schemas/Pagination"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/transactions/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "description": "ID da Transação."
+                }
+            ],
+            "get": {
+                "tags": [
+                    "3. Transações"
+                ],
+                "summary": "Obter Detalhes da Transação (Show)",
+                "description": "Retorna os detalhes da transação e os dados da categoria e usuário.",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retorna a transação com os detalhes incluídos.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "transaction": {
+                                            "$ref": "#/components/schemas/TransactionDetailed"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Transação não encontrada ou não pertence ao usuário."
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "3. Transações"
+                ],
+                "summary": "Atualizar Parcialmente a Transação",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TransactionUpdate"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Transação atualizada com sucesso.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TransactionDetailed"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Dados inválidos ou corpo vazio."
+                    },
+                    "404": {
+                        "description": "Transação não encontrada ou não pertence ao usuário."
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "3. Transações"
+                ],
+                "summary": "Excluir Transação",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Transação excluída com sucesso (No Content)."
+                    },
+                    "404": {
+                        "description": "Transação não encontrada ou não pertence ao usuário."
+                    }
+                }
+            }
+        },
+        "/reports/summary": {
+            "get": {
+                "tags": [
+                    "4. Relatórios Analíticos"
+                ],
+                "summary": "Resumo de Receitas e Despesas do Mês",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "month",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 12
+                        },
+                        "description": "Mês de referência (obrigatório)."
+                    },
+                    {
+                        "name": "year",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "Ano de referência (obrigatório)."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retorna os totais.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "totalExpenses": {
+                                            "type": "number",
+                                            "format": "float",
+                                            "example": 1500
+                                        },
+                                        "totalIncomes": {
+                                            "type": "number",
+                                            "format": "float",
+                                            "example": 5000
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/reports/by-category": {
+            "get": {
+                "tags": [
+                    "4. Relatórios Analíticos"
+                ],
+                "summary": "Agrupamento de Totais por Categoria",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "month",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "year",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retorna array com os totais de gastos/receitas por categoria.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CategoryReport"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/users": {
+            "get": {
+                "tags": [
+                    "5. Administração"
+                ],
+                "summary": "Listar Todos os Usuários (Acesso ADMIN)",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retorna lista de todos os usuários (exceto senhas).",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/User"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Acesso negado (Token inválido ou Role 'member')."
+                    }
+                }
+            }
+        },
+        "/admin/metrics": {
+            "get": {
+                "tags": [
+                    "5. Administração"
+                ],
+                "summary": "Obter Métricas Globais do Sistema",
+                "description": "Retorna o total de usuários, transações, receitas e despesas de toda a plataforma.",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retorna o objeto com as métricas globais.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GlobalMetrics"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Acesso negado (Token inválido ou Role 'member')."
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT",
+                "description": "Insira o token JWT no formato 'Bearer [token]'."
+            }
+        },
+        "schemas": {
+            "User": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "email": {
+                        "type": "string",
+                        "format": "email"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "role": {
+                        "type": "string",
+                        "enum": [
+                            "member",
+                            "admin"
+                        ]
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "required": [
+                    "id",
+                    "email",
+                    "name",
+                    "role"
+                ]
+            },
+            "Category": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "expense",
+                            "income"
+                        ]
+                    }
+                },
+                "required": [
+                    "id",
+                    "name",
+                    "type"
+                ]
+            },
+            "TransactionCreation": {
+                "type": "object",
+                "properties": {
+                    "description": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "expense",
+                            "income"
+                        ]
+                    },
+                    "amount": {
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "date": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-09-15T12:00:00Z"
+                    },
+                    "categoryId": {
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                },
+                "required": [
+                    "description",
+                    "type",
+                    "amount",
+                    "date",
+                    "categoryId"
+                ]
+            },
+            "TransactionResponse": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/TransactionCreation"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string",
+                                "format": "uuid"
+                            },
+                            "user": {
+                                "$ref": "#/components/schemas/UserRef"
+                            },
+                            "category": {
+                                "$ref": "#/components/schemas/Category"
+                            },
+                            "createdAt": {
+                                "type": "string",
+                                "format": "date-time"
+                            }
+                        }
+                    }
+                ]
+            },
+            "TransactionUpdate": {
+                "type": "object",
+                "properties": {
+                    "description": {
+                        "type": "string",
+                        "example": "Novo Aluguel"
+                    },
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "expense",
+                            "income"
+                        ]
+                    },
+                    "amount": {
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "date": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-01-01T00:00:00Z"
+                    },
+                    "categoryId": {
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                },
+                "minProperties": 1
+            },
+            "TransactionDetailed": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "expense",
+                            "income"
+                        ]
+                    },
+                    "amount": {
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "date": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "userId": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "categoryId": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "category": {
+                        "$ref": "#/components/schemas/Category"
+                    },
+                    "user": {
+                        "$ref": "#/components/schemas/UserRef"
+                    }
+                },
+                "required": [
+                    "id",
+                    "description",
+                    "type",
+                    "amount",
+                    "date",
+                    "userId",
+                    "categoryId"
+                ]
+            },
+            "UserRef": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string",
+                        "format": "email"
+                    }
+                }
+            },
+            "CategoryReport": {
+                "type": "object",
+                "properties": {
+                    "categoryName": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "expense",
+                            "income"
+                        ]
+                    },
+                    "totalAmount": {
+                        "type": "number",
+                        "format": "float"
+                    }
+                }
+            },
+            "Pagination": {
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer"
+                    },
+                    "perPage": {
+                        "type": "integer"
+                    },
+                    "totalRecords": {
+                        "type": "integer"
+                    },
+                    "totalPages": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "GlobalMetrics": {
+                "type": "object",
+                "description": "Resumo das métricas globais da plataforma para o administrador.",
+                "properties": {
+                    "totalUsers": {
+                        "type": "integer",
+                        "description": "Número total de usuários cadastrados.",
+                        "example": 50
+                    },
+                    "totalTransactions": {
+                        "type": "integer",
+                        "description": "Número total de transações (receitas + despesas).",
+                        "example": 1250
+                    },
+                    "totalExpenses": {
+                        "type": "number",
+                        "format": "float",
+                        "description": "Soma total de todas as despesas na plataforma.",
+                        "example": 87500.55
+                    },
+                    "totalIncomes": {
+                        "type": "number",
+                        "format": "float",
+                        "description": "Soma total de todas as receitas na plataforma.",
+                        "example": 155000
+                    }
+                },
+                "required": [
+                    "totalUsers",
+                    "totalTransactions",
+                    "totalExpenses",
+                    "totalIncomes"
+                ]
+            }
+        }
+    }
+}

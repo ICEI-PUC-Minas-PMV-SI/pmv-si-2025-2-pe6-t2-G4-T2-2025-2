@@ -33,7 +33,9 @@ A API do Flow tem como objetivo principal servir como camada intermediária entr
 
 
 ## Modelagem da Aplicação
-[Descreva a modelagem da aplicação, incluindo a estrutura de dados, diagramas de classes ou entidades, e outras representações visuais relevantes.]
+A Aplicação apresenta o esquema de dados a seguir:
+
+![arq](/docs/img/Diagrama-UML.drawio.png)
 
 
 ## Tecnologias Utilizadas
@@ -70,181 +72,78 @@ A escolha tecnológica para o FinanceFlow foi guiada pela eficiência, robustez 
 | Jest | Teste | Framework de teste unitário e de integração. |
 | Supertest | Teste HTTP | Usado em conjunto com o Jest para simular requisições HTTP e testar as rotas da API em memória. |
 | cross-env | Dev. Tool | Define variáveis de ambiente (JWT_SECRET) de forma consistente para o ambiente de testes. |
+| Swagger | Documentação API | Permite visualizar os schemas e testar todos os endpoints diretamente do navegador |
 
 
 ## API Endpoints
 
-[Liste os principais endpoints da API, incluindo as operações disponíveis, os parâmetros esperados e as respostas retornadas.]
+A documentação interativa da API Flow foi gerada utilizando o framework Swagger (OpenAPI Specification), que permite que qualquer desenvolvedor explore, visualize os schemas e teste todos os endpoints diretamente no navegador.
 
-Endpoint 1
+A documentação está integrada ao próprio servidor Express, sendo acessível em uma rota específica.
 
-Método: POST
-URL: /users
-Descrição: Cadastrar novo usuário.
+### Pré-requisitos
 
-Parâmetros (Body JSON):
+Para acessar e testar a API, você deve ter a aplicação back-end em execução.
 
-name (string): Nome do usuário.
+1) Node.js (v18+) e Docker instalados.
 
-email (string): E-mail válido. 
+2) Acesso ao PostgreSQL (configurado via Docker Compose (script = docker-compose up -d) ou Render).
 
-password (string): Senha com no mínimo 6 caracteres. 
+3) As dependências do projeto instaladas (npm install).
 
-Resposta:
+### Iniciar a aplicação
 
-Sucesso (201 Created):
+Inicie o servidor de desenvolvimento. Certifique-se de que o seu banco de dados (via Docker) está ativo e que as variáveis de ambiente (.env) estão configuradas corretamente.
 
-{
-  "message": "Success",
-  "data": {
-    "id": "user_0009",
-    "name": "Ana Souza",
-    "email": "ana.souza@example.com",
-    "role": "member",
-    "createdAt": "2025-10-04T15:00:00Z"
-  }
-}
+Executa o servidor Node.js
 
+    npm run dev 
 
-Erro (409 Conflict - Email já existente):
+### Acessar o Painel do Swagger UI
 
-{
-  "message": "Error",
-  "error": {
-    "code": "EMAIL_ALREADY_EXISTS",
-    "details": "Já existe um usuário com o e-mail 'ana.souza@example.com'."
-  }
-}
+Após iniciar o servidor, abra seu navegador e acesse a rota de documentação configurada no seu Express:
 
-Endpoint 2
+    http://localhost:3333/api-docs
 
-Método: POST
-URL: /sessions
-Descrição: Autenticar usuário e gerar token JWT.
+Você verá a interface interativa do Swagger, com todos os endpoints listados e separados por tag conforme a tela abaixo:
+![arq](/docs/img/swaggerPrint.png)
 
-Parâmetros (Body JSON):
+![arq](/docs/img/swaggerPrint2.png)
 
-email (string): E-mail do usuário.
+### Workflow de Teste: Autenticação (JWT)
 
-password (string): Senha do usuário.
+A maioria dos endpoints da API do Flow são privados. Para testá-los, você precisará de um Token JWT válido. Siga estes passos:
 
-Resposta:
+1) **Passo A**: Gerar o Token (Login)
+Expanda o endpoint [POST] /sessions (Login).
 
-Sucesso (200 OK):
+   - Clique em "Try it out".
 
-{
-  "message": "Success",
-  "data": {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
-  }
-}
+   - No campo Request body, insira as credenciais de um usuário válido (ex: email e password).
 
+   - Clique em "Execute".
 
-Erro (401 Unauthorized - Credenciais inválidas):
+   - Na Response body, copie o valor completo do token.
 
-{
-  "message": "Error",
-  "error": {
-    "code": "INVALID_CREDENTIALS",
-    "details": "E-mail ou senha inválidos."
-  }
-}
+2) **Passo B**: Autorizar o Swagger
 
-Endpoint 3
+   - Vá para o topo da página e clique no botão "Authorize" (ou no cadeado ao lado do endpoint).
 
-Método: GET
-URL: /financial-entries
-Descrição: Listar lançamentos financeiros do usuário autenticado.
+   - No campo de entrada (Bearer), insira o token no formato Bearer [SEU TOKEN AQUI].
 
-Parâmetros (Query):
+   - Exemplo: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 
-month (integer, opcional): Mês da entrada (1–12). Ex: 9
+   - Clique em "Authorize" e feche a janela.
 
-year (integer, opcional): Ano da entrada. Ex: 2025
+### Testar Rotas Privadas
 
-Cabeçalho: Authorization: Bearer <token JWT>
+Agora que o token está armazenado, você pode expandir qualquer rota privada (como [GET] /users/me ou [POST] /categories), clicar em "Try it out", e "Execute" a requisição. O Swagger enviará automaticamente o cabeçalho Authorization para você.
 
-Resposta:
+### !! IMPORTANTE !!
 
-Sucesso (200 OK):
+Rotas de Admin (/admin/...) exigem um token de um usuário com a role: "admin".
 
-{
-  "message": "Success",
-  "data": {
-    "month": 9,
-    "year": 2025,
-    "financialEntries": [
-      {
-        "id": "fin_10001",
-        "title": "Conta de Luz",
-        "amount": 120.75,
-        "type": "EXPENSE",
-        "categoryId": "cat_10",
-        "date": "2025-09-15",
-        "createdAt": "2025-09-15T10:00:00Z"
-      }
-    ]
-  }
-}
-
-
-Erro (401 Unauthorized - Token ausente ou inválido):
-
-{
-  "message": "Error",
-  "error": {
-    "code": "UNAUTHORIZED",
-    "details": "Token JWT inválido ou não fornecido."
-  }
-}
-
-Endpoint 4
-
-Método: POST
-URL: /financial-entries
-Descrição: Criar novo lançamento financeiro (despesa ou receita).
-
-Parâmetros (Body JSON):
-
-title (string): Título da entrada. 
-
-amount (number): Valor da entrada. 
-
-type (string): Tipo da entrada. Valores: "INCOME-entrada" ou "EXPENSE-saída"
-
-categoryId (string): ID da categoria. 
-
-date (string): Data da entrada. Formato: YYYY-MM-DD.
-
-Cabeçalho: Authorization: Bearer <token JWT>
-
-Resposta:
-
-Sucesso (201 Created):
-
-{
-  "message": "Success",
-  "data": {
-    "id": "fin_10001",
-    "title": "Assinatura Netflix",
-    "amount": 29.90,
-    "type": "EXPENSE",
-    "categoryId": "cat_03",
-    "date": "2025-09-25",
-    "createdAt": "2025-09-25T10:00:00Z"
-  }
-}
-
-
-Erro (400 Bad Request - Parâmetro inválido):
-
-{
-  "message": "Error",
-  "error": {
-    "code": "INVALID_PARAM",
-    "details": "O parâmetro 'amount' deve ser um número válido."
-  }
-}
+Rotas de Criação (POST) retornam 201 Created com corpo vazio, conforme a regra de design de API.
 
 ## Considerações de Segurança
 
@@ -354,7 +253,6 @@ O deploy do Flow deve seguir um fluxo de Integração Contínua/Entrega Contínu
 
 ## Testes
 
-Testes
 A estratégia de teste do Flow é vital para garantir que a arquitetura distribuída funcione de forma coesa e segura. O foco principal foi na segurança (Autorização/Propriedade) e na integridade da lógica de negócio (Agregação/Filtros).
 
 #### Estratégia e Tipos de Teste
@@ -426,10 +324,10 @@ Foram criadas 5 suítes de teste (27 testes no total) para cobrir todas as funci
 
 O resultado da execução de todos os testes de integração do projeto Flow confirma a estabilidade da API:
 
-Test Suites: 5 passed, 5 total
-Tests: 27 passed, 27 total
-Snapshots: 0 total
-Time: 2.711 s, estimated 3 s
+    Test Suites: 5 passed, 5 total
+    Tests: 27 passed, 27 total
+    Snapshots: 0 total
+    Time: 2.711 s, estimated 3 s
 
 #### Conclusão do Teste:
 
@@ -445,18 +343,14 @@ Todos os 27 casos de teste passaram com sucesso. Este resultado valida as princi
 Complementarmente aos testes automatizados, foi utilizado o Insomnia para realizar testes manuais (funcionais) em tempo real, verificando a semântica HTTP e as mensagens de erro retornadas pela API.
 
 - Verificação de 400 Bad Request: Testes enviados com senhas curtas, e-mails inválidos, e corpo vazio confirmaram que o Zod está retornando o 400 com mensagens claras, o que protege a API e auxilia o front-end na usabilidade.
+
 ![arq](/docs/img/Imagem1.png)
 
 
-(Cópia das telas - )
 - Validação de Tokens: Confirmação de que o envio de tokens expirados ou inválidos resulta em 401 Unauthorized antes que a requisição chegue ao controller.
 
 ![arq](/docs/img/Imagem2.png)
 
-
-# Referências
-
-Inclua todas as referências (livros, artigos, sites, etc) utilizados no desenvolvimento do trabalho.
 
 # Planejamento
 
@@ -500,18 +394,18 @@ Atualizado em: 20/09/2025
 | :----         |    :----         |      :----:    | :----:     | :----: | :----:          |
 | Thiago Ferreira | API(Controllers) | 14/09/2025 | 20/09/2025 | ✔️ | 14/09/2025 |
 | André Ramos | Segurança | 14/09/2025 | 20/09/2025 | ✔️ | 20/09/2025
-| Gustavo Gino | Testes | 14/09/2025 | 20/09/2025 | ⌛| ---- |
-| Lucas Borges | Endpoints | 14/09/2025 | 20/09/2025 | ✔️ | 20/09/2025 |
+| Gustavo Gino | Testes | 14/09/2025 | 20/09/2025 | 📝| ---- |
+| Lucas Borges | Endpoints | 14/09/2025 | 20/09/2025 | 📝 | ---- |
 | Natã Gabriel | Documentos da Modelagem | 14/09/2025 | 20/09/2025 | 📝 | ---- |
-| Rhafael Hector | Testes | 14/09/2025 | 20/09/2025 | ⌛ | ---- |
+| Rhafael Hector | Testes | 14/09/2025 | 20/09/2025 | 📝 | ---- |
 
 ### Semana 4
 
-Atualizado em: 26/09/2025
+Atualizado em: 27/09/2025
 
 | Responsável   | Tarefa/Requisito | Iniciado em    | Prazo      | Status | Terminado em    |
 | :----         |    :----         |      :----:    | :----:     | :----: | :----:          |
-| Thiago Ferreira | (DOC)Implantação | 21/09/2025 | 27/09/2025 | ⌛ | ---- |
+| Thiago Ferreira | (DOC)Implantação | 21/09/2025 | 27/09/2025 | ✔️ | 27/09/2025 |
 | André Ramos | Objetivos da API | 21/09/2025 | 27/09/2025 | ✔️ | 23/09/2025
 | Gustavo Gino | Testes | 21/09/2025 | 27/09/2025 | 📝 | ---- |
 | Lucas Borges | API Endpoints | 21/09/2025 | 27/09/2025 | 📝 | ---- |
@@ -520,16 +414,16 @@ Atualizado em: 26/09/2025
 
 ### Semana 5
 
-Atualizado em: 26/09/2025
+Atualizado em: 05/10/2025
 
 | Responsável   | Tarefa/Requisito | Iniciado em    | Prazo      | Status | Terminado em    |
 | :----         |    :----         |      :----:    | :----:     | :----: | :----:          |
-| Thiago Ferreira | (DOC)Implantação | 28/09/2025 | 02/10/2025 | ✔️ | ---- |
-| André Ramos | Objetivos da API | 28/09/2025 | 04/10/2025 | ✔️ | 23/09/2025
-| Gustavo Gino | Testes | 28/09/2025 | 04/10/2025 | 📝 | ---- |
-| Lucas Borges | API Endpoints | 28/09/2025 | 04/10/2025 | 📝 | ---- |
-| Natã Gabriel | Documentos da Modelagem | 28/09/2025 | 04/10/2025 | ✔️ | ---- |
-| Rhafael Hector | Testes | 28/09/2025 | 04/10/2025 | 📝 | ---- |
+| Thiago Ferreira | API Endpoints | 28/09/2025 | 02/10/2025 | ✔️ | 01/10/2025 |
+| André Ramos | API Endpoints | 28/09/2025 | 04/10/2025 | ✔️ | 04/10/2025
+| Gustavo Gino | Testes | 28/09/2025 | 04/10/2025 | ✔️ | 03/10/2025 |
+| Lucas Borges | API Endpoints | 28/09/2025 | 04/10/2025 | ✔️ | 04/10/2025 |
+| Natã Gabriel | Documentos da Modelagem | 28/09/2025 | 04/10/2025 | ✔️ | 03/10/2025 |
+| Rhafael Hector | Testes | 28/09/2025 | 04/10/2025 | ✔️ | 03/10/2025 |
 
 Legenda:
 - ✔️: terminado
