@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1280" height="1400" viewBox="0 0 1280 1400" fill="none" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Tahoma, Geneva, Verdana, sans-serif">
+
+  <defs>
+    <filter id="shadow" x="0" y="0" width="1280" height="1400" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <!-- Fundo -->
+  <rect width="1280" height="1400" fill="#F5F7FA"/>
+
+  <!-- Título -->
+  <text x="40" y="60" font-size="28" font-weight="700" fill="#1E3A8A">Painel Administrativo</text>
+
+  <!-- Usuários -->
+  <g transform="translate(40, 100)">
+    <rect width="1200" height="200" rx="12" fill="white" filter="url(#shadow)" />
+    <text x="30" y="40" font-size="20" font-weight="600" fill="#1E3A8A">👤 Gerenciar Usuários</text>
+
+    <text x="30" y="80" font-size="14" font-weight="600" fill="#475569">Nome</text>
+    <text x="300" y="80" font-size="14" font-weight="600" fill="#475569">E-mail</text>
+    <text x="600" y="80" font-size="14" font-weight="600" fill="#475569">Status</text>
+    <text x="750" y="80" font-size="14" font-weight="600" fill="#475569">Ações</text>
+    <line x1="30" y1="90" x2="1170" y2="90" stroke="#E2E8F0" stroke-width="1"/>
+
+    <text x="30" y="120" font-size="14" fill="#334155">João Silva</text>
+    <text x="300" y="120" font-size="14" fill="#334155">joao@email.com</text>
+    <text x="600" y="120" font-size="14" fill="#10B981">Ativo</text>
+    <text x="750" y="120" font-size="14" fill="#2563EB">✏️ Editar</text>
+    <text x="850" y="120" font-size="14" fill="#EF4444">🗑 Excluir</text>
+  </g>
+
+  <!-- Gráfico de Barras (Relatórios) -->
+  <g transform="translate(40, 320)">
+    <rect width="580" height="260" rx="12" fill="white" filter="url(#shadow)" />
+    <text x="290" y="40" font-size="18" font-weight="600" fill="#1E3A8A" text-anchor="middle">📊 Relatório de Categorias</text>
+
+    <g transform="translate(40, 70)">
+      <rect x="0" y="150" width="50" height="60" fill="#2563EB" rx="4"/>
+      <text x="25" y="230" text-anchor="middle" font-size="12" fill="#475569">Transp.</text>
+
+      <rect x="80" y="100" width="50" height="110" fill="#FBBF24" rx="4"/>
+      <text x="105" y="230" text-anchor="middle" font-size="12" fill="#475569">Alim.</text>
+
+      <rect x="160" y="120" width="50" height="90" fill="#10B981" rx="4"/>
+      <text x="185" y="230" text-anchor="middle" font-size="12" fill="#475569">Outros</text>
+
+      <rect x="240" y="80" width="50" height="130" fill="#7C3AED" rx="4"/>
+      <text x="265" y="230" text-anchor="middle" font-size="12" fill="#475569">Educa.</text>
+
+      <rect x="320" y="60" width="50" height="150" fill="#F43F5E" rx="4"/>
+      <text x="345" y="230" text-anchor="middle" font-size="12" fill="#475569">Lazer</text>
+    </g>
+  </g>
+
+  <!-- Permissões -->
+  <g transform="translate(660, 320)">
+    <rect width="580" height="260" rx="12" fill="white" filter="url(#shadow)" />
+    <text x="290" y="40" font-size="18" font-weight="600" fill="#1E3A8A" text-anchor="middle">🔐 Permissões</text>
+
+    <text x="30" y="80" font-size="14" font-weight="600" fill="#475569">Usuário</text>
+    <text x="300" y="80" font-size="14" font-weight="600" fill="#475569">Perfil</text>
+    <text x="450" y="80" font-size="14" font-weight="600" fill="#475569">Acesso</text>
+    <line x1="30" y1="90" x2="550" y2="90" stroke="#E2E8F0" stroke-width="1"/>
+
+    <text x="30" y="120" font-size="14" fill="#334155">João Silva</text>
+    <text x="300" y="120" font-size="14" fill="#334155">Administrador</text>
+    <text x="450" y="120" font-size="14" fill="#10B981">Total</text>
+
+    <text x="30" y="160" font-size="14" fill="#334155">Ana Lima</text>
+    <text x="300" y="160" font-size="14" fill="#334155">Gerente</text>
+    <text x="450" y="160" font-size="14" fill="#FBBF24">Parcial</text>
+  </g>
+
+  <!-- Auditoria -->
+  <g transform="translate(40, 600)">
+    <rect width="1200" height="100" rx="12" fill="white" filter="url(#shadow)" />
+    <text x="30" y="40" font-size="18" font-weight="600" fill="#1E3A8A">🔍 Auditoria do Sistema</text>
+
+    <rect x="900" y="20" width="260" height="40" rx="8" fill="#F1F5F9" />
+    <text x="920" y="47" font-size="14" fill="#475569">🔎 Filtrar por data ou ação</text>
+  </g>
+
+  <!-- Notificações -->
+  <g transform="translate(40, 720)">
+    <rect width="580" height="140" rx="12" fill="white" filter="url(#shadow)" />
+    <text x="30" y="40" font-size="18" font-weight="600" fill="#1E3A8A">🔔 Notificações</text>
+
+    <text x="30" y="80" font-size="14" fill="#10B981">✔ Relatório gerado com sucesso</text>
+    <text x="30" y="110" font-size="14" fill="#EF4444">⚠ Tentativa de acesso negada</text>
+  </g>
+
+  <!-- Sistema -->
+  <g transform="translate(660, 720)">
+    <rect width="580" height="140" rx="12" fill="white" filter="url(#shadow)" />
+    <text x="30" y="40" font-size="18" font-weight="600" fill="#1E3A8A">⚙️ Sistema</text>
+
+    <text x="30" y="80" font-size="14" fill="#334155">Modo manutenção: <tspan fill="#EF4444">Desligado</tspan></text>
+    <text x="30" y="110" font-size="14" fill="#334155">Backup automático: <tspan fill="#10B981">Ativo</tspan></text>
+  </g>
+
+  <!-- Novos Itens -->
+  <g transform="translate(40, 880)">
+    <rect width="1200" height="240" rx="12" fill="white" filter="url(#shadow)" />
+    <text x="30" y="40" font-size="20" font-weight="600" fill="#1E3A8A">📁 Gerenciar Itens</text>
+
+    <text x="30" y="90" font-size="16" fill="#334155">💳 Financeiro</text>
+    <text x="30" y="130" font-size="16" fill="#334155">📦 Produtos</text>
+    <text x="30" y="170" font-size="16" fill="#334155">📁 Documentos</text>
+    <text x="30" y="210" font-size="16" fill="#334155">🛠 Configurações Gerais</text>
+  </g>
+
+</svg>
+//////////////////////////MOBILE//////////////////////////////////////////////
+<?xml version="1.0" encoding="UTF-8"?>
+<svg 
+  width="100%" height="1200" viewBox="0 0 375 1600" 
+  fill="none" xmlns="http://www.w3.org/2000/svg"
+  font-family="Segoe UI, Tahoma, Geneva, Verdana, sans-serif"
+  preserveAspectRatio="xMidYMin meet"
+>
+  <defs>
+    <filter id="shadow" x="0" y="0" width="375" height="1600" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <rect width="375" height="1600" fill="#F5F7FA"/>
+
+  <text x="20" y="40" font-size="22" font-weight="700" fill="#1E3A8A">Painel Administrativo</text>
+
+  <g transform="translate(20, 70)">
+    <rect width="335" height="140" rx="12" fill="white" filter="url(#shadow)" />
+    <text x="20" y="30" font-size="18" font-weight="600" fill="#1E3A8A">👤 Gerenciar Usuários</text>
+
+    <text x="20" y="60" font-size="13" font-weight="600" fill="#475569">Nome: <tspan font-weight="400">João Silva</tspan></text>
+    <text x="20" y="85" font-size="13" font-weight="600" fill="#475569">Email: <tspan font-weight="400">joao@email.com</tspan></text>
+    <text x="20" y="110" font-size="13" font-weight="600" fill="#475569">Status: <tspan font-weight="400" fill="#10B981">Ativo</tspan></text>
+  </g>
+
+  <g transform="translate(20, 220)">
+    <rect width="335" height="200" rx="12" fill="white" filter="url(#shadow)" />
+    <text x="167.5" y="30" font-size="16" font-weight="600" fill="#1E3A8A" text-anchor="middle">📊 Relatório de Categorias</text>
+
+    <g transform="translate(40, 70)">
+      <rect x="0" y="90" width="30" height="36" fill="#2563EB" rx="4"/>
+      <text x="15" y="130" text-anchor="middle" font-size="10" fill="#475569">Transp.</text>
+
+      <rect x="45" y="60" width="30" height="66" fill="#FBBF24" rx="4"/>
+      <text x="60" y="130" text-anchor="middle" font-size="10" fill="#475569">Alim.</text>
+
+      <rect x="90" y="72" width="30" height="54" fill="#10B981" rx="4"/>
+      <text x="105" y="130" text-anchor="middle" font-size="10" fill="#475569">Outros</text>
+
+      <rect x="135" y="48" width="30" height="78" fill="#7C3AED" rx="4"/>
+      <text x="150" y="130" text-anchor="middle" font-size="10" fill="#475569">Educa.</text>
+
+      <rect x="180" y="36" width="30" height="90" fill="#F43F5E" rx="4"/>
+      <text x="195" y="130" text-anchor="middle" font-size="10" fill="#475569">Lazer</text>
+    </g>
+  </g>
+
+  <g transform="translate(20, 440)">
+    <rect width="335" height="140" rx="12" fill="white" filter="url(#shadow)" />
+    <text x="167.5" y="30" font-size="16" font-weight="600" fill="#1E3A8A" text-anchor="middle">🔐 Permissões</text>
+
+    <text x="20" y="60" font-size="13" font-weight="600" fill="#475569">Usuário: <tspan font-weight="400">João Silva</tspan></text>
+    <text x="20" y="85" font-size="13" font-weight="400" fill="#334155">Perfil: Administrador</text>
+    <text x="20" y="110" font-size="13" font-weight="400" fill="#10B981">Acesso: Total</text>
+
+    <text x="20" y="135" font-size="13" font-weight="600" fill="#475569">Usuário: <tspan font-weight="400">Ana Lima</tspan></text>
+    <text x="20" y="160" font-size="13" font-weight="400" fill="#334155">Perfil: Gerente</text>
+    <text x="20" y="185" font-size="13" font-weight="400" fill="#FBBF24">Acesso: Parcial</text>
+  </g>
+
+  <g transform="translate(20, 600)">
+    <rect width="335" height="80" rx="12" fill="white" filter="url(#shadow)" />
+    <text x="20" y="35" font-size="16" font-weight="600" fill="#1E3A8A">🔍 Auditoria do Sistema</text>
+
+    <rect x="20" y="45" width="295" height="25" rx="8" fill="#F1F5F9" />
+    <text x="35" y="65" font-size="12" fill="#475569">🔎 Filtrar por data ou ação</text>
+  </g>
+
+  <g transform="translate(20, 700)">
+    <rect width="335" height="100" rx="12" fill="white" filter="url(#shadow)" />
+    <text x="20" y="35" font-size="16" font-weight="600" fill="#1E3A8A">🔔 Notificações</text>
+
+    <text x="20" y="65" font-size="14" fill="#10B981">✔ Relatório gerado com sucesso</text>
+    <text x="20" y="90" font-size="14" fill="#EF4444">⚠ Tentativa de acesso negada</text>
+  </g>
+
+  <g transform="translate(20, 820)">
+    <rect width="335" height="80" rx="12" fill="white" filter="url(#shadow)" />
+    <text x="20" y="35" font-size="16" font-weight="600" fill="#1E3A8A">⚙️ Sistema</text>
+
+    <text x="20" y="60" font-size="14" fill="#334155">Modo manutenção: <tspan fill="#EF4444">Desligado</tspan></text>
+    <text x="20" y="80" font-size="14" fill="#334155">Backup automático: <tspan fill="#10B981">Ativo</tspan></text>
+  </g>
+
+  <g transform="translate(20, 920)">
+    <rect width="335" height="200" rx="12" fill="white" filter="url(#shadow)" />
+    <text x="20" y="35" font-size="18" font-weight="600" fill="#1E3A8A">📁 Gerenciar Itens</text>
+
+    <text x="20" y="75" font-size="16" fill="#334155">💳 Financeiro</text>
+    <text x="20" y="110" font-size="16" fill="#334155">📦 Produtos</text>
+    <text x="20" y="145" font-size="16" fill="#334155">📁 Documentos</text>
+    <text x="20" y="180" font-size="16" fill="#334155">🛠 Configurações Gerais</text>
+  </g>
+
+</svg>
+
