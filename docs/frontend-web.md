@@ -12,7 +12,12 @@
 
 ### Design Visual
 
-[Descreva o estilo visual da interface, incluindo paleta de cores, tipografia, ícones e outros elementos gráficos.]
+Tipografia:
+<img width="1920" height="1080" alt="Tipografia" src="docs\img\Tipografia.png" />
+
+Paleta De Cores:
+<img width="1920" height="1080" alt="Paleta De Cores" src="docs\img\PaletaDeCor.png" />
+
 
 ## Fluxo de Dados
 
