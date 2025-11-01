@@ -18,6 +18,13 @@ Tipografia:
 Paleta De Cores:
 ![PaletaDeCores](img/PaletaDeCor.png)
 
+Design das Telas:
+![WhatsApp Image 2025-11-01 at 16 21 43 (1)](https://github.com/user-attachments/assets/563e25a9-fafd-4f90-8708-0183c5125034)
+
+![WhatsApp Image 2025-11-01 at 16 21 43](https://github.com/user-attachments/assets/5e20cb1b-2dcc-4d20-a05c-c3dd792f0e7a)
+
+![WhatsApp Image 2025-11-01 at 16 21 42](https://github.com/user-attachments/assets/6b24cf98-d986-4695-885d-fba8903b7343)
+
 
 ## Fluxo de Dados
 
