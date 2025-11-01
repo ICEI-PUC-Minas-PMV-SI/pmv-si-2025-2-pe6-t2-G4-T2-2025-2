@@ -39,7 +39,7 @@ model Category {
   type Type
 
   userId String @map("user_id")
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   transactions Transactions[]
 
@@ -57,10 +57,10 @@ model Transactions {
   date DateTime
 
   userId String @map("user_id")
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   categoryId String @map("category_id")
-  category Category @relation(fields: [categoryId], references: [id])
+  category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime? @updatedAt @map("updated_at")

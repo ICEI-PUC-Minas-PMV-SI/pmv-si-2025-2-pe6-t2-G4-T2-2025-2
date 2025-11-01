@@ -58,7 +58,7 @@ class ReportsController {
         return response.json(summary)
     }
 
-    async byCategory(request: Request, response: Response) {
+    async categoryReport(request: Request, response: Response) {
         const userId = request.user?.id
 
         if(!userId) {

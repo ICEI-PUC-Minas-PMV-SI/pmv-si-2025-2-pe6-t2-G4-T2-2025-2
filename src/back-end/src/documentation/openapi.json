@@ -3,7 +3,7 @@
     "info": {
         "title": "API FinanceFlow - Arquitetura Distribuída",
         "description": "API RESTful para gerenciamento de finanças pessoais.",
-        "version": "1.0.0"
+        "version": "1.1.0"
     },
     "servers": [
         {
@@ -655,7 +655,7 @@
                 }
             }
         },
-        "/reports/by-category": {
+        "/reports/categoryReport": {
             "get": {
                 "tags": [
                     "4. Relatórios Analíticos"
@@ -732,13 +732,53 @@
                 }
             }
         },
+        "/admin/users/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "description": "ID do usuário a ser excluído."
+                }
+            ],
+            "delete": {
+                "tags": [
+                    "5. Administração"
+                ],
+                "summary": "Excluir um usuário (Acesso ADMIN)",
+                "description": "Exclui um usuário e todos os seus dados associados (transações, categorias). O admin não pode excluir a si mesmo.",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Usuário excluído com sucesso (No Content)."
+                    },
+                    "401": {
+                        "description": "Acesso negado (Token inválido ou Role 'member')."
+                    },
+                    "403": {
+                        "description": "Acesso proibido (Admin tentando se auto-excluir)."
+                    },
+                    "404": {
+                        "description": "Usuário não encontrado."
+                    }
+                }
+            }
+        },
         "/admin/metrics": {
             "get": {
                 "tags": [
                     "5. Administração"
                 ],
                 "summary": "Obter Métricas Globais do Sistema",
-                "description": "Retorna o total de usuários, transações, receitas e despesas de toda a plataforma.",
+                "description": "Retorna o total de usuários, transações e o volume financeiro total.",
                 "security": [
                     {
                         "bearerAuth": []
@@ -751,6 +791,52 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/GlobalMetrics"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Acesso negado (Token inválido ou Role 'member')."
+                    }
+                }
+            }
+        },
+        "/admin/recent-activity": {
+            "get": {
+                "tags": [
+                    "5. Administração"
+                ],
+                "summary": "Obter feed de atividades recentes (Acesso ADMIN)",
+                "description": "Retorna uma lista combinada e ordenada dos últimos usuários registrados e transações criadas.",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 20,
+                            "default": 5
+                        },
+                        "description": "Número de itens a serem retornados."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retorna o feed de atividades.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ActivityItem"
+                                    }
                                 }
                             }
                         }
@@ -1048,24 +1134,64 @@
                         "description": "Número total de transações (receitas + despesas).",
                         "example": 1250
                     },
-                    "totalExpenses": {
+                    "totalFinancialMovement": {
                         "type": "number",
                         "format": "float",
-                        "description": "Soma total de todas as despesas na plataforma.",
-                        "example": 87500.55
-                    },
-                    "totalIncomes": {
-                        "type": "number",
-                        "format": "float",
-                        "description": "Soma total de todas as receitas na plataforma.",
-                        "example": 155000
+                        "description": "Soma total de todas as movimentações financeiras na plataforma.",
+                        "example": 243700.55
                     }
                 },
                 "required": [
                     "totalUsers",
                     "totalTransactions",
-                    "totalExpenses",
-                    "totalIncomes"
+                    "totalFinancialMovement"
+                ]
+            },
+            "ActivityItem": {
+                "type": "object",
+                "description": "Item do feed de atividade, representando um novo usuário ou transação.",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "USER_REGISTERED",
+                            "TRANSACTION_CREATED"
+                        ]
+                    },
+                    "timestamp": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "userName": {
+                        "type": "string",
+                        "description": "Nome do usuário (para ambos os tipos de evento)."
+                    },
+                    "transactionDescription": {
+                        "type": "string",
+                        "description": "Descrição (se for TRANSCATION_CREATED)."
+                    },
+                    "transactionAmount": {
+                        "type": "number",
+                        "format": "float",
+                        "description": "Valor (se for TRANSCATION_CREATED)."
+                    },
+                    "transactionType": {
+                        "type": "string",
+                        "enum": [
+                            "income",
+                            "expense"
+                        ],
+                        "description": "Tipo (se for TRANSCATION_CREATED)."
+                    }
+                },
+                "required": [
+                    "id",
+                    "type",
+                    "timestamp"
                 ]
             }
         }
