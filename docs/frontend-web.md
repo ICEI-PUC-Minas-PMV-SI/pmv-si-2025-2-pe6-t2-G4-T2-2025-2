@@ -99,12 +99,26 @@ Evite expor tokens ou dados sensíveis no front-end.
 ## Implantação
 
 [Instruções para implantar a aplicação distribuída em um ambiente de produção.]
+1 Requisitos de Ambiente
+Hardware mínimo: 1 vCPU, 512 MB de RAM e 1 GB de armazenamento.
+Software: Node.js 18+, npm ou yarn, e um servidor HTTP (como Nginx, Vercel, Netlify ou Cloudflare Pages).
 
-1. Defina os requisitos de hardware e software necessários para implantar a aplicação em um ambiente de produção.
-2. Escolha uma plataforma de hospedagem adequada, como um provedor de nuvem ou um servidor dedicado.
-3. Configure o ambiente de implantação, incluindo a instalação de dependências e configuração de variáveis de ambiente.
-4. Faça o deploy da aplicação no ambiente escolhido, seguindo as instruções específicas da plataforma de hospedagem.
-5. Realize testes para garantir que a aplicação esteja funcionando corretamente no ambiente de produção.
+2 Configuração do Ambiente
+Instale as dependências do projeto com npm install.
+Configure as variáveis de ambiente, como VITE_API_BASE_URL, apontando para a API de produção.
+
+3 Build e Deploy
+Gere o build otimizado com npm run build.
+Faça o upload do conteúdo da pasta dist/ para a plataforma de hospedagem escolhida.
+Certifique-se de configurar o roteamento de SPA, redirecionando todas as rotas para index.html.
+
+4 Segurança e Boas Práticas
+Utilize HTTPS e cabeçalhos de segurança (CSP, HSTS, X-Frame-Options).
+8Proteja tokens e dados sensíveis, evitando exposição no front-end.
+
+5 Validação Pós-Deploy
+Teste o acesso à aplicação, autenticação, rotas e integração com a API.
+Avalie o desempenho e a responsividade para garantir a estabilidade em produção.
 
 ## Testes
 
