@@ -8,6 +8,7 @@ interface ButtonProps {
 	size?: "default" | "icon";
 	className?: string;
 	isLoading?: boolean;
+	dataTestId?: string;
 }
 
 export function Button({
@@ -20,6 +21,7 @@ export function Button({
 	size = "default",
 	className = "",
 	isLoading = false,
+	dataTestId,
 }: ButtonProps) {
 	const baseClasses = `
     font-semibold transition-colors duration-200
@@ -55,6 +57,7 @@ export function Button({
         ${cursorClass}
         ${className} 
       `}
+			data-testid={dataTestId}
 		>
 			{children}
 		</button>

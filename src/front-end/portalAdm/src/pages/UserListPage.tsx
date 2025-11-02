@@ -157,6 +157,7 @@ export function UserListPage() {
                 absolute right-14 p-1 
                 animate-in fade-in zoom-in-50 duration-300
               `}
+							dataTestId="add-user-button"
 						>
 							<HiPlus className="h-5 w-5" />
 						</Button>
@@ -168,6 +169,7 @@ export function UserListPage() {
 						onClick={handleToggleActions}
 						size="icon"
 						className={`absolute right-0 px-2 transition-all duration-200 `}
+						dataTestId="toggle-actions-button"
 					>
 						{showActions ? (
 							<HiX className="h-5 w-5" />

@@ -104,7 +104,12 @@ export function ProfilePage() {
 					/>
 
 					<div className="flex justify-end mt-6">
-						<Button type="submit" variant="green" isLoading={isLoading}>
+						<Button
+							type="submit"
+							variant="green"
+							isLoading={isLoading}
+							dataTestId="profile-save-button"
+						>
 							Salvar Alterações
 						</Button>
 					</div>
