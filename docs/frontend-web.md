@@ -1,10 +1,10 @@
 # Front-end Web
 
-[Inclua uma breve descrição do projeto e seus objetivos.]
+Este documento detalha o desenvolvimento da interface web (Front-end) do Portal Administrativo **Flow**. Esta aplicação é um Single Page Application (SPA) construída em React com TypeScript e estilizada com Tailwind CSS.
 
 ## Projeto da Interface Web
 
-[Descreva o projeto da interface Web da aplicação, incluindo o design visual, layout das páginas, interações do usuário e outros aspectos relevantes.]
+Este documento detalha o desenvolvimento da interface web (Front-end) do Portal Administrativo **Flow**. Esta aplicação é um Single Page Application (SPA) construída em React com TypeScript e estilizada com Tailwind CSS.
 
 ### Wireframes
 
@@ -47,7 +47,25 @@ Design das Telas:
 1. As próximas páginas buscam os dados da API confirmando que o session do AuthContext é válido e renderizando as páginas Dashboard.tsx e UserListPage.tsx
 
 ## Tecnologias Utilizadas
-[Lista das tecnologias principais que serão utilizadas no projeto.]
+
+O Portal Administrativo foi construído como uma Single Page Application (SPA) moderna, utilizando um conjunto de tecnologias focado em desempenho, manutenibilidade e uma excelente experiência de desenvolvimento.
+
+A tabela abaixo detalha as principais bibliotecas e frameworks utilizados no projeto:
+
+| Categoria   | Tecnologia | Propósito no Projeto    |
+| :----         |    :----         |      :----    |
+| Base (Core)       | React | Biblioteca principal para a construção da interface de usuário declarativa e baseada em componentes.
+| Base (Core)       | TypeScript    | Garante a tipagem estática, aumentando a segurança do código, melhorando o IntelliSense e facilitando a refatoração.              |
+| Build Tool        | Vite  | Ferramenta de build moderna que oferece Hot Module Replacement (HMR) instantâneo e builds de produção otimizados. |
+| Estilização        | Tailwind CSS  |    Framework utility-first para estilização rápida e consistente diretamente no JSX, permitindo a criação de um design system customizado. |
+| Estilização | tailwindcss-animate | Plugin do Tailwind para adicionar animações de entrada/saída (animate-in, fade-in) de forma declarativa. |
+| Iconografia | react-icons | Biblioteca para a inclusão de ícones (como HiMenu, TbUserCircle, HiPlus) de forma otimizada. |
+| Roteamento | React Router DOM | Utilizado para gerenciar a navegação entre as páginas (Login, Dashboard, Usuários, Perfil) e para a criação de Rotas Protegidas. |
+| Ger. de Estado | React Context API | Usado especificamente no AuthContext para gerenciar globalmente o estado da sessão do usuário (token, dados do usuário, status de isLoading). |
+| Ger. de Estado | React Hooks | useState, useEffect, useContext, useRef, useCallback e useActionState são usados para gerenciar o estado local das páginas e componentes. |
+| Comunicação API | Axios | Cliente HTTP baseado em Promises (abstraído no serviço api.ts) para realizar requisições seguras (com Bearer Token) aos endpoints da API. |
+| Notificação | react-hot-toast | Biblioteca para exibir notificações toast globais (sucesso, erro) de forma limpa e centralizada. |
+| Validação | Zod | Utilizado no front-end para validar os dados dos formulários (Login, Perfil, Adicionar Usuário) antes do envio, garantindo feedback imediato ao usuário. |
 
 ## Considerações de Segurança
 
