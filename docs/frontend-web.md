@@ -28,7 +28,23 @@ Design das Telas:
 
 ## Fluxo de Dados
 
-[Diagrama ou descrição do fluxo de dados na aplicação.]
+### Fluxo 1
+1. O usuário entra no sistema (insere e-mail e senha na página SignIn.tsx e clica em entrar). 
+
+2. Os dados do formulário são validados localmente usando Zod.
+
+3. Uma requisição POST /sessions é enviada à API com os dados.
+
+4. O AuthProvider armazena o token e user no localStorage
+
+5. A instância global do api (Axios) é atualizada com o cabeçalho Authorization: Bearer [token]
+
+6. O AppRoutes detecta que session não é mais null e que o role é "admin".
+
+7. O React Router redireciona automaticamente o usuário da rota / para /admin/dashboard e o usuário recebe um popup na tela ("Login efetuado com sucesso")
+
+### Fluxo 2
+1. As próximas páginas buscam os dados da API confirmando que o session do AuthContext é válido e renderizando as páginas Dashboard.tsx e UserListPage.tsx
 
 ## Tecnologias Utilizadas
 [Lista das tecnologias principais que serão utilizadas no projeto.]
