@@ -1,6 +1,6 @@
 # Front-end Web
 
-Este documento detalha o desenvolvimento da interface web (Front-end) do Portal Administrativo **Flow**. Esta aplicação é um Single Page Application (SPA) construída em React com TypeScript e estilizada com Tailwind CSS.
+Esta documentação refere-se ao desenvolvimento Frontend do portal administrativo web, a ser acessado pelo administrador da plataforma.
 
 ## Projeto da Interface Web
 
@@ -8,7 +8,10 @@ Este documento detalha o desenvolvimento da interface web (Front-end) do Portal 
 
 ### Wireframes
 
-[Inclua os wireframes das páginas principais da interface, mostrando a disposição dos elementos na página.]
+![Login](img/1-Wireframe-Login.png)
+![Dashboard](img/2-Wareframe-Dashboard.png)
+![Gen-Usuários](img/3-Wareframe-GenUsuario.png)
+![Gen-Delete](img/4-Wireframe-GenUsuario.png)
 
 ### Design Visual
 
@@ -69,98 +72,132 @@ A tabela abaixo detalha as principais bibliotecas e frameworks utilizados no pro
 
 ## Considerações de Segurança
 
-Armazenamento do Token:
-Prefira cookies HTTP-only com SameSite=strict e Secure em vez de localStorage.
-Se usar localStorage, proteja contra XSS com políticas CSP e sanitização.
-Validação de Dados:
-O front usa Zod, mas o backend também deve validar e sanitizar todas as entradas.
-Comunicação Segura:
-Todas as requisições devem usar HTTPS para proteger credenciais e tokens.
-Autorização:
-O cabeçalho Authorization: Bearer [token] só deve ser definido após login.
-Tokens expirados devem forçar logout e limpeza do armazenamento.
-Sessão e Expiração:
-Use tokens de curta duração e, se necessário, refresh tokens seguros.
-Monitore e encerre sessões inválidas automaticamente.
-Proteção contra ataques:
-XSS: sanitize dados e evite dangerouslySetInnerHTML.
-CSRF: cookies com SameSite=strict.
-Força bruta: rate limiting no backend.
-Mensagens e Logs:
-Use mensagens de erro genéricas e não exponha dados sensíveis no console.
-Atualizações e Deploy:
-Mantenha dependências atualizadas e aplique cabeçalhos de segurança no servidor (HSTS, CSP, X-Frame-Options, etc.).
+1. **Armazenamento do Token:** Cookies HTTP-only com SameSite=strict e Secure. Utilizamos também o localStorage, protegido contra XSS com políticas CSP e sanitização.
+
+1. **Validação de Dados:** O front usa Zod, e o backend valida e sanitiza todas as entradas.
+
+2. **Comunicação Segura:** Todas as requisições usam HTTPS para proteger credenciais e tokens.
+
+### Autorização
+
+1. **O cabeçalho Authorization:** Bearer [token] é definido após login. Tokens expirados forçam logout e limpeza do armazenamento.
+
+2. **Sessão e Expiração:** Tokens de curta duração e refresh tokens seguros. Monitorados e encerrados em sessões inválidas automaticamente.
+
+### Proteção contra ataques
+
+1. **XSS:** Dados sanatizados evitando dangerouslySetInnerHTML.
+
+2. **CSRF:** cookies com SameSite=strict.
+
+3. **Força bruta:** rate limiting no backend.
+
+4. **Mensagens e Logs:** Mensagens de erro genéricas e não expondo dados sensíveis no console.
+
+5. **Atualizações e Deploy:** Dependências atualizadas e cabeçalhos de segurança no servidor (HSTS, CSP, X-Frame-Options, etc.).
 
 Em resumo:
 
-Garantir que seja HTTPS, tokens curtos, validação em ambas as camadas, e proteção contra XSS/CSRF.
-Evite expor tokens ou dados sensíveis no front-end.
+Garantimos que seja HTTPS, tokens curtos, validação em ambas as camadas, e proteção contra XSS/CSRF.
+Evitando expor tokens ou dados sensíveis no front-end.
 
 ## Implantação
 
-[Instruções para implantar a aplicação distribuída em um ambiente de produção.]
-1 Requisitos de Ambiente
-Hardware mínimo: 1 vCPU, 512 MB de RAM e 1 GB de armazenamento.
-Software: Node.js 18+, npm ou yarn, e um servidor HTTP (como Nginx, Vercel, Netlify ou Cloudflare Pages).
+### Requisitos de Ambiente
+1. Hardware mínimo: 1 vCPU, 512 MB de RAM e 1 GB de armazenamento.
+2. Software: Node.js 18+, npm ou yarn, e um servidor HTTP (como Nginx, Vercel, Netlify ou Cloudflare Pages).
 
-2 Configuração do Ambiente
+### Configuração do Ambiente
+
 Instale as dependências do projeto com npm install.
 Configure as variáveis de ambiente, como VITE_API_BASE_URL, apontando para a API de produção.
 
-3 Build e Deploy
-Gere o build otimizado com npm run build.
-Faça o upload do conteúdo da pasta dist/ para a plataforma de hospedagem escolhida.
-Certifique-se de configurar o roteamento de SPA, redirecionando todas as rotas para index.html.
+### Build e Deploy
 
-4 Segurança e Boas Práticas
-Utilize HTTPS e cabeçalhos de segurança (CSP, HSTS, X-Frame-Options).
-8Proteja tokens e dados sensíveis, evitando exposição no front-end.
+1. Gere o build otimizado com npm run build.
+2. Faça o upload do conteúdo da pasta dist/ para a plataforma de hospedagem escolhida.
+3. Certifique-se de configurar o roteamento de SPA, redirecionando todas as rotas para index.html.
 
-5 Validação Pós-Deploy
-Teste o acesso à aplicação, autenticação, rotas e integração com a API.
-Avalie o desempenho e a responsividade para garantir a estabilidade em produção.
+### Segurança e Boas Práticas
+1. Utilize HTTPS e cabeçalhos de segurança (CSP, HSTS, X-Frame-Options).
+2. Proteja tokens e dados sensíveis, evitando exposição no front-end.
 
-## Testes
+### Validação Pós-Deploy
+1. Teste o acesso à aplicação, autenticação, rotas e integração com a API.
+2. Avalie o desempenho e a responsividade para garantir a estabilidade em produção.
 
-[Descreva a estratégia de teste, incluindo os tipos de teste a serem realizados (unitários, integração, carga, etc.) e as ferramentas a serem utilizadas.]
+## Testes Automatizados (Front-end)
 
-1. Crie casos de teste para cobrir todos os requisitos funcionais e não funcionais da aplicação.
-2. Implemente testes unitários para testar unidades individuais de código, como funções e classes.
-3. Realize testes de integração para verificar a interação correta entre os componentes da aplicação.
-4. Execute testes de carga para avaliar o desempenho da aplicação sob carga significativa.
-5. Utilize ferramentas de teste adequadas, como frameworks de teste e ferramentas de automação de teste, para agilizar o processo de teste.
+[Acesse aqui os Arquivos dos Testes](/src/front-end/portalAdm/src/tests/)
 
-# Referências
-
-Inclua todas as referências (livros, artigos, sites, etc) utilizados no desenvolvimento do trabalho.
+| Arquivo de Teste | O que é o Teste (Caso de Teste) | Qual a Expectativa (Verificação) | 
+| :--- | :--- | :--- | 
+| `getApiErrorMessage.test.ts` | Teste Unitário: Decodificar erro do Axios (com `response.data.message`). | Retorna a mensagem específica da API (ex: "Credenciais inválidas"). | 
+| `getApiErrorMessage.test.ts` | Teste Unitário: Decodificar erro padrão do JavaScript (ex: `new Error()`). | Retorna a mensagem do erro (ex: "Network Error"). | 
+| `getApiErrorMessage.test.ts` | Teste Unitário: Decodificar erro desconhecido (ex: `null` ou `{}`). | Retorna a mensagem padrão (ex: "Ocorreu um erro inesperado..."). | 
+| `useOutsideAlerter.test.tsx` | Teste de Hook: Simula clique **DENTRO** do elemento monitorado. | A função de *callback* (para fechar) **NÃO** é chamada. | 
+| `useOutsideAlerter.test.tsx` | Teste de Hook: Simula clique **FORA** do elemento monitorado. | A função de *callback* (para fechar) **é chamada 1 vez**. | 
+| `SignIn.test.tsx` | Teste de Integração: Login com credenciais corretas. | 1. Botão exibe "carregando" (`isLoading`).<br>2. `api.post` é chamada com `/sessions` e dados corretos.<br>3. `save()` do `AuthContext` é chamada com `token` e `user`.<br>4. `toast.success` é exibido.<br>5. `Maps` é chamado para `/admin/dashboard`. | 
+| `AdminLayout.test.tsx` | Teste de Integração: Clique no botão "Menu Hamburger" (mobile). | 1. (Clique 1) O estado `isSidebarOpen` muda para `true`.<br>2. (Clique 2) O estado `isSidebarOpen` volta para `false`. | 
+| `UserListPage.test.tsx` | Teste de Integração: Renderização inicial da página. | A `api.get("/admin/users")` é chamada e os dados mockados são exibidos. |
+ | `UserListPage.test.tsx` | Teste de Integração: Alternar visibilidade das ações (Toggle). | 1. (Inicial) Botão "Adicionar" e coluna "Ações" não são visíveis.<br>2. (Após clique) Botão "Adicionar" e coluna "Ações" aparecem.<br>3. (Após 2º clique) Ambos desaparecem. | 
+| `ProfilePage.test.tsx` | Teste de Integração: Atualização de perfil do usuário. | 1. Campos pré-preenchidos com dados do `AuthContext`.<br>2. Botão exibe `disabled` (loading).<br>3. `api.patch("/users/me")` é chamada apenas com dados alterados.<br>4. `save()` do `AuthContext` é chamada com os novos dados.<br>5. `toast.success` é exibido. |
 
 # Planejamento
 
 ##  Quadro de tarefas
 
-> Apresente a divisão de tarefas entre os membros do grupo e o acompanhamento da execução, conforme o exemplo abaixo.
-
 ### Semana 1
 
-Atualizado em: 21/04/2024
+Atualizado em: 12/10/2025
 
 | Responsável   | Tarefa/Requisito | Iniciado em    | Prazo      | Status | Terminado em    |
 | :----         |    :----         |      :----:    | :----:     | :----: | :----:          |
-| AlunaX        | Introdução | 01/02/2024     | 07/02/2024 | ✔️    | 05/02/2024      |
-| AlunaZ        | Objetivos    | 03/02/2024     | 10/02/2024 | 📝    |                 |
-| AlunoY        | Histórias de usuário  | 01/01/2024     | 07/01/2005 | ⌛     |                 |
-| AlunoK        | Personas 1  |    01/01/2024        | 12/02/2005 | ❌    |       |
+| Thiago Ferreira | Wireframes | 06/10/2025 | 12/10/2025 | ✔️ | 12/10/2025      |
+| André Ramos | Estudo da Segurança | 06/10/2025 | ---- | 📝 | ----
+| Gustavo Gino | Tipografia | 06/10/2025 | 12/10/2025 | ✔️ | 12/10/2025 |
+| Lucas Borges | Fecths | 06/10/2025 | ----- | 📝 | ---- |
+| Natã Gabriel | Tecnologias | 06/10/2025 | ---- | 📝 | ---- |
+| Rhafael Hector | Design IU/UX | 06/10/2025 | ---- | 📝 | ---- |
 
 #### Semana 2
 
-Atualizado em: 21/04/2024
+Atualizado em: 19/10/2025
 
 | Responsável   | Tarefa/Requisito | Iniciado em    | Prazo      | Status | Terminado em    |
 | :----         |    :----         |      :----:    | :----:     | :----: | :----:          |
-| AlunaX        | Página inicial   | 01/02/2024     | 07/03/2024 | ✔️    | 05/02/2024      |
-| AlunaZ        | CSS unificado    | 03/02/2024     | 10/03/2024 | 📝    |                 |
-| AlunoY        | Página de login  | 01/02/2024     | 07/03/2024 | ⌛     |                 |
-| AlunoK        | Script de login  |  01/01/2024    | 12/03/2024 | ❌    |       |
+| Thiago Ferreira | Desenvolvimento | 12/10/2025 | ---- | 📝 | ----      |
+| André Ramos | Estudo da Segurança | 06/10/2025 | ---- | 📝 | ----
+| Gustavo Gino | Tipografia | 06/10/2025 | 12/10/2025 | ✔️ | 12/10/2025 |
+| Lucas Borges | Fecths | 06/10/2025 | ----- | 📝 | ---- |
+| Natã Gabriel | Tecnologias | 06/10/2025 | ---- | 📝 | ---- |
+| Rhafael Hector | Design IU/UX | 06/10/2025 | 19/10/2025 | ✔️ | 19/10/2025 |
+
+#### Semana 3
+
+Atualizado em: 26/10/2025
+
+| Responsável   | Tarefa/Requisito | Iniciado em    | Prazo      | Status | Terminado em    |
+| :----         |    :----         |      :----:    | :----:     | :----: | :----:          |
+| Thiago Ferreira | Desenvolvimento | 12/10/2025 | ---- | 📝 | ----      |
+| André Ramos | Estudo da Segurança | 06/10/2025 | 26/10/2025 | ✔️ | 25/10/2025
+| Gustavo Gino | Tipografia | 06/10/2025 | 12/10/2025 | ✔️ | 12/10/2025 |
+| Lucas Borges | Fecths | 06/10/2025 | ----- | 📝 | ---- |
+| Natã Gabriel | Tecnologias | 06/10/2025 | 26/10/2025 | ✔️ | 26/10/2025 |
+| Rhafael Hector | Design IU/UX | 06/10/2025 | 19/10/2025 | ✔️ | 19/10/2025 |
+
+#### Semana 4
+
+Atualizado em: 02/10/2025
+
+| Responsável   | Tarefa/Requisito | Iniciado em    | Prazo      | Status | Terminado em    |
+| :----         |    :----         |      :----:    | :----:     | :----: | :----:          |
+| Thiago Ferreira | Desenvolvimento | 12/10/2025 | 02/10/2025 | ✔️ | 01/10/2025      |
+| André Ramos | Estudo da Segurança | 06/10/2025 | 26/10/2025 | ✔️ | 25/10/2025
+| Gustavo Gino | Tipografia | 06/10/2025 | 12/10/2025 | ✔️ | 12/10/2025 |
+| Lucas Borges | Fecths | 06/10/2025 | 02/10/2025 | ✔️ | 01/10/2025 |
+| Natã Gabriel | Tecnologias | 06/10/2025 | 26/10/2025 | ✔️ | 26/10/2025 |
+| Rhafael Hector | Design IU/UX | 06/10/2025 | 19/10/2025 | ✔️ | 19/10/2025 |
 
 Legenda:
 - ✔️: terminado
