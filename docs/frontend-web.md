@@ -51,7 +51,32 @@ Design das Telas:
 
 ## Considerações de Segurança
 
-[Discuta as considerações de segurança relevantes para a aplicação distribuída, como autenticação, autorização, proteção contra ataques, etc.]
+Armazenamento do Token:
+Prefira cookies HTTP-only com SameSite=strict e Secure em vez de localStorage.
+Se usar localStorage, proteja contra XSS com políticas CSP e sanitização.
+Validação de Dados:
+O front usa Zod, mas o backend também deve validar e sanitizar todas as entradas.
+Comunicação Segura:
+Todas as requisições devem usar HTTPS para proteger credenciais e tokens.
+Autorização:
+O cabeçalho Authorization: Bearer [token] só deve ser definido após login.
+Tokens expirados devem forçar logout e limpeza do armazenamento.
+Sessão e Expiração:
+Use tokens de curta duração e, se necessário, refresh tokens seguros.
+Monitore e encerre sessões inválidas automaticamente.
+Proteção contra ataques:
+XSS: sanitize dados e evite dangerouslySetInnerHTML.
+CSRF: cookies com SameSite=strict.
+Força bruta: rate limiting no backend.
+Mensagens e Logs:
+Use mensagens de erro genéricas e não exponha dados sensíveis no console.
+Atualizações e Deploy:
+Mantenha dependências atualizadas e aplique cabeçalhos de segurança no servidor (HSTS, CSP, X-Frame-Options, etc.).
+
+Em resumo:
+
+Garantir que seja HTTPS, tokens curtos, validação em ambas as camadas, e proteção contra XSS/CSRF.
+Evite expor tokens ou dados sensíveis no front-end.
 
 ## Implantação
 
