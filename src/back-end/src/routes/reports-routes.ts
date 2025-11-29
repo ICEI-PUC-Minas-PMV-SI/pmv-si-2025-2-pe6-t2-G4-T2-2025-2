@@ -6,5 +6,6 @@ const reportsController = new ReportsController()
 
 reportsRoutes.get("/summary", reportsController.summary)
 reportsRoutes.get("/categoryReport", reportsController.categoryReport)
+reportsRoutes.get("/weeklyReport", reportsController.weeklyReport)
 
 export { reportsRoutes}
