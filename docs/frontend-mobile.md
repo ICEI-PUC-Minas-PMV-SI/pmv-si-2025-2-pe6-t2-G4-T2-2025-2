@@ -35,7 +35,96 @@ Em termos de interação, a interface prioriza o *feedback* imediato e a visuali
 
 
 
+
 ## Considerações de Segurança
+ A segurança do **Flow** foi projetada em camadas 
+("Defense in Depth"), garantindo que a proteção dos 
+dados financeiros e pessoais dos usuários seja 
+mantida desde a interface do usuário até o banco de 
+dados.
+ Abaixo estão as estratégias implementadas para 
+mitigar riscos e garantir a integridade da aplicação 
+distribuída.
+ #### Autenticação e Gerenciamento de Sessão
+ A autenticação é a porta de entrada do sistema e 
+utiliza padrões modernos para garantir que apenas 
+usuários legítimos acessem a plataforma.- Padrão JWT (JSON Web Token): A API utiliza tokens 
+JWT assinados com uma chave secreta (JWT_SECRET) 
+mantida apenas no servidor. O token é stateless (sem 
+estado), o que permite que a API escale 
+horizontalmente sem depender de sessões em memória.- Criptografia de Senhas: As senhas nunca são 
+armazenadas em texto plano. Utilizamos a biblioteca 
+Bcrypt para realizar o hashing das senhas com um salt 
+aleatório antes da persistência no banco de dados, 
+protegendo contra ataques de rainbow table.- Armazenamento Seguro (Mobile): No aplicativo React 
+Native, o token JWT não é salvo em armazenamento 
+comum. Utilizamos o Expo SecureStore, que aproveita o 
+Keychain (iOS) e o Keystore (Android) para 
+criptografar o token no dispositivo do usuário.- Contexto de Autenticação: O front-end (Web e 
+Mobile) utiliza um AuthContext centralizado que 
+gerencia o ciclo de vida do token, garantindo o 
+logout automático e a limpeza de dados sensíveis da 
+memória quando necessário.
+#### Autorização e Controle de Acesso (RBAC)
+ Apenas estar logado não é suficiente; o sistema 
+verifica o que o usuário pode fazer.- Role-Based Access Control (RBAC): O sistema 
+implementa dois níveis de acesso distintos:
+  - member: Acesso restrito apenas aos seus próprios 
+dados (transações, categorias, perfil).
+  - admin: Acesso privilegiado ao Portal 
+Administrativo para visualização de métricas globais 
+e gestão de usuários.- Middleware de Proteção: As rotas críticas são 
+protegidas por middlewares (ensureAuthenticated e 
+verifyUserAuthorization) que interceptam a 
+requisição, validam o token e verificam se a role do 
+usuário permite o acesso ao recurso solicitado.- Isolamento de Dados (Propriedade): A segurança é 
+aplicada no nível da consulta ao banco de dados. Todo 
+comando de leitura ou escrita inclui a cláusula 
+where: { userId: request.user.id }. Isso garante 
+matematicamente que um usuário jamais consiga ler ou 
+manipular transações de outro usuário, mesmo que 
+tente forjar IDs na URL.
+ #### Proteção Contra Ataques Comuns
+ A arquitetura foi desenhada para mitigar as 
+vulnerabilidades mais comuns listadas no OWASP Top 
+10.- Prevenção de SQL Injection: A utilização do Prisma 
+ORM elimina o risco de injeção de SQL. O Prisma 
+utiliza prepared statements (consultas 
+parametrizadas) por padrão, tratando todos os inputs 
+do usuário como dados literais e nunca como comandos 
+executáveis.- Validação e Sanitização de Dados: A biblioteca Zod 
+atua como um guardião na entrada da API. Todos os 
+dados recebidos (body, query, params) são validados 
+contra um esquema estrito. Dados malformados, tipos 
+incorretos ou campos inesperados são rejeitados 
+imediatamente com erro 400 Bad Request, impedindo que 
+dados "sujos" entrem na lógica de negócio.- Tratamento de Erros Seguro: A API implementa uma 
+camada global de tratamento de erros (AppError). 
+Erros internos do servidor ou falhas de banco de 
+dados não expõem stack traces ou detalhes sensíveis 
+da infraestrutura para o cliente; apenas mensagens 
+genéricas e códigos de status HTTP apropriados são 
+retornados.
+- Tratamento de Erros Seguro: A API implementa uma 
+camada global de tratamento de erros (AppError). 
+Erros internos do servidor ou falhas de banco de 
+dados não expõem stack traces ou detalhes sensíveis 
+da infraestrutura para o cliente; apenas mensagens 
+genéricas e códigos de status HTTP apropriados são 
+retornados.
+ #### Segurança da Infraestrutura e Comunicação- HTTPS/TLS: Em produção (Render), toda a comunicação 
+entre os clientes (Mobile/Web) e a API é forçada via 
+HTTPS, garantindo a criptografia dos dados em 
+trânsito e protegendo contra ataques Man-in-the
+Middle.- Variáveis de Ambiente: Segredos como credenciais de 
+banco de dados e chaves de assinatura JWT são 
+injetados em tempo de execução através de variáveis 
+de ambiente, nunca sendo "commitados" no código-fonte 
+(repositório).- Containerização (Docker): O uso do Docker garante 
+que a aplicação rode em um ambiente isolado e 
+controlado, com versões específicas de dependências, 
+reduzindo a superfície de ataque do sistema 
+operacional
 
 
 
