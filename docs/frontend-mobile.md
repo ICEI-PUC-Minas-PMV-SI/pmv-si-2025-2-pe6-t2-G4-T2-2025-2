@@ -146,6 +146,37 @@ operacional
 
 
 ## Implantação
+A implantação do **Flow** envolve a orquestração de
+quatro componentes distintos que compõem a
+arquitetura distribuída: o Banco de Dados, a API de
+Serviços (Back-end), o Portal Administrativo (Frontend Web) e o Aplicativo Móvel.
+Para este projeto, adotamos uma estratégia baseada em
+PaaS (Platform as a Service) utilizando a plataforma
+Render, que simplifica a gestão de infraestrutura, e
+o ecosistema Expo (EAS) para o aplicativo móvel.
+#### Requisitos de Hardware e Software
+Como utilizamos serviços em nuvem, os requisitos de
+hardware físico são abstraídos pelo provedor. Abaixo
+estão as especificações dos ambientes de execução:
+##### Ambiente de Servidor (Back-end & Banco de
+Dados):
+- Banco de Dados: Instância PostgreSQL (Versão 14 ou
+superior). Requer armazenamento persistente e suporte
+a conexões SSL.
+- API (Node.js): Ambiente de execução Node.js (v18+
+LTS). Recomenda-se containerização via Docker para
+garantir a paridade entre desenvolvimento e produção.
+ - Recursos Mínimos Sugeridos: 0.5 vCPU e 512MB de
+RAM (Suficiente para o escopo acadêmico).
+#### Ambiente de Cliente (Front-end):
+Mobile App:
+- Android: Versão 6.0 (Marshmallow) ou superior.
+- iOS: Versão 13.0 ou superior.
+#### Escolha da Plataforma de Hospedagem
+A plataforma Render foi selecionada para hospedar a
+camada de servidor e web devido à sua integração
+nativa com repositórios Git, suporte a Docker e
+facilidade de configuração de serviços distribuídos.
 
 
 ## Testes
