@@ -1,15 +1,16 @@
 import React from "react";
 import { Modal, Pressable, View, Text, TouchableOpacity } from "react-native";
-import { User, LogOut } from "lucide-react-native";
+import { User, LogOut, CircleHelp } from "lucide-react-native";
 
 interface DashboardMenuProps {
   visible: boolean;
   onClose: () => void;
   onProfile: () => void;
   onSignOut: () => void;
+  onHelp: () => void;
 }
 
-export function DashboardMenu({ visible, onClose, onProfile, onSignOut }: DashboardMenuProps) {
+export function DashboardMenu({ visible, onClose, onProfile, onSignOut, onHelp }: DashboardMenuProps) {
   return (
     <Modal
       transparent={true}
@@ -25,6 +26,14 @@ export function DashboardMenu({ visible, onClose, onProfile, onSignOut }: Dashbo
           >
             <User size={18} color="#c0fd2b" />
             <Text className="text-white font-medium ml-3">Meu Perfil</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity 
+            className="flex-row items-center px-4 py-3 border-b border-gray-700 active:bg-gray-700"
+            onPress={onHelp}
+          >
+            <CircleHelp size={18} color="#3b82f6" /> 
+            <Text className="text-white font-medium ml-3">Ajuda / Tour</Text>
           </TouchableOpacity>
 
           <TouchableOpacity 
