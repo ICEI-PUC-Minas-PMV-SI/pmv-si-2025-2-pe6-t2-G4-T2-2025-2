@@ -1,6 +1,7 @@
 # Front-end Móvel
-
-[Inclua uma breve descrição do projeto e seus objetivos.]
+Flow é uma plataforma de gerenciamento de finanças pessoais projetada sob uma arquitetura de sistemas distribuídos. O ecossistema é composto por três pilares integrados: um aplicativo móvel (React Native) focado na experiência do usuário final para lançamentos rápidos, um portal administrativo web (React) para gestão e monitoramento da plataforma, e uma API RESTful robusta (Node.js) que centraliza a lógica de negócios e a persistência de dados.
+O objetivo central do projeto é democratizar o controle financeiro através de uma ferramenta simples e eficiente, permitindo que usuários registrem despesas, receitas e visualizem sua saúde financeira através de relatórios categorizados. A solução prioriza a segurança e a integridade dos dados, implementando autenticação via tokens JWT e garantindo que cada usuário tenha acesso exclusivo e isolado às suas próprias informações financeiras.
+Do ponto de vista acadêmico e técnico, o projeto visa demonstrar a implementação prática de uma arquitetura moderna e escalável. Ele utiliza tecnologias de ponta como TypeScript, Prisma ORM e PostgreSQL, além de práticas de DevOps com Docker, exemplificando a separação clara de responsabilidades entre front-end, back-end e banco de dados em um ambiente distribuído.
 
 ## Projeto da Interface
 O desenvolvimento da interface móvel do **Flow** foi norteado pela premissa de oferecer uma experiência de usuário fluida, intuitiva e focada na agilidade do registro de informações. Construído com **React Native** e estilizado via **NativeWind**, o aplicativo atua como o ponto de contato primário para o usuário final, permitindo que o controle financeiro seja realizado em tempo real, diretamente do dispositivo móvel.
