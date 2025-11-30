@@ -33,7 +33,24 @@ Em termos de interação, a interface prioriza o *feedback* imediato e a visuali
 
 ## Tecnologias Utilizadas
 
-
+| Categoria | Tecnologia | Propósito no Projeto |
+| :--- | :--- | :--- |
+| **Base (Core)** | **React Native** | Framework principal para o desenvolvimento da interface nativa (iOS e Android) utilizando a lógica do React. |
+| **Base (Core)** | **TypeScript** | Garante a tipagem estática, aumentando a segurança do código e facilitando a manutenção e refatoração. |
+| **Base (Core)** | **Expo** | Plataforma que agiliza o desenvolvimento, build e teste, fornecendo acesso fácil a APIs nativas (como SecureStore). |
+| **Estilização** | **NativeWind** | Traz o poder do Tailwind CSS para o React Native, permitindo estilização rápida via classes diretamente no JSX. |
+| **Navegação** | **React Navigation** | Gerencia todo o fluxo de navegação do app, implementando Pilhas (Stack) para telas modais e Abas (Bottom Tabs) para o menu principal. |
+| **Ger. de Estado** | **React Context API** | Usado no `AuthContext` para gerenciar globalmente a sessão do usuário (login, logout e persistência de token). |
+| **Ger. de Estado** | **React Hooks** | `useState`, `useEffect`, `useCallback` e o específico `useFocusEffect` são usados para controlar o ciclo de vida e reatividade das telas. |
+| **Formulários** | **React Hook Form** | Gerencia o estado dos formulários (Login, Cadastro) de forma performática, reduzindo a necessidade de múltiplos estados manuais. |
+| **Validação** | **Zod** | Utilizado para criar esquemas de validação robustos, integrando-se ao React Hook Form para validar dados antes do envio. |
+| **Comunicação API** | **Axios** | Cliente HTTP para realizar as requisições REST ao back-end, configurado para injetar automaticamente o token JWT. |
+| **Armazenamento** | **Expo SecureStore** | Armazenamento local criptografado, utilizado para persistir o Token JWT e dados sensíveis do usuário de forma segura. |
+| **Armazenamento** | **AsyncStorage** | Armazenamento local simples chave-valor, usado para persistir preferências não sensíveis, como o status de visualização do tutorial. |
+| **Visualização** | **RN Gifted Charts** | Biblioteca utilizada para renderizar os gráficos interativos (Barras e Rosca) no Dashboard de forma nativa e animada. |
+| **Onboarding** | **RN Copilot** | Biblioteca para criar o tutorial passo-a-passo (Walkthrough) que guia novos usuários pelas funcionalidades principais. |
+| **Onboarding** | **RN Copilot** | Biblioteca para criar o tutorial passo-a-passo (Walkthrough) que guia novos usuários pelas funcionalidades principais. |
+| **Iconografia** | **Lucide React Native** | Conjunto de ícones vetoriais modernos e consistent
 
 
 ## Considerações de Segurança
