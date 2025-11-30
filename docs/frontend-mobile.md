@@ -23,6 +23,8 @@ Em termos de interação, a interface prioriza o *feedback* imediato e a visuali
 
 ### Design Visual
 
+![WhatsApp Image 2025-11-30 at 13 28 38 (1)](https://github.com/user-attachments/assets/3565383a-cda9-4b6d-81bb-06e711d9a24a)
+![WhatsApp Image 2025-11-30 at 13 28 38](https://github.com/user-attachments/assets/a0f16183-2b16-441e-a8ae-364002d3b92c)
 
 
 ## Fluxo de Dados
