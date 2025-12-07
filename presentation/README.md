@@ -4,7 +4,7 @@
 
 [Download video](https://drive.google.com/file/d/1tk0ZfusPDR7tEedVzAXxiR5Cwunu84Hu/view?usp=sharing)
 
-# FinanceFlow 💸
+# Flow 💸
 
 > Plataforma de Gestão Financeira Pessoal baseada em Arquitetura Distribuída.
 
@@ -40,29 +40,29 @@ O sistema adota uma arquitetura distribuída, separando claramente as responsabi
 1. Backend (API)
 O núcleo do sistema. Desenvolvido para ser seguro, escalável e stateless.
 
- - Segurança: Autenticação via JWT, criptografia de senhas com Bcrypt e validação de dados com Zod.
+  - Segurança: Autenticação via JWT, criptografia de senhas com Bcrypt e validação de dados com Zod.
 
- - Banco de Dados: PostgreSQL containerizado via Docker, gerenciado pelo Prisma ORM.
+  - Banco de Dados: PostgreSQL containerizado via Docker, gerenciado pelo Prisma ORM.
 
- - Documentação: Rotas documentadas via Swagger/OpenAPI.
+  - Documentação: Rotas documentadas via Swagger/OpenAPI.
 
 2. Frontend Web (Portal Admin)
 Interface voltada para administradores e power-users.
 
- - Dashboard: Gráficos de visão geral do sistema.
+  - Dashboard: Gráficos de visão geral do sistema.
 
- - Gestão: CRUD completo de usuários e categorias.
+  - Gestão: CRUD completo de usuários e categorias.
 
- - Tecnologia: React SPA com Vite e TailwindCSS.
+  - Tecnologia: React SPA com Vite e TailwindCSS.
 
 3. Frontend Mobile (App do Usuário)
 A ponta do sistema na mão do usuário.
 
- - UX/UI: Design moderno com NativeWind e gráficos interativos (Gifted Charts).
+  - UX/UI: Design moderno com NativeWind e gráficos interativos (Gifted Charts).
 
- - Onboarding: Tutorial interativo (Copilot) para novos usuários.
+  - Onboarding: Tutorial interativo (Copilot) para novos usuários.
 
- - Funcionalidades: Lançamento de transações, gestão de categorias e relatórios mensais.
+  - Funcionalidades: Lançamento de transações, gestão de categorias e relatórios mensais.
 
 ## 🛠️ Tecnologias Utilizadas
 
